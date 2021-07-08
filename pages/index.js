@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Product from '../components/home/Product'
 import Navigation from '../components/home/Navigation'
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 
 export const siteTitle = "잼팟"
 
@@ -18,7 +18,6 @@ function Home() {
       </Head>
       <Navigation/>
       <Product/>
-      <AmplifySignOut/>
     </div>
   )
 }

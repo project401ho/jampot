@@ -11,6 +11,9 @@
   "dependencies": {
     "@aws-amplify/cli": "^5.1.0",
     "@aws-amplify/ui-react": "^1.2.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "aws-amplify": "^4.1.2",
     "next": "11.0.1",
     "react": "17.0.2",

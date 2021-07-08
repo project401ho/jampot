@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-jampot-dev-150020-authRole",
+            "UnauthRoleArn": "arn:aws:iam::121170078978:role/amplify-jampot-dev-150020-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::121170078978:role/amplify-jampot-dev-150020-authRole",
+            "Region": "ap-northeast-2",
+            "DeploymentBucketName": "amplify-jampot-dev-150020-deployment",
+            "UnauthRoleName": "amplify-jampot-dev-150020-unauthRole",
+            "StackName": "amplify-jampot-dev-150020",
+            "StackId": "arn:aws:cloudformation:ap-northeast-2:121170078978:stack/amplify-jampot-dev-150020/c9c3f440-dfb1-11eb-84d5-06a501574012",
+            "AmplifyAppId": "dmu6eucpqu4ib"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "dmu6eucpqu4ib",
+                    "type": "cicd"
+                }
+            }
+        }
+    }
+}

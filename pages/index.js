@@ -3,10 +3,11 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Product from '../components/home/Product'
 import Navigation from '../components/home/Navigation'
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 
 export const siteTitle = "잼팟"
 
-export default function Home() {
+function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -17,6 +18,9 @@ export default function Home() {
       </Head>
       <Navigation/>
       <Product/>
+      <AmplifySignOut/>
     </div>
   )
 }
+
+export default withAuthenticator(Home)

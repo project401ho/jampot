@@ -24,7 +24,10 @@ body {
   }
 }
 
-
+.faIcons{
+  width:30px;
+  height:30px;
+}
 
 a {
   color: inherit;

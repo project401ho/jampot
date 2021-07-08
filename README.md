@@ -14,3 +14,8 @@ react-ui 추가<br>
 amplify 기본 셋업 끝<br>
 홈페이지 css 대충 만듬<br>
 사이트 기본 구조 만듬<br>
+unauth user 관련 권한 처리<br>
+getStaticProps 가지고 놀아봄<br>
+API와 Storage 랜더전에 사용 가능<br>
+lib 폴더안에 기능 몰아넣어서 더 깔끔해짐<br>
+

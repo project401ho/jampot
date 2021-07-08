@@ -8,9 +8,21 @@ export const createProduct = /* GraphQL */ `
   ) {
     createProduct(input: $input, condition: $condition) {
       id
-      name
       description
+      applicants
+      title
       createdAt
+      max_applicants
+      winner {
+        items {
+          id
+          productID
+          winneremail
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       updatedAt
     }
   }
@@ -22,9 +34,21 @@ export const updateProduct = /* GraphQL */ `
   ) {
     updateProduct(input: $input, condition: $condition) {
       id
-      name
       description
+      applicants
+      title
       createdAt
+      max_applicants
+      winner {
+        items {
+          id
+          productID
+          winneremail
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       updatedAt
     }
   }
@@ -36,8 +60,98 @@ export const deleteProduct = /* GraphQL */ `
   ) {
     deleteProduct(input: $input, condition: $condition) {
       id
-      name
       description
+      applicants
+      title
+      createdAt
+      max_applicants
+      winner {
+        items {
+          id
+          productID
+          winneremail
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      updatedAt
+    }
+  }
+`;
+export const createWinner = /* GraphQL */ `
+  mutation CreateWinner(
+    $input: CreateWinnerInput!
+    $condition: ModelWinnerConditionInput
+  ) {
+    createWinner(input: $input, condition: $condition) {
+      id
+      productID
+      product {
+        id
+        description
+        applicants
+        title
+        createdAt
+        max_applicants
+        winner {
+          nextToken
+        }
+        updatedAt
+      }
+      winneremail
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateWinner = /* GraphQL */ `
+  mutation UpdateWinner(
+    $input: UpdateWinnerInput!
+    $condition: ModelWinnerConditionInput
+  ) {
+    updateWinner(input: $input, condition: $condition) {
+      id
+      productID
+      product {
+        id
+        description
+        applicants
+        title
+        createdAt
+        max_applicants
+        winner {
+          nextToken
+        }
+        updatedAt
+      }
+      winneremail
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteWinner = /* GraphQL */ `
+  mutation DeleteWinner(
+    $input: DeleteWinnerInput!
+    $condition: ModelWinnerConditionInput
+  ) {
+    deleteWinner(input: $input, condition: $condition) {
+      id
+      productID
+      product {
+        id
+        description
+        applicants
+        title
+        createdAt
+        max_applicants
+        winner {
+          nextToken
+        }
+        updatedAt
+      }
+      winneremail
       createdAt
       updatedAt
     }

@@ -1,5 +1,22 @@
-type Product @model {
+type Product
+@model  
+{
   id: ID!
-  name: String!
   description: String
+  applicants: [String]
+  title: String!
+  createdAt: AWSDateTime!
+  max_applicants: Int!
+  image: String
+  winner: [Winner] @connection(keyName: "byProduct", fields: ["id"])
+}
+
+type Winner 
+@model 
+@key(name:"byProduct", fields:["productID", "winneremail"])
+{
+  id:ID!
+  productID: ID!
+  product: Product @connection(fields:["productID"])
+  winneremail:String!
 }

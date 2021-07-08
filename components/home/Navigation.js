@@ -14,7 +14,7 @@ export default function Navigation(props) {
           <h1>Jampot logo</h1>
         </a>
       </Link>
-      <FontAwesomeIcon icon={faBars} size="lg"></FontAwesomeIcon>
+      <FontAwesomeIcon className="faIcons" icon={faBars} size="sm"></FontAwesomeIcon>
     </div>
   );
 }

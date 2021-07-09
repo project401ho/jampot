@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import {Auth} from "aws-amplify"
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Product from '../components/home/Product'
@@ -14,14 +15,13 @@ export const siteTitle = "잼팟"
 
 
 export async function getServerSideProps() {
-  const user = await isLoggedIn()
   const product = await fetchProduct()
   const _url = await fetchProductImage("neogulman.png")
+
   return {
     props: {
       product,
       _url,
-      user
     }
   }
 }
@@ -29,12 +29,23 @@ export async function getServerSideProps() {
 
 function Home(props) {
   const [file,setFile] = useState(null)
-  const [user,setUser] = useState(props.user)
+  const [user,setUser] = useState(null)
   const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
   
   const product = props.product
   const _url = props._url
+
+  Auth.currentAuthenticatedUser()
+    .then((e) => {        
+      if(user === null || user.username !== e.username){
+        setUser(e)
+        console.log(e);
+      }
+    })
+    .catch(()=>{
+      
+    })
   
 
   const signInModalClose = () => {
@@ -50,7 +61,6 @@ function Home(props) {
   const signUpModalOpen = () => {
     setIsSignUpModalOpen(true)
   }
-
   return (
     <div className={styles.container}>
       <Head>

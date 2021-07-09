@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Link from "next/link"
-import { SignIn as SignInLib } from '../../lib/signin'
+import { SignIn as SignInLib,rememberDevice, forgetDevice} from '../../lib/signin'
 import styles from "./SignIn.module.scss";
 
 
@@ -51,17 +51,16 @@ class SignIn extends Component {
                     onChange={this.stateHandler}
                   />
                   <div className={styles.loginMid}>
-                    <label className={styles.autoLogin} >
+                    {/* <label className={styles.autoLogin} >
                       {" "}
-                      <input type="checkbox" id="hint" /> 로그인 유지하기
-                    </label>
+                      <input type="checkbox" id="hint" onChange={this.rememberDeviceHandler}/> 로그인 유지하기
+                    </label> */}
                     <div className={styles.autoLogin}>아이디/비밀번호 찾기</div>
                   </div>
                   <button className={styles.loginBtn} onClick={async ()=>{
-                    if(await SignInLib(this.state.email,this.state.password,(_user)=>this.props.setUser(_user))){
-                      close()
-                    }
-                    
+                    let _user = await SignInLib(this.state.email,this.state.password)
+                    this.props.setUser(_user)
+                    close()                    
                     //link move
                   }}>
                     {" "}

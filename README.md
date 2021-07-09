@@ -14,7 +14,11 @@ sign up modal import<br>
 프로필 클릭시 로그인 팝업<br>
 응모하기 클릭시 로그인 팝업<br>
 로그인 팝업 외곽 클릭시 닫기<br>
-
+가입하기 기능<br>
+로그인 유지<br>
+가입시 창 닫아지기<br>
+자동 verification<br>
+이상한 이메일 아직 못 거름<br>
 
 ## 7.08
 auth 추가 <br>

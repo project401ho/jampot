@@ -70,9 +70,11 @@ class SignIn extends Component {
                   <button className={styles.loginBtn} onClick={async ()=>{
                     if(this.state.password === this.state.password_confirm){
                       if(await SignUp(this.state.nickname,this.state.email,this.state.password)){
-                        if(await SignInLib(this.state.email,this.state.password,(_user)=>this.props.setUser(_user))){
-                          close()
-                        }
+                        console.log("signed up");
+                        let _user = await SignInLib(this.state.email,this.state.password)
+                        this.props.setUser(_user)
+                        close()
+                        
                       }
                     }
                     else{

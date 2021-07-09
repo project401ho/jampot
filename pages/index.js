@@ -5,7 +5,7 @@ import Product from '../components/home/Product'
 import SignIn from '../components/home/Signin'
 import SignUp from '../components/home/SignUp'
 import Navigation from '../components/Navigation'
-import {AmplifySignOut } from '@aws-amplify/ui-react'
+import { AmplifySignOut } from '@aws-amplify/ui-react'
 import { uploadImage, createProduct, fetchProduct, fetchProductImage } from '../lib/products'
 import { isLoggedIn} from '../lib/signin'
 

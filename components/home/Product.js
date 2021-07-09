@@ -15,7 +15,12 @@ export default function Product({_url,user,isSignInModalOpen,}) {
         <FontAwesomeIcon className="faIcons" icon={faChevronLeft} size="sm"></FontAwesomeIcon>
         <div className={styles.Product_image_container}>
           {/* <img src={_url} alt="product image"></img> */}
-          
+          <Image
+            src={"/"+_url}
+            alt="test"
+            width="100"
+            height="100"
+          />
         </div>
         <FontAwesomeIcon className="faIcons" icon={faChevronRight} size="sm"></FontAwesomeIcon>
       </div>

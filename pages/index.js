@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Product from '../components/home/Product'
@@ -14,9 +14,9 @@ export const siteTitle = "잼팟"
 
 
 export async function getStaticProps() {
+  const user = await isLoggedIn()
   const product = await fetchProduct()
   const _url = await fetchProductImage("neogulman.png")
-  const user = await isLoggedIn()
   return {
     props: {
       product,
@@ -64,6 +64,14 @@ function Home(props) {
         user={user}
         isSignInModalOpen={signInModalOpen}
       />
+      
+
+      <Product 
+        _url={_url} 
+        user={user}  
+        isSignInModalOpen={signInModalOpen}
+      />
+     
       <SignIn 
         isOpen={isSignInModalOpen} 
         setUser={(_user)=>setUser(_user)} 
@@ -75,14 +83,6 @@ function Home(props) {
         setUser={(_user)=>setUser(_user)} 
         close={signUpModalClose}
       />
-
-      <Product 
-        _url={_url} 
-        user={user}  
-        isSignInModalOpen={signInModalOpen}
-      />
-     
-      
     </div>
   )
 }

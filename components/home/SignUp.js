@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import Link from "next/link"
-import { SignIn as SignInLib } from '../../lib/signin'
+import { SignIn as SignInLib,SignUp } from '../../lib/signin'
 import styles from "./SignIn.module.scss";
 
 
 class SignIn extends Component {
   state = {
+    nickname: "",
     email: "",
     password: "",
-    password_confimr:"",
+    password_confirm:"",
   };
 
   stateHandler = (e) => {
@@ -37,10 +38,16 @@ class SignIn extends Component {
                 <h1>가입하기</h1>
 
                 <div className={styles.modalContents} >
-
+                  <input
+                    name="nickname"
+                    className={styles.loginPw}
+                    type="text"
+                    placeholder="유저 닉네임  "
+                    onChange={this.stateHandler}
+                  />
                   <input
                     name="email"
-                    className={styles.loginId}
+                    className={styles.loginPw}
                     type="text"
                     placeholder="이메일"
                     onChange={this.stateHandler}
@@ -61,8 +68,15 @@ class SignIn extends Component {
                   />
                   
                   <button className={styles.loginBtn} onClick={async ()=>{
-                    if(await SignInLib(this.state.email,this.state.password,(_user)=>this.props.setUser(_user))){
-                      close()
+                    if(this.state.password === this.state.password_confirm){
+                      if(await SignUp(this.state.nickname,this.state.email,this.state.password)){
+                        if(await SignInLib(this.state.email,this.state.password,(_user)=>this.props.setUser(_user))){
+                          close()
+                        }
+                      }
+                    }
+                    else{
+                      alert("패스워드를 확인해주세요")
                     }
                     
                     //link move

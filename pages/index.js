@@ -30,7 +30,7 @@ export async function getStaticProps() {
 function Home(props) {
   const [file,setFile] = useState(null)
   const [user,setUser] = useState(props.user)
-  const [isSignInModalOpen,setIsSignInModalOpen] = useState(true)
+  const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
   
   const product = props.product

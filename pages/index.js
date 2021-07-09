@@ -13,7 +13,7 @@ import { isLoggedIn} from '../lib/signin'
 export const siteTitle = "잼팟"
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const user = await isLoggedIn()
   const product = await fetchProduct()
   const _url = await fetchProductImage("neogulman.png")

@@ -5,10 +5,9 @@ import styles from '../../styles/Home.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight,faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
-
-
-export default function Product({_url}) {
+export default function Product({_url,user,isSignInModalOpen,}) {
   const [productList,setProductList] = useState([])
+
   return (
     <div className={styles.Product_container}>
       <h2 className = {styles.Product_title}>구글 기프트 카드 5천원 (1/6)</h2>
@@ -21,7 +20,10 @@ export default function Product({_url}) {
         <FontAwesomeIcon className="faIcons" icon={faChevronRight} size="sm"></FontAwesomeIcon>
       </div>
       <button className={styles.Product_apply_button} onClick={()=> {
-        console.log(test);
+
+        if(user === null) {
+          isSignInModalOpen()
+        }
        
       }} >
         응모하기

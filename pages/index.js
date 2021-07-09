@@ -2,9 +2,13 @@ import React, {useState} from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Product from '../components/home/Product'
-import Navigation from '../components/home/Navigation'
-import {withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+import SignIn from '../components/home/Signin'
+import SignUp from '../components/home/SignUp'
+import Navigation from '../components/Navigation'
+import {AmplifySignOut } from '@aws-amplify/ui-react'
 import { uploadImage, createProduct, fetchProduct, fetchProductImage } from '../lib/products'
+import { isLoggedIn} from '../lib/signin'
+
 
 export const siteTitle = "잼팟"
 
@@ -12,20 +16,40 @@ export const siteTitle = "잼팟"
 export async function getStaticProps() {
   const product = await fetchProduct()
   const _url = await fetchProductImage("neogulman.png")
-
+  const user = await isLoggedIn()
   return {
     props: {
       product,
       _url,
+      user
     }
   }
 }
 
+
 function Home(props) {
   const [file,setFile] = useState(null)
-
+  const [user,setUser] = useState(props.user)
+  const [isSignInModalOpen,setIsSignInModalOpen] = useState(true)
+  const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
+  
   const product = props.product
   const _url = props._url
+  
+
+  const signInModalClose = () => {
+    setIsSignInModalOpen(false)
+  }
+  const signInModalOpen = () => {
+    console.log(isSignInModalOpen);
+    setIsSignInModalOpen(true)
+  }
+  const signUpModalClose = () => {
+    setIsSignUpModalOpen(false)
+  }
+  const signUpModalOpen = () => {
+    setIsSignUpModalOpen(true)
+  }
 
   return (
     <div className={styles.container}>
@@ -36,9 +60,29 @@ function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <Navigation/>
+      <Navigation
+        user={user}
+        isSignInModalOpen={signInModalOpen}
+      />
+      <SignIn 
+        isOpen={isSignInModalOpen} 
+        setUser={(_user)=>setUser(_user)} 
+        close={signInModalClose}
+        openSignUp={signUpModalOpen}
+      />
+      <SignUp
+        isOpen={isSignUpModalOpen} 
+        setUser={(_user)=>setUser(_user)} 
+        close={signUpModalClose}
+      />
 
-      <Product _url={_url}/>
+      <Product 
+        _url={_url} 
+        user={user}  
+        isSignInModalOpen={signInModalOpen}
+      />
+     
+      
     </div>
   )
 }

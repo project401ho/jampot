@@ -18,8 +18,8 @@ export default function Product({_url,user,isSignInModalOpen,}) {
           <Image
             src={_url}
             alt="test"
-            width="100"
-            height="100"
+            width="200"
+            height="200"
             unoptimized={true}
           />
         </div>

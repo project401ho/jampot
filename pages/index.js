@@ -6,9 +6,8 @@ import Product from '../components/home/Product'
 import SignIn from '../components/home/Signin'
 import SignUp from '../components/home/SignUp'
 import Navigation from '../components/Navigation'
-import { AmplifySignOut } from '@aws-amplify/ui-react'
-import { uploadImage, createProduct, fetchProduct, fetchProductImage } from '../lib/products'
-import { isLoggedIn} from '../lib/signin'
+import { fetchProduct, fetchProductImage } from '../lib/graphql'
+
 
 
 export const siteTitle = "잼팟"
@@ -26,7 +25,6 @@ export async function getServerSideProps() {
   }
 }
 
-
 function Home(props) {
   const [file,setFile] = useState(null)
   const [user,setUser] = useState(null)
@@ -40,13 +38,8 @@ function Home(props) {
     .then((e) => {        
       if(user === null || user.username !== e.username){
         setUser(e)
-        console.log(e);
       }
-    })
-    .catch(()=>{
-      
-    })
-  
+    })  
 
   const signInModalClose = () => {
     setIsSignInModalOpen(false)

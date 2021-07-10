@@ -20,3 +20,14 @@ type Winner
   product: Product @connection(fields:["productID"])
   winneremail:String!
 }
+
+type User
+@model{
+  id:ID!
+  email:String!
+  nickname: String!  
+  ticket:Int!
+  freeTicket:Int!
+  appliedList:[String]
+  
+}

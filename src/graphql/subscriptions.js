@@ -10,6 +10,7 @@ export const onCreateProduct = /* GraphQL */ `
       title
       createdAt
       max_applicants
+      image
       winner {
         items {
           id
@@ -33,6 +34,7 @@ export const onUpdateProduct = /* GraphQL */ `
       title
       createdAt
       max_applicants
+      image
       winner {
         items {
           id
@@ -56,6 +58,7 @@ export const onDeleteProduct = /* GraphQL */ `
       title
       createdAt
       max_applicants
+      image
       winner {
         items {
           id
@@ -82,6 +85,7 @@ export const onCreateWinner = /* GraphQL */ `
         title
         createdAt
         max_applicants
+        image
         winner {
           nextToken
         }
@@ -105,6 +109,7 @@ export const onUpdateWinner = /* GraphQL */ `
         title
         createdAt
         max_applicants
+        image
         winner {
           nextToken
         }
@@ -128,12 +133,55 @@ export const onDeleteWinner = /* GraphQL */ `
         title
         createdAt
         max_applicants
+        image
         winner {
           nextToken
         }
         updatedAt
       }
       winneremail
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      email
+      nickname
+      ticket
+      freeTicket
+      appliedList
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      id
+      email
+      nickname
+      ticket
+      freeTicket
+      appliedList
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      email
+      nickname
+      ticket
+      freeTicket
+      appliedList
       createdAt
       updatedAt
     }

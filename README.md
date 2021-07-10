@@ -1,11 +1,22 @@
 # 해야 할 일
-1. createProduct 페이지
-2. 햄버거 메뉴
-3. 게스트 로그인
-4. 회원가입 / 로그인 페이지
-5. 마이페이지 
+1. 어드민 페이지 (createProduct부터)
+2. 햄버거 메뉴 clickable
+3. 햄벅 안에 마이페이지 넣기
+4. 
 
 # 개발 기록
+
+## 7.10
+유저 스키마 작성<br>
+IAM auth 일괄 업데이트<br>
+마이페이지 추가<br>
+로그아웃시 router로 홈페이지 이동<br>
+(이래야 새로고침 효과가 없음)<br>
+router를 통해 props를 넘기려면 아마도 redux를 사용해야할듯<br>
+일단 MVP를 최대한 빨리 만들기 위해 비효율적인 API request할 예정<br>
+
+
+
 
 ## 7.09
 sign in modal import<br>

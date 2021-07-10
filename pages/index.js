@@ -39,7 +39,10 @@ function Home(props) {
       if(user === null || user.username !== e.username){
         setUser(e)
       }
-    })  
+    }) 
+    .catch(()=>{
+      console.log("guest user");
+    }) 
 
   const signInModalClose = () => {
     setIsSignInModalOpen(false)

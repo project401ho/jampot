@@ -32,6 +32,9 @@ export default function MyPage(props) {
         setUser(e)
       }
     })
+    .catch(()=>{
+      console.log("guest user");
+    }) 
   return (
     <div className={styles.container}>
       <Head>

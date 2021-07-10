@@ -10,11 +10,12 @@ export default function UserInfo(props) {
     <div className='UserInfo_container'>
       <Image
         priority
-        src="../images/profile.png"
+        src="/images/profile.png"
         className={styles.borderCircle}
         height={80}
         width={80}
         alt="profile image"
+        unoptimized={true}
       />    
       <p>{user && user.attributes.nickname}</p>
     </div>

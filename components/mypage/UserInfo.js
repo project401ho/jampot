@@ -10,7 +10,7 @@ export default function UserInfo(props) {
     <div className='UserInfo_container'>
       <Image
         priority
-        src="/static/images/profile.png"
+        src="/defaultprofile.png"
         className={styles.borderCircle}
         height={80}
         width={80}

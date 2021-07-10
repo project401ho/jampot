@@ -12,6 +12,7 @@ export const getProduct = /* GraphQL */ `
       max_applicants
       image
       isFree
+      type
       winner {
         items {
           id
@@ -42,6 +43,7 @@ export const listProducts = /* GraphQL */ `
         max_applicants
         image
         isFree
+        type
         winner {
           nextToken
         }
@@ -65,6 +67,7 @@ export const getWinner = /* GraphQL */ `
         max_applicants
         image
         isFree
+        type
         winner {
           nextToken
         }
@@ -95,6 +98,7 @@ export const listWinners = /* GraphQL */ `
           max_applicants
           image
           isFree
+          type
           updatedAt
         }
         winneremail
@@ -134,6 +138,42 @@ export const listUsers = /* GraphQL */ `
         freeTicket
         appliedList
         createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const productsByDate = /* GraphQL */ `
+  query ProductsByDate(
+    $type: String
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    productsByDate(
+      type: $type
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        description
+        applicants
+        title
+        createdAt
+        max_applicants
+        image
+        isFree
+        type
+        winner {
+          nextToken
+        }
         updatedAt
       }
       nextToken

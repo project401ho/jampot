@@ -1,6 +1,10 @@
 type Product
-@model  
-{
+  @model
+  @key(
+    name: "productsByDate"
+    fields: ["type", "createdAt"]
+    queryField: "productsByDate"
+  ) {
   id: ID!
   description: String
   applicants: [String]
@@ -9,6 +13,7 @@ type Product
   max_applicants: Int!
   image: String
   isFree: Boolean!
+  type: String!
   winner: [Winner] @connection(keyName: "byProduct", fields: ["id"])
 }
 

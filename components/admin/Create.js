@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import styles from "./Create.module.scss";
-import { createProduct } from '../../lib/graphql'
+import { uploadImage } from '../../lib/graphql'
 
 export const date = new Date()
 
@@ -13,8 +13,10 @@ class Create extends Component {
     title: "",
     createdAt: date,
     max_applicants: 6,
-    image: "",
-    isFree: false
+    image: "neogulman.png",
+    isFree: false,
+    type: "product",
+    imagefile: null
   }
 
   stateHandler = (e) => {
@@ -65,7 +67,7 @@ class Create extends Component {
         type="file"
         placeholder="image"
         onChange={(e)=>{
-          this.setState({image:e.target.files[0].name})
+          this.setState({imagefile:e.target.files[0],image:e.target.files[0].name})
           console.log(e);
         }}
       />
@@ -100,7 +102,8 @@ class Create extends Component {
         </button>
 
       </div>
-      
+      <button onClick={async ()=>await uploadImage(this.state.imagefile)}> 이미지 업로드</button>
+
     </div>
   );
   }

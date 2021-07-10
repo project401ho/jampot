@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Link from "next/link"
-import { SignIn as SignInLib,SignUp } from '../../lib/signin'
+import { SignIn as SignInLib,SignUp as SignUpLib } from '../../lib/signin'
 import styles from "./SignIn.module.scss";
 
 
-class SignIn extends Component {
+class SignUp extends Component {
   state = {
     nickname: "",
     email: "",
@@ -69,7 +69,7 @@ class SignIn extends Component {
                   
                   <button className={styles.loginBtn} onClick={async ()=>{
                     if(this.state.password === this.state.password_confirm){
-                      if(await SignUp(this.state.nickname,this.state.email,this.state.password)){
+                      if(await SignUpLib(this.state.nickname,this.state.email,this.state.password)){
                         console.log("signed up");
                         let _user = await SignInLib(this.state.email,this.state.password)
                         this.props.setUser(_user)
@@ -96,4 +96,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default SignUp;

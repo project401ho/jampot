@@ -6,7 +6,7 @@ import Product from '../components/home/Product'
 import SignIn from '../components/home/Signin'
 import SignUp from '../components/home/SignUp'
 import Navigation from '../components/Navigation'
-import { fetchProduct, fetchProductImage } from '../lib/graphql'
+import { fetchProduct, fetchProductImage, fetchProductListByDate } from '../lib/graphql'
 
 
 
@@ -14,13 +14,12 @@ export const siteTitle = "잼팟"
 
 
 export async function getServerSideProps() {
-  // const productlist = [await fetchProduct()]
-  const product =  await fetchProduct()
-  const _url = await fetchProductImage(product.image)
+  const productlist = await fetchProductListByDate(null)
+  const _url = await fetchProductImage(productlist[0].image)
 
   return {
     props: {
-      // productlist,
+      productlist,
       _url,
     }
   }
@@ -28,11 +27,11 @@ export async function getServerSideProps() {
 
 function Home(props) {
   const [user,setUser] = useState(null)
-  // const [featureProduct,setfeatureProduct] = useState(props.productlist[0])
+  const [productList,setproductList] = useState(props.productlist)
   const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
-  
   const _url = props._url
+
 
   Auth.currentAuthenticatedUser()
     .then((e) => {        
@@ -43,7 +42,7 @@ function Home(props) {
     .catch(()=>{
       console.log("guest user");
     }) 
-
+  
   const signInModalClose = () => {
     setIsSignInModalOpen(false)
   }
@@ -76,6 +75,7 @@ function Home(props) {
         _url={_url} 
         user={user}  
         isSignInModalOpen={signInModalOpen}
+        _productList = {productList}
       />
      
       <SignIn 

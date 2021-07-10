@@ -10,18 +10,6 @@ import { fetchProductList, fetchProductImage } from '../lib/graphql'
 
 export const siteTitle = "잼팟"
 
-export async function getServerSideProps() {
-  // const product = await fetchProductList(null)
-  // const _url = await fetchProductImage("neogulman.png")
-  // 
-  return {
-    props: {
-      // productList,      
-      // 
-    }
-  }
-}
-
 export default function MyPage(props) {
   const [user,setUser] = useState(null)
   const [productList,setProductList] = useState(null)

@@ -14,24 +14,24 @@ export const siteTitle = "잼팟"
 
 
 export async function getServerSideProps() {
-  const product = await fetchProduct()
-  const _url = await fetchProductImage("neogulman.png")
+  // const productlist = [await fetchProduct()]
+  const product =  await fetchProduct()
+  const _url = await fetchProductImage(product.image)
 
   return {
     props: {
-      product,
+      // productlist,
       _url,
     }
   }
 }
 
 function Home(props) {
-  const [file,setFile] = useState(null)
   const [user,setUser] = useState(null)
+  // const [featureProduct,setfeatureProduct] = useState(props.productlist[0])
   const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
   
-  const product = props.product
   const _url = props._url
 
   Auth.currentAuthenticatedUser()

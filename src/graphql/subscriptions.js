@@ -11,6 +11,7 @@ export const onCreateProduct = /* GraphQL */ `
       createdAt
       max_applicants
       image
+      isFree
       winner {
         items {
           id
@@ -35,6 +36,7 @@ export const onUpdateProduct = /* GraphQL */ `
       createdAt
       max_applicants
       image
+      isFree
       winner {
         items {
           id
@@ -59,6 +61,7 @@ export const onDeleteProduct = /* GraphQL */ `
       createdAt
       max_applicants
       image
+      isFree
       winner {
         items {
           id
@@ -86,6 +89,7 @@ export const onCreateWinner = /* GraphQL */ `
         createdAt
         max_applicants
         image
+        isFree
         winner {
           nextToken
         }
@@ -110,6 +114,7 @@ export const onUpdateWinner = /* GraphQL */ `
         createdAt
         max_applicants
         image
+        isFree
         winner {
           nextToken
         }
@@ -134,6 +139,7 @@ export const onDeleteWinner = /* GraphQL */ `
         createdAt
         max_applicants
         image
+        isFree
         winner {
           nextToken
         }

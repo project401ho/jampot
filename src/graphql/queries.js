@@ -11,6 +11,7 @@ export const getProduct = /* GraphQL */ `
       createdAt
       max_applicants
       image
+      isFree
       winner {
         items {
           id
@@ -40,6 +41,7 @@ export const listProducts = /* GraphQL */ `
         createdAt
         max_applicants
         image
+        isFree
         winner {
           nextToken
         }
@@ -62,6 +64,7 @@ export const getWinner = /* GraphQL */ `
         createdAt
         max_applicants
         image
+        isFree
         winner {
           nextToken
         }
@@ -91,6 +94,7 @@ export const listWinners = /* GraphQL */ `
           createdAt
           max_applicants
           image
+          isFree
           updatedAt
         }
         winneremail

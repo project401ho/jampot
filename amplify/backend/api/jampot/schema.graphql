@@ -8,6 +8,7 @@ type Product
   createdAt: AWSDateTime!
   max_applicants: Int!
   image: String
+  isFree: Boolean!
   winner: [Winner] @connection(keyName: "byProduct", fields: ["id"])
 }
 

@@ -8,7 +8,11 @@
 ## 7.11
 DataStore로 섭스크립션 중<br>
 SSR 하려고 하니 새로고침이 잘 안돼는듯함<br>
-
+로그인 로그아웃 자잘한 버그 해결<br>
+응모하기 완료 팝업 생성<br>
+live data 연결<br>
+conflict 설정은 Opimize-Concurrency? 로 해놓음<br>
+자잘한 디테일 수정<br>
 
 
 ## 7.10

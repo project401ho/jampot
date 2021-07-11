@@ -37,36 +37,38 @@ function Home(props) {
   const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
   const _url = props._url
-  
 
 
   useEffect(() => {
     
+    let test = "test"
+    let userData_subscription = null
+
+    Auth.currentAuthenticatedUser()
+    .then((e) => {        
+      setUser(e)      
+      fetchUserData(e.attributes.email)      
+      test = e.attributes.email
+    }) 
+    .catch((error)=>{console.log(error);})
+   
     async function fetchUserData(id) {
       const userData = await DataStore.query(UserDS,id)      
       setUserData(userData)      
     }
-    const userData_subscription = null
-    Auth.currentAuthenticatedUser()
-    .then(async (e) => {        
-      setUser(e)      
-      fetchUserData(e.attributes.email)
-      
-      userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(e.attributes.email))
-    }) 
-    .catch((error)=>{console.log(error);}) 
+    
 
-    
-    
-    
     async function fetchProductLists() {
       const productList = await DataStore.query(ProductDS, Predicates.ALL, {
         sort: item => item.createdAt(SortDirection.ASCENDING)
       })      
-      // console.log(productList);
       setproductList(productList)      
     }
+      
+    console.log("set subscription");
 
+    userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
+    console.log("done set");
     const productList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchProductLists())
 
     return () => {

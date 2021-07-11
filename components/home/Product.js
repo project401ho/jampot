@@ -55,7 +55,6 @@ export default function Product(props) {
             }            
           } 
           setproductIdx(tempidx)
-          setprops.productList[productIdx](props.productList[tempidx])
         }}>
           <FontAwesomeIcon className="faIcons" icon={faChevronLeft} size="sm"></FontAwesomeIcon>
         </a>
@@ -91,7 +90,6 @@ export default function Product(props) {
               seturlList(templist)
             }            
           }  
-          setprops.productList[productIdx](props.productList[tempidx])
           setproductIdx(tempidx)
         }}>
           <FontAwesomeIcon className="faIcons" icon={faChevronRight} size="sm"></FontAwesomeIcon>
@@ -107,6 +105,7 @@ export default function Product(props) {
           else{
             
             let tempProduct = await DataStore.query(ProductDS,props.productList[productIdx].id)
+            console.log([...tempProduct.applicants].concat(props.userData.id));
             if(tempProduct.isFree){
               if(props.userData.freeTicket > 0){
                 await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{

@@ -22,7 +22,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+}
+.Product_userdata_container{
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 15px;
+}
+.Product_userdata{
+  display: inline;
+  margin: 0 10px;
 }
 .Product_title{
   margin:0;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Link from "next/link"
-import { SignIn as SignInLib,SignUp as SignUpLib } from '../../lib/signin'
+import { SignIn as SignInLib, SignUp as SignUpLib } from '../../lib/signin'
+import { createUser } from '../../lib/graphql'
 import styles from "./SignIn.module.scss";
 
 
@@ -72,6 +73,15 @@ class SignUp extends Component {
                       if(await SignUpLib(this.state.nickname,this.state.email,this.state.password)){
                         console.log("signed up");
                         let _user = await SignInLib(this.state.email,this.state.password)
+                        let temp = {
+                          id:this.state.email,
+                          email:this.state.email,
+                          nickname: this.state.nickname,
+                          ticket:0,
+                          freeTicket:0,
+                          appliedList:[],
+                        }
+                        await createUser(temp)
                         this.props.setUser(_user)
                         close()
                         

@@ -1,27 +1,31 @@
 import React, {Component} from 'react'
 import styles from "./Create.module.scss";
-import { uploadImage } from '../../lib/graphql'
+import { uploadImage, createProduct } from '../../lib/graphql'
 
 export const date = new Date()
 
 class Create extends Component {
   
   state={
-    id: ""+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getTime(),
-    description: "",
-    applicants: [],
-    title: "",
-    createdAt: date,
-    max_applicants: 6,
-    image: "neogulman.png",
-    isFree: false,
-    type: "product",
+    product:{
+      id: ""+date.getFullYear()+(date.getMonth()+1)+date.getDate()+date.getTime(),
+      description: "",
+      applicants: [],
+      title: "",
+      createdAt: date,
+      max_applicants: 6,
+      image: "neogulman.png",
+      isFree: false,
+      type: "product",
+    },
+    
     imagefile: null
   }
 
   stateHandler = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    let temp = Object.assign({},this.state.product,{[name]:value})
+    this.setState({ product: temp });
   };
   verifyFields(item){
     if(item.title === null) return false
@@ -50,7 +54,7 @@ class Create extends Component {
         name="max_applicants"
         className={styles.inputs}
         type="text"
-        placeholder={"기본 설정: " + this.state.max_applicants}
+        placeholder={"기본 설정: " + this.state.product.max_applicants}
         onChange={this.stateHandler}
       />
       <input
@@ -58,7 +62,7 @@ class Create extends Component {
         className={styles.inputs}
         type="text"
         placeholder="image"
-        value = {this.state.image}
+        value = {this.state.product.image}
         onChange={this.stateHandler}
       />
       <input
@@ -71,6 +75,13 @@ class Create extends Component {
           console.log(e);
         }}
       />
+      <button 
+        className={styles.inputs}
+        onClick={async ()=>await uploadImage(this.state.imagefile)}
+      > 
+        이미지 업로드
+      </button>
+
       <div className={styles.isFree_container}>
         <p>무료 상품일때 체크</p>
         <input
@@ -90,7 +101,7 @@ class Create extends Component {
         </button>
         <button 
           onClick={()=>{
-            let item = Object.assign({},this.state)
+            let item = Object.assign({},this.state.product)
             if(this.verifyFields(item)){
               console.log("start create");
               createProduct(item)
@@ -102,7 +113,6 @@ class Create extends Component {
         </button>
 
       </div>
-      <button onClick={async ()=>await uploadImage(this.state.imagefile)}> 이미지 업로드</button>
 
     </div>
   );

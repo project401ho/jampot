@@ -1,21 +1,36 @@
-/* eslint-disable @next/next/no-img-element */
 import React, {useState} from 'react'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight,faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { fetchProductImage } from '../../lib/graphql'
+import { fetchProductImage} from '../../lib/graphql'
 
-export default function Product({_url, user,isSignInModalOpen,_productList}) {
-  const [productList,setProductList] = useState(_productList)
+import {Product as ProductDS, User as UserDS} from '../../src/models'
+import { DataStore } from "aws-amplify"
+
+
+export default function Product(props) {
   const [productIdx, setproductIdx] = useState(0)
-  const [currentProduct,setcurrentProduct] = useState(productList[0])
-  const [url, seturl] = useState(_url)
-  const [urlList, seturlList] = useState([{url:_url,filename:productList[0].image}])
+  const [currentProduct,setcurrentProduct] = useState(props.productList[0])
+  
+  const [url, seturl] = useState(props.url)
+  const [urlList, seturlList] = useState([{url:props.url,filename:props.productList[0].image}])
+  
+  
   return (
-    <div className={styles.Product_container}>
+    <div className={styles.Product_container}>      
+        {
+          props.userData !== null 
+          &&
+          <div className={styles.Product_userdata_container}>
+            <p className={styles.Product_userdata}>{props.userData.ticket}</p>     
+            <p className={styles.Product_userdata}>{props.userData.freeTicket}</p>   
+          </div>
+        }              
       <h2 className = {styles.Product_title}>
         {currentProduct.title}
+        <br/>
+        {"( " + currentProduct.applicants.length+" / "+currentProduct.max_applicants + " )"}
       </h2>
       <div className={styles.Product_content_container}>
         <a onClick={async (e)=>{
@@ -25,28 +40,28 @@ export default function Product({_url, user,isSignInModalOpen,_productList}) {
             tempidx -= 1
           }
           else{
-            tempidx = productList.length-1
+            tempidx = props.productList.length-1
           }
-          if(productList[tempidx].image !== currentProduct.image){
-            let urlListIdx =urlList.findIndex((item)=>item.filename===productList[tempidx].image)
+          if(props.productList[tempidx].image !== currentProduct.image){
+            let urlListIdx =urlList.findIndex((item)=>item.filename===props.productList[tempidx].image)
             if(urlListIdx >= 0){
               seturl(urlList[urlListIdx].url)
             }
             else{
-              let tempurl = await fetchProductImage(productList[tempidx].image)
-              let temp = {url:tempurl,filename:productList[tempidx].image}
+              let tempurl = await fetchProductImage(props.productList[tempidx].image)
+              let temp = {url:tempurl,filename:props.productList[tempidx].image}
               let templist = [...urlList].concat(temp)
               seturl(tempurl)
               seturlList(templist)
             }            
           } 
           setproductIdx(tempidx)
-          setcurrentProduct(productList[tempidx])
+          setcurrentProduct(props.productList[tempidx])
         }}>
           <FontAwesomeIcon className="faIcons" icon={faChevronLeft} size="sm"></FontAwesomeIcon>
         </a>
         <div className={styles.Product_image_container}>
-          {/* <img src={_url} alt="product image"></img> */}
+          {/* <img src={props.url} alt="product image"></img> */}
           <Image
             src={url}
             alt="test"
@@ -58,40 +73,83 @@ export default function Product({_url, user,isSignInModalOpen,_productList}) {
         <a onClick={async (e)=>{
           e.preventDefault()
           let tempidx = productIdx
-          if(productIdx < productList.length-1){
+          if(productIdx < props.productList.length-1){
             tempidx += 1
           }
           else{
             tempidx = 0
           }
-          if(productList[tempidx].image !== currentProduct.image){
-            let urlListIdx =urlList.findIndex((item)=>item.filename===productList[tempidx].image)
+          if(props.productList[tempidx].image !== currentProduct.image){
+            let urlListIdx =urlList.findIndex((item)=>item.filename===props.productList[tempidx].image)
             if(urlListIdx >= 0){
               seturl(urlList[urlListIdx].url)
             }
             else{
-              let tempurl = await fetchProductImage(productList[tempidx].image)
-              let temp = {url:tempurl,filename:productList[tempidx].image}
+              let tempurl = await fetchProductImage(props.productList[tempidx].image)
+              let temp = {url:tempurl,filename:props.productList[tempidx].image}
               let templist = [...urlList].concat(temp)
               seturl(tempurl)
               seturlList(templist)
             }            
           }  
-          setcurrentProduct(productList[tempidx])
+          setcurrentProduct(props.productList[tempidx])
           setproductIdx(tempidx)
         }}>
           <FontAwesomeIcon className="faIcons" icon={faChevronRight} size="sm"></FontAwesomeIcon>
         </a>
       </div>
-      <button className={styles.Product_apply_button} onClick={()=> {
+      {
+        currentProduct.applicants.length < currentProduct.max_applicants
+        ?
+        <button className={styles.Product_apply_button} onClick={ async ()=> {
+          if(props.user === null) {
+            props.isSignInModalOpen()
+          }
+          else{
+            let tempProduct = await DataStore.query(ProductDS,props.productList[productIdx].id)
+            if(tempProduct.isFree){
+              if(props.userData.freeTicket > 0){
+                await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
+                  updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
+                }))
+                await DataStore.save(UserDS.copyOf(props.userData, updated=>{
+                  updated.freeTicket -= 1
+                }))
+                setcurrentProduct(props.productList[productIdx])
+              }
+              else{
+                alert("not enough free ticket")
+                return
+              }
+            }
+            else{
+              if(props.userData.ticket > 0){
+                await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
+                  updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
+                }))
+                await DataStore.save(UserDS.copyOf(props.userData, updated=>{
+                  updated.ticket -= 1
+                }))
+                setcurrentProduct(props.productList[productIdx])
+              }
+              else{
+                alert("not enough ticket")
 
-        if(user === null) {
-          isSignInModalOpen()
-        }
-       
-      }} >
-        응모하기
-      </button>
+                return
+              }
+            }
+          }
+        
+        }} >
+          응모하기
+        </button>
+        :
+        <button className={styles.Product_apply_button} onClick={()=> {}}>
+          모집 완료
+        </button>
+
+      }
+      
     </div>
   );
 }

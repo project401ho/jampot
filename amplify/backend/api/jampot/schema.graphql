@@ -1,10 +1,4 @@
-type Product
-  @model
-  @key(
-    name: "productsByDate"
-    fields: ["type", "createdAt"]
-    queryField: "productsByDate"
-  ) {
+type Product @model @key(name: "productsByDate", fields: ["type", "createdAt"], queryField: "productsByDate") @auth(rules: [{allow: private, provider: iam}]) {
   id: ID!
   description: String
   applicants: [String]
@@ -17,23 +11,19 @@ type Product
   winner: [Winner] @connection(keyName: "byProduct", fields: ["id"])
 }
 
-type Winner 
-@model 
-@key(name:"byProduct", fields:["productID", "winneremail"])
-{
-  id:ID!
+type Winner @model @key(name: "byProduct", fields: ["productID", "winneremail"]) @auth(rules: [{allow: private, provider: iam}]) {
+  id: ID!
   productID: ID!
-  product: Product @connection(fields:["productID"])
-  winneremail:String!
+  product: Product @connection(fields: ["productID"])
+  winneremail: String!
 }
 
-type User
-@model{
-  id:ID!
-  email:String!
-  nickname: String!  
-  ticket:Int!
-  freeTicket:Int!
-  appliedList:[String]
-  
+type User @model @auth(rules: [{allow: private, provider: iam}]) {
+  id: ID!
+  email: String!
+  nickname: String!
+  ticket: Int!
+  freeTicket: Int!
+  appliedList: [String]
 }
+  

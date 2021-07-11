@@ -8,6 +8,7 @@ import SignUp from '../components/home/SignUp'
 import Navigation from '../components/Navigation'
 import {Product as ProductDS, User as UserDS} from '../src/models'
 
+import { SignOut } from '../lib/signin'
 
 
 export const siteTitle = "잼팟"
@@ -18,10 +19,6 @@ export async function getServerSideProps() {
   let productlist = await DataStore.query(ProductDS, Predicates.ALL, {
     sort: item => item.createdAt(SortDirection.ASCENDING)
   })
-  let temp = await DataStore.query(UserDS)
-  console.log(temp);
-  // console.log(productlist);
-  temp = JSON.parse(JSON.stringify(temp))
   productlist = JSON.parse(JSON.stringify(productlist))
   const _url = await Storage.get(productlist[0].image)
 
@@ -29,7 +26,6 @@ export async function getServerSideProps() {
     props: {
       productlist,
       _url,
-      temp,
     }    
   }
 }
@@ -43,20 +39,25 @@ function Home(props) {
   const _url = props._url
   
 
+
   useEffect(() => {
-    console.log("WTF");
+    
+    async function fetchUserData(id) {
+      const userData = await DataStore.query(UserDS,id)      
+      setUserData(userData)      
+    }
+    const userData_subscription = null
     Auth.currentAuthenticatedUser()
     .then(async (e) => {        
-      setUser(e)
-      fetchUserData(e.id)
+      setUser(e)      
+      fetchUserData(e.attributes.email)
+      
+      userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(e.attributes.email))
     }) 
     .catch((error)=>{console.log(error);}) 
 
-    async function fetchUserData(id) {
-      const userData = await DataStore.query(UserDS,id)      
-      setUserData(userData[0])      
-    }
-    const userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData())
+    
+    
     
     async function fetchProductLists() {
       const productList = await DataStore.query(ProductDS, Predicates.ALL, {
@@ -76,7 +77,6 @@ function Home(props) {
   },[])
   
 
-  // testuserdata.map(user=>console.log(user.email))
 
   const signInModalClose = () => {
     setIsSignInModalOpen(false)
@@ -106,27 +106,8 @@ function Home(props) {
         user={user}
         isSignInModalOpen={signInModalOpen}
       />
-      <button onClick={async ()=>{
+      <button onClick={SignOut}>로그아웃</button>
 
-        let tempProduct = await DataStore.query(ProductDS,productList[0].id)
-        await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
-          updated.title = "CHANGED"
-        }))
-        await DataStore.save(UserDS.copyOf(userData, updated=>{
-          updated.ticket += 1
-        }))
-      }}> 
-      구독 테스트
-      </button>
-      {
-        userData !== null &&<p>
-        email : {userData.email}
-        <br/>
-        ticket: {userData.ticket}
-        
-      </p>
-      }
-      
       <Product 
         url={_url} 
         user={user}  
@@ -140,6 +121,7 @@ function Home(props) {
         setUser={(_user)=>setUser(_user)} 
         close={signInModalClose}
         openSignUp={signUpModalOpen}
+        setUserData={(userData)=>setUserData(userData)}
       />
       <SignUp
         isOpen={isSignUpModalOpen} 

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Link from "next/link"
-import { SignIn as SignInLib,rememberDevice, forgetDevice} from '../../lib/signin'
+import { SignIn as SignInLib} from '../../lib/signin'
 import styles from "./SignIn.module.scss";
-
+import { User as UserDS} from '../../src/models'
+import { DataStore } from "aws-amplify"
 
 class SignIn extends Component {
   state = {
@@ -59,7 +60,10 @@ class SignIn extends Component {
                   </div>
                   <button className={styles.loginBtn} onClick={async ()=>{
                     let _user = await SignInLib(this.state.email,this.state.password)
-                    this.props.setUser(_user)
+                    console.log(_user);
+                    if(_user !== null){
+                      
+                    }
                     close()                    
                     //link move
                   }}>

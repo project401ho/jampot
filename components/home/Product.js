@@ -11,7 +11,6 @@ import { DataStore } from "aws-amplify"
 
 export default function Product(props) {
   const [productIdx, setproductIdx] = useState(0)
-  const [currentProduct,setcurrentProduct] = useState(props.productList[0])
   
   const [url, seturl] = useState(props.url)
   const [urlList, seturlList] = useState([{url:props.url,filename:props.productList[0].image}])
@@ -23,14 +22,14 @@ export default function Product(props) {
           props.userData !== null 
           &&
           <div className={styles.Product_userdata_container}>
-            <p className={styles.Product_userdata}>{props.userData.ticket}</p>     
-            <p className={styles.Product_userdata}>{props.userData.freeTicket}</p>   
+            <p className={styles.Product_userdata}>{props.userData && props.userData.ticket}</p>     
+            <p className={styles.Product_userdata}>{props.userData && props.userData.freeTicket}</p>   
           </div>
         }              
       <h2 className = {styles.Product_title}>
-        {currentProduct.title}
+        {props.productList[productIdx].title}
         <br/>
-        {"( " + currentProduct.applicants.length+" / "+currentProduct.max_applicants + " )"}
+        {"( " + props.productList[productIdx].applicants.length+" / "+props.productList[0].max_applicants + " )"}
       </h2>
       <div className={styles.Product_content_container}>
         <a onClick={async (e)=>{
@@ -42,7 +41,7 @@ export default function Product(props) {
           else{
             tempidx = props.productList.length-1
           }
-          if(props.productList[tempidx].image !== currentProduct.image){
+          if(props.productList[tempidx].image !== props.productList[productIdx].image){
             let urlListIdx =urlList.findIndex((item)=>item.filename===props.productList[tempidx].image)
             if(urlListIdx >= 0){
               seturl(urlList[urlListIdx].url)
@@ -56,7 +55,7 @@ export default function Product(props) {
             }            
           } 
           setproductIdx(tempidx)
-          setcurrentProduct(props.productList[tempidx])
+          setprops.productList[productIdx](props.productList[tempidx])
         }}>
           <FontAwesomeIcon className="faIcons" icon={faChevronLeft} size="sm"></FontAwesomeIcon>
         </a>
@@ -79,7 +78,7 @@ export default function Product(props) {
           else{
             tempidx = 0
           }
-          if(props.productList[tempidx].image !== currentProduct.image){
+          if(props.productList[tempidx].image !== props.productList[productIdx].image){
             let urlListIdx =urlList.findIndex((item)=>item.filename===props.productList[tempidx].image)
             if(urlListIdx >= 0){
               seturl(urlList[urlListIdx].url)
@@ -92,20 +91,21 @@ export default function Product(props) {
               seturlList(templist)
             }            
           }  
-          setcurrentProduct(props.productList[tempidx])
+          setprops.productList[productIdx](props.productList[tempidx])
           setproductIdx(tempidx)
         }}>
           <FontAwesomeIcon className="faIcons" icon={faChevronRight} size="sm"></FontAwesomeIcon>
         </a>
       </div>
       {
-        currentProduct.applicants.length < currentProduct.max_applicants
+        props.productList[productIdx].applicants.length < props.productList[0].max_applicants
         ?
         <button className={styles.Product_apply_button} onClick={ async ()=> {
           if(props.user === null) {
             props.isSignInModalOpen()
           }
           else{
+            
             let tempProduct = await DataStore.query(ProductDS,props.productList[productIdx].id)
             if(tempProduct.isFree){
               if(props.userData.freeTicket > 0){
@@ -115,7 +115,7 @@ export default function Product(props) {
                 await DataStore.save(UserDS.copyOf(props.userData, updated=>{
                   updated.freeTicket -= 1
                 }))
-                setcurrentProduct(props.productList[productIdx])
+                
               }
               else{
                 alert("not enough free ticket")
@@ -130,7 +130,7 @@ export default function Product(props) {
                 await DataStore.save(UserDS.copyOf(props.userData, updated=>{
                   updated.ticket -= 1
                 }))
-                setcurrentProduct(props.productList[productIdx])
+                
               }
               else{
                 alert("not enough ticket")

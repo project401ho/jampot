@@ -18,11 +18,18 @@ export const onCreateProduct = /* GraphQL */ `
           id
           productID
           winneremail
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       updatedAt
     }
   }
@@ -44,11 +51,18 @@ export const onUpdateProduct = /* GraphQL */ `
           id
           productID
           winneremail
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       updatedAt
     }
   }
@@ -70,11 +84,18 @@ export const onDeleteProduct = /* GraphQL */ `
           id
           productID
           winneremail
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       updatedAt
     }
   }
@@ -96,10 +117,17 @@ export const onCreateWinner = /* GraphQL */ `
         type
         winner {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         updatedAt
       }
       winneremail
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -122,10 +150,17 @@ export const onUpdateWinner = /* GraphQL */ `
         type
         winner {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         updatedAt
       }
       winneremail
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -148,10 +183,17 @@ export const onDeleteWinner = /* GraphQL */ `
         type
         winner {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         updatedAt
       }
       winneremail
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -166,6 +208,9 @@ export const onCreateUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -180,6 +225,9 @@ export const onUpdateUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -194,6 +242,9 @@ export const onDeleteUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }

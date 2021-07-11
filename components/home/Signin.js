@@ -62,7 +62,7 @@ class SignIn extends Component {
                     let _user = await SignInLib(this.state.email,this.state.password)
                     console.log(_user);
                     if(_user !== null){
-                      
+                      window.location.reload()
                     }
                     close()                    
                     //link move

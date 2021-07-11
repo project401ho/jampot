@@ -7,14 +7,56 @@ import { fetchProductImage} from '../../lib/graphql'
 
 import {Product as ProductDS, User as UserDS} from '../../src/models'
 import { DataStore } from "aws-amplify"
-
+import ApplyPopUp from './ApplyPopUp'
 
 export default function Product(props) {
-  const [productIdx, setproductIdx] = useState(0)
-  
+  const [productIdx, setproductIdx] = useState(0)  
   const [url, seturl] = useState(props.url)
   const [urlList, seturlList] = useState([{url:props.url,filename:props.productList[0].image}])
+  const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
+
+  const applyProduct = async ()=> {
+    if(props.user === null) {
+      props.isSignInModalOpen()
+    }
+    else{
+      
+      let tempProduct = await DataStore.query(ProductDS,props.productList[productIdx].id)
+      if(tempProduct.isFree){
+        if(props.userData.freeTicket > 0){
+          await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
+            updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
+          }))
+          await DataStore.save(UserDS.copyOf(props.userData, updated=>{
+            updated.freeTicket -= 1
+          }))
+          
+        }
+        else{
+          alert("not enough free ticket")
+          return
+        }
+      }
+      else{
+        if(props.userData.ticket > 0){
+          await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
+            updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
+          }))
+          await DataStore.save(UserDS.copyOf(props.userData, updated=>{
+            updated.ticket -= 1
+          }))
+          
+        }
+        else{
+          alert("not enough ticket")
+
+          return
+        }
+      }
+      setisApplyPopUpOpen(true)
+    }
   
+  }
   
   return (
     <div className={styles.Product_container}>      
@@ -29,7 +71,7 @@ export default function Product(props) {
       <h2 className = {styles.Product_title}>
         {props.productList[productIdx].title}
         <br/>
-        {"( " + props.productList[productIdx].applicants.length+" / "+props.productList[0].max_applicants + " )"}
+        {"( " + props.productList[productIdx].applicants.length+" / "+props.productList[productIdx].max_applicants + " )"}
       </h2>
       <div className={styles.Product_content_container}>
         <a onClick={async (e)=>{
@@ -96,59 +138,21 @@ export default function Product(props) {
         </a>
       </div>
       {
-        props.productList[productIdx].applicants.length < props.productList[0].max_applicants
+        props.productList[productIdx].applicants.length < props.productList[productIdx].max_applicants
         ?
-        <button className={styles.Product_apply_button} onClick={ async ()=> {
-          if(props.user === null) {
-            props.isSignInModalOpen()
-          }
-          else{
-            
-            let tempProduct = await DataStore.query(ProductDS,props.productList[productIdx].id)
-            console.log([...tempProduct.applicants].concat(props.userData.id));
-            if(tempProduct.isFree){
-              if(props.userData.freeTicket > 0){
-                await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
-                  updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
-                }))
-                await DataStore.save(UserDS.copyOf(props.userData, updated=>{
-                  updated.freeTicket -= 1
-                }))
-                
-              }
-              else{
-                alert("not enough free ticket")
-                return
-              }
-            }
-            else{
-              if(props.userData.ticket > 0){
-                await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
-                  updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
-                }))
-                await DataStore.save(UserDS.copyOf(props.userData, updated=>{
-                  updated.ticket -= 1
-                }))
-                
-              }
-              else{
-                alert("not enough ticket")
-
-                return
-              }
-            }
-          }
-        
-        }} >
+        <button className={styles.Product_apply_button} onClick={applyProduct} >
           응모하기
         </button>
         :
-        <button className={styles.Product_apply_button} onClick={()=> {}}>
+        <button className={styles.Product_apply_button} disabled>
           모집 완료
         </button>
 
       }
-      
+      <ApplyPopUp
+        isOpen={isApplyPopUpOpen}
+        close={()=>setisApplyPopUpOpen(false)}
+      />
     </div>
   );
 }

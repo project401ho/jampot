@@ -1,6 +1,43 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const syncProducts = /* GraphQL */ `
+  query SyncProducts(
+    $filter: ModelProductFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncProducts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        description
+        applicants
+        title
+        createdAt
+        max_applicants
+        image
+        isFree
+        type
+        winner {
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getProduct = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {
@@ -18,11 +55,18 @@ export const getProduct = /* GraphQL */ `
           id
           productID
           winneremail
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       updatedAt
     }
   }
@@ -46,10 +90,58 @@ export const listProducts = /* GraphQL */ `
         type
         winner {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         updatedAt
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncWinners = /* GraphQL */ `
+  query SyncWinners(
+    $filter: ModelWinnerFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncWinners(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        productID
+        product {
+          id
+          description
+          applicants
+          title
+          createdAt
+          max_applicants
+          image
+          isFree
+          type
+          _version
+          _deleted
+          _lastChangedAt
+          updatedAt
+        }
+        winneremail
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -70,10 +162,17 @@ export const getWinner = /* GraphQL */ `
         type
         winner {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         updatedAt
       }
       winneremail
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -99,13 +198,51 @@ export const listWinners = /* GraphQL */ `
           image
           isFree
           type
+          _version
+          _deleted
+          _lastChangedAt
           updatedAt
         }
         winneremail
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUsers = /* GraphQL */ `
+  query SyncUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        email
+        nickname
+        ticket
+        freeTicket
+        appliedList
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -118,6 +255,9 @@ export const getUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -137,10 +277,14 @@ export const listUsers = /* GraphQL */ `
         ticket
         freeTicket
         appliedList
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
+      startedAt
     }
   }
 `;
@@ -173,10 +317,15 @@ export const productsByDate = /* GraphQL */ `
         type
         winner {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         updatedAt
       }
       nextToken
+      startedAt
     }
   }
 `;

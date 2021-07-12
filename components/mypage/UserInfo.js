@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from './UserInfo.module.css'
 import { SignOut } from '../../lib/signin'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCandyCane,faCookieBite } from "@fortawesome/free-solid-svg-icons";
+import { faStar,faCookieBite } from "@fortawesome/free-solid-svg-icons";
 
 export default function UserInfo(props) {
   const {user,userData} = props
@@ -23,7 +23,7 @@ export default function UserInfo(props) {
       <button onClick={SignOut}>로그아웃</button>
       <div className={styles.tickets_container}>
         <div className={styles.ticket_holder}>            
-          <FontAwesomeIcon className="faIcons_tickets" icon={faCandyCane} ></FontAwesomeIcon>
+          <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
           <p>{userData && userData.ticket}</p>   
         </div>
         <div className={styles.ticket_holder}>

@@ -88,6 +88,9 @@ function Home(props) {
         <meta name="description" content="online event apply website" />
         <meta name="og:title" content={siteTitle} />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
+        <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"/>
       </Head>
       
       <Navigation

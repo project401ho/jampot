@@ -27,11 +27,14 @@ body {
 .faIcons{
   width:30px;
   height:30px;
+  color: #3BD1B3;
 }
 .faIcons_tickets {
   margin: 0px 10px;
   width: 15px;
   height: 15px;
+  color: #3BD1B3;
+
 }
 
 a {

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight,faChevronLeft,faCandyCane,faCookieBite } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight,faChevronLeft,faStar,faCookieBite } from "@fortawesome/free-solid-svg-icons";
 import { fetchProductImage} from '../../lib/graphql'
 
 import {Product as ProductDS, User as UserDS} from '../../src/models'
@@ -70,7 +70,7 @@ export default function Product(props) {
           &&
           <>
           <div className={styles.Product_userdata}>            
-            <FontAwesomeIcon className="faIcons_tickets" icon={faCandyCane} ></FontAwesomeIcon>
+            <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
             <p className={styles.Product_userdata}>{props.userData && props.userData.ticket}</p>   
           </div>
           <div className={styles.Product_userdata}>
@@ -172,7 +172,7 @@ export default function Product(props) {
           ?
             <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>
           :
-            <FontAwesomeIcon className="faIcons_tickets" icon={faCandyCane} ></FontAwesomeIcon>
+            <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
           }
           응모하기
         </button>

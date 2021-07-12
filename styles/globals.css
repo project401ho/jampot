@@ -28,6 +28,11 @@ body {
   width:30px;
   height:30px;
 }
+.faIcons_tickets {
+  margin: 0px 10px;
+  width: 15px;
+  height: 15px;
+}
 
 a {
   color: inherit;

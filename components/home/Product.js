@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight,faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight,faChevronLeft,faCandyCane,faCookieBite } from "@fortawesome/free-solid-svg-icons";
 import { fetchProductImage} from '../../lib/graphql'
 
 import {Product as ProductDS, User as UserDS} from '../../src/models'
@@ -60,19 +60,21 @@ export default function Product(props) {
   
   return (
     <div className={styles.Product_container}>      
-        {
-          props.userData !== null 
-          &&
-          <div className={styles.Product_userdata_container}>
-            <p className={styles.Product_userdata}>{props.userData && props.userData.ticket}</p>     
+      {
+        props.userData !== null 
+        &&
+        <div className={styles.Product_userdata_container}>
+          <div className={styles.Product_userdata}>            
+            <FontAwesomeIcon className="faIcons_tickets" icon={faCandyCane} ></FontAwesomeIcon>
+            <p className={styles.Product_userdata}>{props.userData && props.userData.ticket}</p>   
+          </div>
+          <div className={styles.Product_userdata}>
+            <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>  
             <p className={styles.Product_userdata}>{props.userData && props.userData.freeTicket}</p>   
           </div>
-        }              
-      <h2 className = {styles.Product_title}>
-        {props.productList[productIdx].title}
-        <br/>
-        {"( " + props.productList[productIdx].applicants.length+" / "+props.productList[productIdx].max_applicants + " )"}
-      </h2>
+        </div>
+      }      
+      
       <div className={styles.Product_content_container}>
         <a onClick={async (e)=>{
           e.preventDefault()
@@ -101,12 +103,31 @@ export default function Product(props) {
           <FontAwesomeIcon className="faIcons" icon={faChevronLeft} size="sm"></FontAwesomeIcon>
         </a>
         <div className={styles.Product_image_container}>
-          {/* <img src={props.url} alt="product image"></img> */}
+          <div className={styles.Product_productdata_container}>
+            {
+              (props.productList[productIdx].applicants.length >= Math.ceil(props.productList[productIdx].max_applicants*0.7)
+              &&
+              props.productList[productIdx].applicants.length < props.productList[productIdx].max_applicants
+              )
+              ?
+              <div className={styles.Product_urgent}>
+                마감 임박!
+              </div>
+              :
+              null
+            }        
+            <h2 className = {styles.Product_title}>
+              {props.productList[productIdx].title}
+              <br/>
+              {"( " + props.productList[productIdx].applicants.length+" / "+props.productList[productIdx].max_applicants + " )"}
+            </h2>
+          </div>
+          
           <Image
             src={url}
             alt="test"
-            width={"300"}
-            height={"300"}
+            width={"200"}
+            height={"200"}
             unoptimized={true}
           />
         </div>
@@ -141,6 +162,13 @@ export default function Product(props) {
         props.productList[productIdx].applicants.length < props.productList[productIdx].max_applicants
         ?
         <button className={styles.Product_apply_button} onClick={applyProduct} >
+          {
+          props.productList[productIdx].isFree
+          ?
+            <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>
+          :
+            <FontAwesomeIcon className="faIcons_tickets" icon={faCandyCane} ></FontAwesomeIcon>
+          }
           응모하기
         </button>
         :

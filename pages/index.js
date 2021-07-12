@@ -12,13 +12,16 @@ import { SignOut } from '../lib/signin'
 
 
 export const siteTitle = "잼팟"
-
+export async function fetchProductList() {
+  let productlist = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
+    sort: item => item.createdAt(SortDirection.ASCENDING)
+  })
+  return productlist
+}
 
 export async function getServerSideProps() {
  
-  let productlist = await DataStore.query(ProductDS, Predicates.ALL, {
-    sort: item => item.createdAt(SortDirection.ASCENDING)
-  })
+  let productlist = await fetchProductList()
   productlist = JSON.parse(JSON.stringify(productlist))
   const _url = await Storage.get(productlist[0].image)
 
@@ -58,10 +61,8 @@ function Home(props) {
     }
     
 
-    async function fetchProductLists() {
-      const productList = await DataStore.query(ProductDS, Predicates.ALL, {
-        sort: item => item.createdAt(SortDirection.ASCENDING)
-      })      
+    async function fetchProductList_2() {
+      let productList = fetchProductList()      
       setproductList(productList)      
     }
       
@@ -69,7 +70,7 @@ function Home(props) {
 
     userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
     console.log("done set");
-    const productList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchProductLists())
+    const productList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchProductList_2())
 
     return () => {
       userData_subscription.unsubscribe()
@@ -108,7 +109,7 @@ function Home(props) {
         user={user}
         isSignInModalOpen={signInModalOpen}
       />
-      <button onClick={SignOut}>로그아웃</button>
+      {/* <button onClick={SignOut}>로그아웃</button> */}
 
       <Product 
         url={_url} 

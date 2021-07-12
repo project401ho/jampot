@@ -25,7 +25,7 @@ export default function ApplyPopUp(props) {
                   <h1>응모 완료 ㅎㅎ</h1>
                   
 
-                  <button className={styles.ApplyPopUpBtn} >
+                  <button className={styles.ApplyPopUpBtn} onClick={()=>close()}>
                     확인
                   </button>
                   

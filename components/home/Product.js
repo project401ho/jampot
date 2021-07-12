@@ -105,7 +105,7 @@ export default function Product(props) {
           } 
           setproductIdx(tempidx)
         }}>
-          <FontAwesomeIcon className="faIcons" icon={faChevronLeft} size="sm"></FontAwesomeIcon>
+          <FontAwesomeIcon className="faIcons" icon={faChevronLeft} ></FontAwesomeIcon>
         </a>
         <div className={styles.Product_image_container}>
           <div className={styles.Product_productdata_container}>
@@ -160,7 +160,7 @@ export default function Product(props) {
           }  
           setproductIdx(tempidx)
         }}>
-          <FontAwesomeIcon className="faIcons" icon={faChevronRight} size="sm"></FontAwesomeIcon>
+          <FontAwesomeIcon className="faIcons" icon={faChevronRight}></FontAwesomeIcon>
         </a>
       </div>
       {

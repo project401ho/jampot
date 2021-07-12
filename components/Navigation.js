@@ -22,7 +22,7 @@ export default function Navigation(props) {
           e.preventDefault()
           expandMenu()
       }}>
-        <FontAwesomeIcon className="faIcons" icon={faBars} size="sm"></FontAwesomeIcon>
+        <FontAwesomeIcon className="faIcons" icon={faBars}></FontAwesomeIcon>
       </a>
     </div>
   );

@@ -8,14 +8,7 @@ type Product @model @key(name: "productsByDate", fields: ["type", "createdAt"], 
   image: String
   isFree: Boolean!
   type: String!
-  winner: [Winner] @connection(keyName: "byProduct", fields: ["id"])
-}
-
-type Winner @model @key(name: "byProduct", fields: ["productID", "winneremail"]) @auth(rules: [{allow: private, provider: iam}]) {
-  id: ID!
-  productID: ID!
-  product: Product @connection(fields: ["productID"])
-  winneremail: String!
+  winner: String
 }
 
 type User @model @auth(rules: [{allow: private, provider: iam}]) {

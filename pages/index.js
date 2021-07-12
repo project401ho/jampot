@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Auth, DataStore, Predicates, SortDirection, Storage } from "aws-amplify"
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import MenuExpand from '../components/home/MenuExpand'
 import Product from '../components/home/Product'
 import SignIn from '../components/home/Signin'
 import SignUp from '../components/home/SignUp'
@@ -12,16 +13,13 @@ import { SignOut } from '../lib/signin'
 
 
 export const siteTitle = "잼팟"
-export async function fetchProductList() {
-  let productlist = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
-    sort: item => item.createdAt(SortDirection.ASCENDING)
-  })
-  return productlist
-}
+
 
 export async function getServerSideProps() {
  
-  let productlist = await fetchProductList()
+  let productlist = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
+    sort: item => item.createdAt(SortDirection.ASCENDING)
+  })
   productlist = JSON.parse(JSON.stringify(productlist))
   const _url = await Storage.get(productlist[0].image)
 
@@ -39,6 +37,7 @@ function Home(props) {
   const [productList,setproductList] = useState(props.productlist)
   const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
+  const [isMenuExpand,setisMenuExpand] = useState(false)
   const _url = props._url
 
 
@@ -60,10 +59,11 @@ function Home(props) {
       setUserData(userData)      
     }
     
-
     async function fetchProductList_2() {
-      let productList = fetchProductList()      
-      setproductList(productList)      
+      let productlist = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
+        sort: item => item.createdAt(SortDirection.ASCENDING)
+      })      
+      setproductList(productlist)      
     }
       
     console.log("set subscription");
@@ -81,21 +81,6 @@ function Home(props) {
   
 
 
-  const signInModalClose = () => {
-    setIsSignInModalOpen(false)
-  }
-  const signInModalOpen = () => {
-    
-    setIsSignInModalOpen(true)
-  }
-  const signUpModalClose = () => {
-    setIsSignUpModalOpen(false)
-  }
-  const signUpModalOpen = () => {
-    setIsSignUpModalOpen(true)
-  }
-
-
   return (
     <div className={styles.container}>
       <Head>
@@ -106,31 +91,41 @@ function Home(props) {
       </Head>
       
       <Navigation
-        user={user}
-        isSignInModalOpen={signInModalOpen}
+        expandMenu={()=>setisMenuExpand(true)}
       />
       {/* <button onClick={SignOut}>로그아웃</button> */}
+      
 
       <Product 
         url={_url} 
         user={user}  
-        isSignInModalOpen={signInModalOpen}
+        isSignInModalOpen={()=>setIsSignInModalOpen(true)}
         productList = {productList}
         userData={userData}        
       />
-     
+      {
+        isMenuExpand
+        ?
+        <MenuExpand          
+          user={user}
+          isSignInModalOpen={()=>setIsSignInModalOpen(true)}
+          close={()=>setisMenuExpand(false)}
+        />
+        :null
+      }
       <SignIn 
         isOpen={isSignInModalOpen} 
         setUser={(_user)=>setUser(_user)} 
-        close={signInModalClose}
-        openSignUp={signUpModalOpen}
+        close={()=>setIsSignInModalOpen(false)}
+        openSignUp={()=>setIsSignUpModalOpen(true)}
         setUserData={(userData)=>setUserData(userData)}
       />
       <SignUp
         isOpen={isSignUpModalOpen} 
         setUser={(_user)=>setUser(_user)} 
-        close={signUpModalClose}
+        close={()=>setIsSignUpModalOpen(false)}
       />
+      
     </div>
   )
 }

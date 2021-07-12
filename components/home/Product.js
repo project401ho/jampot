@@ -20,15 +20,17 @@ export default function Product(props) {
       props.isSignInModalOpen()
     }
     else{
-      
+      console.log("1");
       let tempProduct = await DataStore.query(ProductDS,props.productList[productIdx].id)
       if(tempProduct.isFree){
         if(props.userData.freeTicket > 0){
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
             updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
+            
           }))
           await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.freeTicket -= 1
+            updated.appliedList = [props.userData.appliedList].concat(props.productList[productIdx].id)
           }))
           
         }
@@ -44,6 +46,7 @@ export default function Product(props) {
           }))
           await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.ticket -= 1
+            updated.appliedList = [props.userData.appliedList].concat(props.productList[productIdx].id)
           }))
           
         }
@@ -60,10 +63,12 @@ export default function Product(props) {
   
   return (
     <div className={styles.Product_container}>      
-      {
-        props.userData !== null 
-        &&
-        <div className={styles.Product_userdata_container}>
+      
+      <div className={styles.Product_userdata_container}>
+        {
+          props.userData !== null 
+          &&
+          <>
           <div className={styles.Product_userdata}>            
             <FontAwesomeIcon className="faIcons_tickets" icon={faCandyCane} ></FontAwesomeIcon>
             <p className={styles.Product_userdata}>{props.userData && props.userData.ticket}</p>   
@@ -72,9 +77,9 @@ export default function Product(props) {
             <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>  
             <p className={styles.Product_userdata}>{props.userData && props.userData.freeTicket}</p>   
           </div>
-        </div>
-      }      
-      
+          </>
+        }      
+      </div>
       <div className={styles.Product_content_container}>
         <a onClick={async (e)=>{
           e.preventDefault()

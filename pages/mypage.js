@@ -35,7 +35,7 @@ export default function MyPage() {
     
     async function fetchappliedProductList(id) {
       let productlist = await DataStore.query(ProductDS, c=>c.applicants("contains",id), {
-        sort: item => item.createdAt(SortDirection.ASCENDING)
+        sort: item => item.createdAt(SortDirection.DESCENDING)
       })      
       setappliedProductList(productlist)      
     }
@@ -71,6 +71,7 @@ export default function MyPage() {
       />
       <AppliedList
         appliedProductList={appliedProductList}
+        userData={userData}
       />
     </div>
   );

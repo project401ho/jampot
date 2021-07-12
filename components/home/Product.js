@@ -27,11 +27,11 @@ export default function Product(props) {
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
             updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
             
-          }))
-          await DataStore.save(UserDS.copyOf(props.userData, updated=>{
+          })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.freeTicket -= 1
-            updated.appliedList = [props.userData.appliedList].concat(props.productList[productIdx].id)
-          }))
+            updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+          })))
+          
           
         }
         else{
@@ -43,11 +43,11 @@ export default function Product(props) {
         if(props.userData.ticket > 0){
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
             updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
-          }))
-          await DataStore.save(UserDS.copyOf(props.userData, updated=>{
+          })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.ticket -= 1
-            updated.appliedList = [props.userData.appliedList].concat(props.productList[productIdx].id)
-          }))
+            updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+          })))
+          
           
         }
         else{

@@ -16,20 +16,7 @@ export const createProduct = /* GraphQL */ `
       image
       isFree
       type
-      winner {
-        items {
-          id
-          productID
-          winneremail
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      winner
       _version
       _deleted
       _lastChangedAt
@@ -52,20 +39,7 @@ export const updateProduct = /* GraphQL */ `
       image
       isFree
       type
-      winner {
-        items {
-          id
-          productID
-          winneremail
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      winner
       _version
       _deleted
       _lastChangedAt
@@ -88,131 +62,10 @@ export const deleteProduct = /* GraphQL */ `
       image
       isFree
       type
-      winner {
-        items {
-          id
-          productID
-          winneremail
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      winner
       _version
       _deleted
       _lastChangedAt
-      updatedAt
-    }
-  }
-`;
-export const createWinner = /* GraphQL */ `
-  mutation CreateWinner(
-    $input: CreateWinnerInput!
-    $condition: ModelWinnerConditionInput
-  ) {
-    createWinner(input: $input, condition: $condition) {
-      id
-      productID
-      product {
-        id
-        description
-        applicants
-        title
-        createdAt
-        max_applicants
-        image
-        isFree
-        type
-        winner {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        updatedAt
-      }
-      winneremail
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateWinner = /* GraphQL */ `
-  mutation UpdateWinner(
-    $input: UpdateWinnerInput!
-    $condition: ModelWinnerConditionInput
-  ) {
-    updateWinner(input: $input, condition: $condition) {
-      id
-      productID
-      product {
-        id
-        description
-        applicants
-        title
-        createdAt
-        max_applicants
-        image
-        isFree
-        type
-        winner {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        updatedAt
-      }
-      winneremail
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteWinner = /* GraphQL */ `
-  mutation DeleteWinner(
-    $input: DeleteWinnerInput!
-    $condition: ModelWinnerConditionInput
-  ) {
-    deleteWinner(input: $input, condition: $condition) {
-      id
-      productID
-      product {
-        id
-        description
-        applicants
-        title
-        createdAt
-        max_applicants
-        image
-        isFree
-        type
-        winner {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        updatedAt
-      }
-      winneremail
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
       updatedAt
     }
   }
@@ -229,6 +82,7 @@ export const createUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      checkedAppliedList
       _version
       _deleted
       _lastChangedAt
@@ -249,6 +103,7 @@ export const updateUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      checkedAppliedList
       _version
       _deleted
       _lastChangedAt
@@ -269,6 +124,7 @@ export const deleteUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      checkedAppliedList
       _version
       _deleted
       _lastChangedAt

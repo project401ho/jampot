@@ -14,8 +14,8 @@ export default function UserInfo(props) {
         priority
         src="/defaultprofile.png"
         className={styles.borderCircle}
-        height={80}
-        width={80}
+        height={50}
+        width={50}
         alt="profile image"
         unoptimized={true}
       />    

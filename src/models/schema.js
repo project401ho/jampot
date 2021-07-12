@@ -69,17 +69,10 @@ export const schema = {
                 },
                 "winner": {
                     "name": "winner",
-                    "isArray": true,
-                    "type": {
-                        "model": "Winner"
-                    },
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "product"
-                    }
+                    "attributes": []
                 },
                 "updatedAt": {
                     "name": "updatedAt",
@@ -106,89 +99,6 @@ export const schema = {
                             "createdAt"
                         ],
                         "queryField": "productsByDate"
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "private",
-                                "provider": "iam",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Winner": {
-            "name": "Winner",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "product": {
-                    "name": "product",
-                    "isArray": false,
-                    "type": {
-                        "model": "Product"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "productID"
-                    }
-                },
-                "winneremail": {
-                    "name": "winneremail",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Winners",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byProduct",
-                        "fields": [
-                            "productID",
-                            "winneremail"
-                        ]
                     }
                 },
                 {
@@ -256,6 +166,14 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
+                "checkedAppliedList": {
+                    "name": "checkedAppliedList",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -302,5 +220,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4f5005f88fe61b9ebd25a46cfaf58540"
+    "version": "6349112d655091dc38f420ff3b842804"
 };

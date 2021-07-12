@@ -13,20 +13,7 @@ export const onCreateProduct = /* GraphQL */ `
       image
       isFree
       type
-      winner {
-        items {
-          id
-          productID
-          winneremail
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      winner
       _version
       _deleted
       _lastChangedAt
@@ -46,20 +33,7 @@ export const onUpdateProduct = /* GraphQL */ `
       image
       isFree
       type
-      winner {
-        items {
-          id
-          productID
-          winneremail
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      winner
       _version
       _deleted
       _lastChangedAt
@@ -79,122 +53,10 @@ export const onDeleteProduct = /* GraphQL */ `
       image
       isFree
       type
-      winner {
-        items {
-          id
-          productID
-          winneremail
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      winner
       _version
       _deleted
       _lastChangedAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateWinner = /* GraphQL */ `
-  subscription OnCreateWinner {
-    onCreateWinner {
-      id
-      productID
-      product {
-        id
-        description
-        applicants
-        title
-        createdAt
-        max_applicants
-        image
-        isFree
-        type
-        winner {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        updatedAt
-      }
-      winneremail
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateWinner = /* GraphQL */ `
-  subscription OnUpdateWinner {
-    onUpdateWinner {
-      id
-      productID
-      product {
-        id
-        description
-        applicants
-        title
-        createdAt
-        max_applicants
-        image
-        isFree
-        type
-        winner {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        updatedAt
-      }
-      winneremail
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteWinner = /* GraphQL */ `
-  subscription OnDeleteWinner {
-    onDeleteWinner {
-      id
-      productID
-      product {
-        id
-        description
-        applicants
-        title
-        createdAt
-        max_applicants
-        image
-        isFree
-        type
-        winner {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        updatedAt
-      }
-      winneremail
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
       updatedAt
     }
   }
@@ -208,6 +70,7 @@ export const onCreateUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      checkedAppliedList
       _version
       _deleted
       _lastChangedAt
@@ -225,6 +88,7 @@ export const onUpdateUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      checkedAppliedList
       _version
       _deleted
       _lastChangedAt
@@ -242,6 +106,7 @@ export const onDeleteUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      checkedAppliedList
       _version
       _deleted
       _lastChangedAt

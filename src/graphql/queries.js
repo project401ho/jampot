@@ -24,10 +24,7 @@ export const syncProducts = /* GraphQL */ `
         image
         isFree
         type
-        winner {
-          nextToken
-          startedAt
-        }
+        winner
         _version
         _deleted
         _lastChangedAt
@@ -50,20 +47,7 @@ export const getProduct = /* GraphQL */ `
       image
       isFree
       type
-      winner {
-        items {
-          id
-          productID
-          winneremail
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
+      winner
       _version
       _deleted
       _lastChangedAt
@@ -88,126 +72,10 @@ export const listProducts = /* GraphQL */ `
         image
         isFree
         type
-        winner {
-          nextToken
-          startedAt
-        }
+        winner
         _version
         _deleted
         _lastChangedAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncWinners = /* GraphQL */ `
-  query SyncWinners(
-    $filter: ModelWinnerFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncWinners(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        productID
-        product {
-          id
-          description
-          applicants
-          title
-          createdAt
-          max_applicants
-          image
-          isFree
-          type
-          _version
-          _deleted
-          _lastChangedAt
-          updatedAt
-        }
-        winneremail
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getWinner = /* GraphQL */ `
-  query GetWinner($id: ID!) {
-    getWinner(id: $id) {
-      id
-      productID
-      product {
-        id
-        description
-        applicants
-        title
-        createdAt
-        max_applicants
-        image
-        isFree
-        type
-        winner {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        updatedAt
-      }
-      winneremail
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listWinners = /* GraphQL */ `
-  query ListWinners(
-    $filter: ModelWinnerFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listWinners(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        productID
-        product {
-          id
-          description
-          applicants
-          title
-          createdAt
-          max_applicants
-          image
-          isFree
-          type
-          _version
-          _deleted
-          _lastChangedAt
-          updatedAt
-        }
-        winneremail
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
         updatedAt
       }
       nextToken
@@ -235,6 +103,7 @@ export const syncUsers = /* GraphQL */ `
         ticket
         freeTicket
         appliedList
+        checkedAppliedList
         _version
         _deleted
         _lastChangedAt
@@ -255,6 +124,7 @@ export const getUser = /* GraphQL */ `
       ticket
       freeTicket
       appliedList
+      checkedAppliedList
       _version
       _deleted
       _lastChangedAt
@@ -277,6 +147,7 @@ export const listUsers = /* GraphQL */ `
         ticket
         freeTicket
         appliedList
+        checkedAppliedList
         _version
         _deleted
         _lastChangedAt
@@ -315,10 +186,7 @@ export const productsByDate = /* GraphQL */ `
         image
         isFree
         type
-        winner {
-          nextToken
-          startedAt
-        }
+        winner
         _version
         _deleted
         _lastChangedAt

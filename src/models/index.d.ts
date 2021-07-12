@@ -14,20 +14,10 @@ export declare class Product {
   readonly image?: string;
   readonly isFree: boolean;
   readonly type: string;
-  readonly winner?: (Winner | null)[];
+  readonly winner?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Product>);
   static copyOf(source: Product, mutator: (draft: MutableModel<Product>) => MutableModel<Product> | void): Product;
-}
-
-export declare class Winner {
-  readonly id: string;
-  readonly product?: Product;
-  readonly winneremail: string;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<Winner>);
-  static copyOf(source: Winner, mutator: (draft: MutableModel<Winner>) => MutableModel<Winner> | void): Winner;
 }
 
 export declare class User {
@@ -37,6 +27,7 @@ export declare class User {
   readonly ticket: number;
   readonly freeTicket: number;
   readonly appliedList?: (string | null)[];
+  readonly checkedAppliedList?: (string | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User>);

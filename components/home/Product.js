@@ -26,13 +26,13 @@ export default function Product(props) {
         if(props.userData.freeTicket > 0){
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
             updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
-            
+            if(updated.applicants.length === updated.max_applicants){
+              updated.type = "close"
+            }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.freeTicket -= 1
             updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
           })))
-          
-          
         }
         else{
           alert("not enough free ticket")
@@ -43,12 +43,13 @@ export default function Product(props) {
         if(props.userData.ticket > 0){
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
             updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
+            if(updated.applicants.length === updated.max_applicants){
+              updated.type = "close"
+            }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.ticket -= 1
             updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
           })))
-          
-          
         }
         else{
           alert("not enough ticket")

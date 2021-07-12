@@ -175,6 +175,13 @@ export default function Product(props) {
             <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
           }
           응모하기
+          {
+          props.productList[productIdx].isFree
+          ?
+            <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>
+          :
+            <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
+          }
         </button>
         :
         <button className={styles.Product_apply_button} disabled>

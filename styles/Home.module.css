@@ -2,6 +2,7 @@
   Signiture color : #3BD1B3
   light tone: #c2f1e8
   super light tone: #effffb
+  dark tone: #307e6e
 */
 
 .container{
@@ -75,6 +76,7 @@
   margin:0;
   font-size: 1.2rem;
   text-align: center;
+
 }
 .Product_content_container{
   width: 100%;
@@ -104,6 +106,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed #3BD1B3;
+
 }
 .Product_urgent{
   border-radius: 20px;
@@ -132,5 +137,9 @@
   border-right: 7px solid #c2f1e8;
   border-bottom: 7px solid #c2f1e8;
   background-color: #fff;
-  color: #3BD1B3;
+  color: #307e6e;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }

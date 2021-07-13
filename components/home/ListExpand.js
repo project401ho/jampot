@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useMemo} from 'react'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar,faCookieBite } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight,faChevronLeft,faStar,faCookieBite,faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import {Product as ProductDS, User as UserDS} from '../../src/models'
 import { DataStore,Storage } from "aws-amplify"
@@ -16,31 +16,32 @@ export default function ListExpand(props) {
     seturlList,
   } = props
 
-  const[imageList,setimageList] = useState([])
+  const [imageList,setimageList] = useState([])
   const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
-
-
+  const [page, setpage] =useState(0)
   useEffect(()=>{
-    fetchAndSubscribeAllProductList()
+    fetchAndSubscribeAllProductList(page)
     // generateProductList()
+    
   },[])
 
-  async function applyProduct (item) {
+  async function applyProduct (tempProduct) {
     if(props.user === null) {
       props.isSignInModalOpen()
     }
     else{      
-      
-      if(item.isFree){
+      // let tempProduct = await DataStore.query(ProductDS,item.id)
+      console.log(tempProduct);
+      if(tempProduct.isFree){
         if(props.userData.freeTicket > 0){
-          await DataStore.save(ProductDS.copyOf(item,updated=>{
-            updated.applicants = [...item.applicants].concat(props.userData.id)
+          await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
+            updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
             if(updated.applicants.length === updated.max_applicants){
               updated.type = "close"
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.freeTicket -= 1
-            updated.appliedList = [...props.userData.appliedList].concat(item.id)
+            updated.appliedList = [...props.userData.appliedList].concat(tempProduct.id)
           })))
         }
         else{
@@ -50,14 +51,16 @@ export default function ListExpand(props) {
       }
       else{
         if(props.userData.ticket > 0){
-          await DataStore.save(ProductDS.copyOf(item,updated=>{
-            updated.applicants = [...item.applicants].concat(props.userData.id)
+          console.log("page",page);
+          await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
+            updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
             if(updated.applicants.length === updated.max_applicants){
               updated.type = "close"              
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.ticket -= 1
-            updated.appliedList = [...props.userData.appliedList].concat(item.id)
+            updated.appliedList = [...props.userData.appliedList].concat(tempProduct.id)
+
           })))
         }
         else{
@@ -66,11 +69,10 @@ export default function ListExpand(props) {
         }
       }
       setisApplyPopUpOpen(true)
-    }
+    }        
   }
 
   async function generateProductList(){
-    if(imageList.length === allProductList.length) return
     let templist = allProductList.concat()
     let tempimageList = []
 
@@ -104,7 +106,7 @@ export default function ListExpand(props) {
                 {allProductList[i].title}
               </h3>
               {
-                allProductList[i].applicants.length >= Math.floor(allProductList[i].max_applicants)
+                allProductList[i].applicants.length >= Math.floor(allProductList[i].max_applicants*0.7)
                 ?
                 <>
                 {
@@ -144,28 +146,40 @@ export default function ListExpand(props) {
               </button>
               :
               <button className={styles.ListExpand_apply, styles.ListExpand_apply_done  } disabled>
-                모집 완료
+                마감
               </button>
             }
           </div>
         </div>
       )
     })
-    console.log(tempimageList);
     setimageList(tempimageList)
   }
-  
-  if(allProductList.length > 0){
-    generateProductList()
-  }
+  useMemo(()=> generateProductList(),[allProductList])
 
   return (
     <div className={styles.ListExpand_container}>
       {imageList}
-      <ApplyPopUp
-        isOpen={isApplyPopUpOpen}
-        close={()=>setisApplyPopUpOpen(false)}
-      />
+      <div className={styles.ListExpand_ButtonContainer}>
+        <button onClick={()=>{
+          if(page === 0) return
+          fetchAndSubscribeAllProductList(page-1)          
+          setpage(page-1)
+        }}>  
+          <FontAwesomeIcon className="faIcons_tickets" icon={faChevronLeft} ></FontAwesomeIcon>
+        </button>
+        <button onClick={()=>{
+          fetchAndSubscribeAllProductList(page+1).then((e)=>{
+            setpage(e[1])
+          })
+        }}>  
+          <FontAwesomeIcon className="faIcons_tickets" icon={faChevronRight} ></FontAwesomeIcon>
+        </button>
+        <ApplyPopUp
+          isOpen={isApplyPopUpOpen}
+          close={()=>setisApplyPopUpOpen(false)}
+        />
+      </div>
     </div>
   );
 }

@@ -40,7 +40,7 @@ function Home(props) {
   const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
   const [isMenuExpand,setisMenuExpand] = useState(false)
-  const [isListExapnd,setisListExapnd] = useState(true)
+  const [isListExapnd,setisListExapnd] = useState(false)
   const [urlList, seturlList] = useState([{url:props._url,filename:props.productlist[0].image}])
 
   const _url = props._url 
@@ -70,9 +70,11 @@ function Home(props) {
       })      
       setproductList(productlist)      
     }
-      
+
     userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
-    const productList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchProductList_2())
+    const productList_subscription = DataStore.observe(ProductDS).subscribe(() => {      
+      fetchProductList_2()
+    })
 
     return () => {
       userData_subscription.unsubscribe()
@@ -81,20 +83,37 @@ function Home(props) {
     }
   },[])
   
-  function fetchAndSubscribeAllProductList(){
-    fetchAllProductList()
-    async function fetchAllProductList(){
-      const allProductList = await DataStore.query(ProductDS, Predicates.ALL, {
-        sort: item => item.createdAt(SortDirection.DESCENDING),
-        page: 0,
+  async function fetchAndSubscribeAllProductList(page){
+    let newpage = page
+    await fetchAllProductList(page)
+    async function fetchAllProductList(page){
+      let allProductList = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
+        sort: item => item.createdAt(SortDirection.ASCENDING),
+        page: page,
         limit: 4,        
       });
-      setallproductList(allProductList)
+      console.log(allProductList);
+      if(allProductList.length < 1){
+        allProductList = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
+          sort: item => item.createdAt(SortDirection.ASCENDING),
+          page: 0,
+          limit: 4,        
+        });
+        newpage = 0
+        console.log("newpage",newpage);
+      }
+      setallproductList(allProductList)      
     }
-    const subscription = DataStore.observe(ProductDS).subscribe(() => fetchAllProductList())
-    return () => {
-      subscription.subscribe()
-    }
+    console.log("newpage2",newpage);
+    const subscription = DataStore.observe(ProductDS).subscribe(() => {      
+      fetchAllProductList(page)
+    })
+    return [
+      () => {
+        subscription.unsubscribe()      
+      },
+      newpage
+    ]
   }
 
   return (
@@ -126,7 +145,7 @@ function Home(props) {
           seturlList={(list)=>seturlList(list)}
 
           allProductList={allProductList}
-          fetchAndSubscribeAllProductList={()=>fetchAndSubscribeAllProductList()}     
+          fetchAndSubscribeAllProductList={(page)=>fetchAndSubscribeAllProductList(page)}     
 
         />
         :

@@ -40,7 +40,7 @@ export default function ListExpand(props) {
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.freeTicket -= 1
-            updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+            updated.appliedList = [...props.userData.appliedList].concat(item.id)
           })))
         }
         else{
@@ -57,7 +57,7 @@ export default function ListExpand(props) {
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.ticket -= 1
-            updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+            updated.appliedList = [...props.userData.appliedList].concat(item.id)
           })))
         }
         else{

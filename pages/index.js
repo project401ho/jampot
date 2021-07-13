@@ -87,7 +87,7 @@ function Home(props) {
       const allProductList = await DataStore.query(ProductDS, Predicates.ALL, {
         sort: item => item.createdAt(SortDirection.DESCENDING),
         page: 0,
-        limit: 15,        
+        limit: 4,        
       });
       setallproductList(allProductList)
     }
@@ -136,7 +136,7 @@ function Home(props) {
           urlList = {urlList}          
           isSignInModalOpen={()=>setIsSignInModalOpen(true)}
           seturlList={(list)=>seturlList(list)}
-          
+
           url={_url} 
           productList = {productList}                     
             

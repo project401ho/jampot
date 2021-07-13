@@ -12,7 +12,6 @@ import ApplyPopUp from './ApplyPopUp'
 export default function Product(props) {
   const [productIdx, setproductIdx] = useState(0)  
   const [url, seturl] = useState(props.url)
-  const [urlList, seturlList] = useState([{url:props.url,filename:props.productList[0].image}])
   const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
 
   const applyProduct = async ()=> {
@@ -20,7 +19,7 @@ export default function Product(props) {
       props.isSignInModalOpen()
     }
     else{
-      console.log("1");
+      
       let tempProduct = await DataStore.query(ProductDS,props.productList[productIdx].id)
       if(tempProduct.isFree){
         if(props.userData.freeTicket > 0){
@@ -44,7 +43,7 @@ export default function Product(props) {
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
             updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
             if(updated.applicants.length === updated.max_applicants){
-              updated.type = "close"
+              updated.type = "close"              
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.ticket -= 1
@@ -58,6 +57,7 @@ export default function Product(props) {
         }
       }
       setisApplyPopUpOpen(true)
+      setproductIdx(0)
     }
   
   }
@@ -65,22 +65,7 @@ export default function Product(props) {
   return (
     <div className={styles.Product_container}>      
       
-      <div className={styles.Product_userdata_container}>
-        {
-          props.userData !== null 
-          &&
-          <>
-          <div className={styles.Product_userdata}>            
-            <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
-            <p className={styles.Product_userdata}>{props.userData && props.userData.ticket}</p>   
-          </div>
-          <div className={styles.Product_userdata}>
-            <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>  
-            <p className={styles.Product_userdata}>{props.userData && props.userData.freeTicket}</p>   
-          </div>
-          </>
-        }      
-      </div>
+      
       <div className={styles.Product_content_container}>
         <a onClick={async (e)=>{
           e.preventDefault()
@@ -92,16 +77,16 @@ export default function Product(props) {
             tempidx = props.productList.length-1
           }
           if(props.productList[tempidx].image !== props.productList[productIdx].image){
-            let urlListIdx =urlList.findIndex((item)=>item.filename===props.productList[tempidx].image)
+            let urlListIdx = props.urlList.findIndex((item)=>item.filename===props.productList[tempidx].image)
             if(urlListIdx >= 0){
-              seturl(urlList[urlListIdx].url)
+              seturl(props.urlList[urlListIdx].url)
             }
             else{
               let tempurl = await fetchProductImage(props.productList[tempidx].image)
               let temp = {url:tempurl,filename:props.productList[tempidx].image}
-              let templist = [...urlList].concat(temp)
+              let templist = [...props.urlList].concat(temp)
               seturl(tempurl)
-              seturlList(templist)
+              props.seturlList(templist)
             }            
           } 
           setproductIdx(tempidx)
@@ -111,7 +96,7 @@ export default function Product(props) {
         <div className={styles.Product_image_container}>
           <div className={styles.Product_productdata_container}>
             {
-              (props.productList[productIdx].applicants.length >= Math.ceil(props.productList[productIdx].max_applicants*0.7)
+              (props.productList[productIdx].applicants.length >= Math.floor(props.productList[productIdx].max_applicants*0.7)
               &&
               props.productList[productIdx].applicants.length < props.productList[productIdx].max_applicants
               )
@@ -147,16 +132,16 @@ export default function Product(props) {
             tempidx = 0
           }
           if(props.productList[tempidx].image !== props.productList[productIdx].image){
-            let urlListIdx =urlList.findIndex((item)=>item.filename===props.productList[tempidx].image)
+            let urlListIdx = props.urlList.findIndex((item)=>item.filename===props.productList[tempidx].image)
             if(urlListIdx >= 0){
-              seturl(urlList[urlListIdx].url)
+              seturl(props.urlList[urlListIdx].url)
             }
             else{
               let tempurl = await fetchProductImage(props.productList[tempidx].image)
               let temp = {url:tempurl,filename:props.productList[tempidx].image}
-              let templist = [...urlList].concat(temp)
+              let templist = [...props.urlList].concat(temp)
               seturl(tempurl)
-              seturlList(templist)
+              props.seturlList(templist)
             }            
           }  
           setproductIdx(tempidx)

@@ -44,7 +44,7 @@
   justify-content: center;
 }
 
-.Product_userdata_container {
+.Navigation_userdata_container {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -57,7 +57,7 @@
   background-color: #fff;
 }
 
-.Product_userdata {
+.Navigation_userdata {
   display: inline;
   margin: 5px 5px 0px 0px;
 }
@@ -142,4 +142,113 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.ListExpand_container{
+  width:100%;
+  height: 100%;
+  background-color: #effffb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.ListExpand_item_container {
+  width: 95%;
+  background-color: #effffb;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 5px;
+  border: 1px dashed #c2f1e8;
+  margin: 5px;
+  border-bottom: 4px solid #3BD1B3;
+
+}
+.ListExpand_content_container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #effffb;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.ListExpand_text_container {
+  width:100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0px;
+}
+.ListExpand_title{
+  margin: 0px;
+}
+.ListExpand_urgent{
+  border-radius: 3px;
+  background-color: red;
+  width: 22%;
+  height: 20px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ListExpand_applycount{
+  border-radius: 3px;
+  background-color: #c2f1e8;
+  width: 22%;
+  height: 20px;
+  text-align: center;
+  color: #307e6e;
+  font-weight: bold;
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ListExpand_apply:hover{
+  background-color: #3BD1B3;
+}
+.ListExpand_apply:active {
+  background-color: #3BD1B3;
+}
+.ListExpand_apply{
+  width: 100%;
+  height:100%;
+  padding: 10px 0px; 
+  border-radius: 5px;
+  border:none;
+  border-bottom: 1px solid #c2f1e8;
+  border-top: 1px solid #c2f1e8;
+  border-right: 1px solid #c2f1e8;
+  
+  border-left: 3px solid #3BD1B3;
+  background-color: #fff;
+  color: #307e6e;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.ListExpand_apply_done{
+  width: 100%;
+  height:100%;
+  padding: 10px 0px;
+  border-radius: 5px;
+  border: none;
+  color: #307e6e;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(250, 216, 216);
 }

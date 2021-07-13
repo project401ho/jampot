@@ -4,6 +4,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import MenuExpand from '../components/home/MenuExpand'
 import Product from '../components/home/Product'
+import ListExpand from '../components/home/ListExpand'
 import SignIn from '../components/home/Signin'
 import SignUp from '../components/home/SignUp'
 import Navigation from '../components/Navigation'
@@ -35,10 +36,14 @@ function Home(props) {
   const [user,setUser] = useState(null)
   const [userData,setUserData] = useState(null)
   const [productList,setproductList] = useState(props.productlist)
+  const [allProductList,setallproductList] = useState([])
   const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
   const [isMenuExpand,setisMenuExpand] = useState(false)
-  const _url = props._url
+  const [isListExapnd,setisListExapnd] = useState(true)
+  const [urlList, seturlList] = useState([{url:props._url,filename:props.productlist[0].image}])
+
+  const _url = props._url 
 
 
   useEffect(() => {
@@ -66,10 +71,7 @@ function Home(props) {
       setproductList(productlist)      
     }
       
-    console.log("set subscription");
-
     userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
-    console.log("done set");
     const productList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchProductList_2())
 
     return () => {
@@ -79,7 +81,21 @@ function Home(props) {
     }
   },[])
   
-
+  function fetchAndSubscribeAllProductList(){
+    fetchAllProductList()
+    async function fetchAllProductList(){
+      const allProductList = await DataStore.query(ProductDS, Predicates.ALL, {
+        sort: item => item.createdAt(SortDirection.DESCENDING),
+        page: 0,
+        limit: 15,        
+      });
+      setallproductList(allProductList)
+    }
+    const subscription = DataStore.observe(ProductDS).subscribe(() => fetchAllProductList())
+    return () => {
+      subscription.subscribe()
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -95,24 +111,48 @@ function Home(props) {
       
       <Navigation
         expandMenu={()=>setisMenuExpand(true)}
+        userData={userData}
       />
       {/* <button onClick={SignOut}>로그아웃</button> */}
       
-
-      <Product 
-        url={_url} 
-        user={user}  
-        isSignInModalOpen={()=>setIsSignInModalOpen(true)}
-        productList = {productList}
-        userData={userData}        
-      />
       {
-        isMenuExpand
+        isListExapnd
+        ?        
+        <ListExpand
+          user={user}  
+          userData={userData} 
+          urlList={urlList}
+          isSignInModalOpen={()=>setIsSignInModalOpen(true)}
+          seturlList={(list)=>seturlList(list)}
+
+          allProductList={allProductList}
+          fetchAndSubscribeAllProductList={()=>fetchAndSubscribeAllProductList()}     
+
+        />
+        :
+        <Product 
+          user={user}  
+          userData={userData}
+          urlList = {urlList}          
+          isSignInModalOpen={()=>setIsSignInModalOpen(true)}
+          seturlList={(list)=>seturlList(list)}
+          
+          url={_url} 
+          productList = {productList}                     
+            
+        />
+        
+      }
+      
+      {
+        isMenuExpand === true
         ?
         <MenuExpand          
           user={user}
           isSignInModalOpen={()=>setIsSignInModalOpen(true)}
           close={()=>setisMenuExpand(false)}
+          isListExapnd={isListExapnd}
+          setisListExapnd={(bool)=>setisListExapnd(bool)}
         />
         :null
       }

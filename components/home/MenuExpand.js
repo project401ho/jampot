@@ -5,7 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faListUl,faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function MenuExpand(props) {
-  const {user,isSignInModalOpen,close} = props
+  const {
+    user,
+    isSignInModalOpen,
+    close,
+    isListExapnd,
+    setisListExapnd,
+  } = props
   let clickinside = false
 
   return (
@@ -25,13 +31,12 @@ export default function MenuExpand(props) {
           </div>          
         </div> */}
         
-          <Link href="/list">
-            <a className={styles.content_item}>
+            <div className={styles.content_item} onClick={()=>{
+              setisListExapnd(!isListExapnd)
+            }}>
               <FontAwesomeIcon className={styles.faIcon} icon={faListUl} size="sm"></FontAwesomeIcon>
-              전체보기
-            </a>
-          </Link>            
-        
+              {isListExapnd ? "추천 보기 ": "전체 보기"}              
+            </div>
         
           {
             user!==null

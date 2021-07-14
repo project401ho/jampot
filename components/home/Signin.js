@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Link from "next/link"
 import { SignIn as SignInLib} from '../../lib/signin'
-import styles from "./SignIn.module.scss";
+import styles from "../../styles/SignIn.module.scss";
 import { User as UserDS} from '../../src/models'
 import { DataStore } from "aws-amplify"
 

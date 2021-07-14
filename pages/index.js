@@ -100,11 +100,9 @@ function Home(props) {
           limit: 4,        
         });
         newpage = 0
-        console.log("newpage",newpage);
       }
       setallproductList(allProductList)      
     }
-    console.log("newpage2",newpage);
     const subscription = DataStore.observe(ProductDS).subscribe(() => {      
       fetchAllProductList(page)
     })
@@ -123,16 +121,12 @@ function Home(props) {
         <meta name="description" content="online event apply website" />
         <meta name="og:title" content={siteTitle} />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin/>
-        <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"/>
       </Head>
       
       <Navigation
         expandMenu={()=>setisMenuExpand(true)}
         userData={userData}
       />
-      {/* <button onClick={SignOut}>로그아웃</button> */}
       
       {
         isListExapnd

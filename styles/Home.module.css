@@ -20,8 +20,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-family: 'Bungee',  cursive;
-  background-color: #fff;
+  background-color: #effffb;
 }
 .Navigation_logo{
   display: flex;
@@ -36,6 +35,7 @@
   margin:0px;
   margin-left: 10px;
   font-size: 1.75rem;
+  font-family: 'Bungee', cursive;
 }
 .Navigation_menu{
   margin-right: 10px;
@@ -54,8 +54,11 @@
   justify-content: space-around;
   padding-bottom: 5px;
   border-bottom: 3px dashed #c2f1e8;
-  color: #3BD1B3;
+  border-top: 3px dashed #c2f1e8;
+  color: #307e6e;
   background-color: #fff;
+  
+  font-weight: bold;
 }
 
 .Navigation_userdata {
@@ -126,9 +129,7 @@
   align-items: center;
   justify-content: center;
 }
-/* .Product_image{
 
-} */
 .Product_apply_button{
   width: 80%;
   height: 15%;
@@ -145,6 +146,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.arrow{
+  font-size: 2rem;
+}
+.tickets{
+  margin: 0px 10px;
+  font-size: 1rem;
+  color: #307e6e;
 }
 
 .ListExpand_container{
@@ -262,4 +271,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.menu{
+  font-size: 1.7rem;
+}
+.nav_tickets{
+  font-size: 1rem;
+  margin-right: 7px;
 }

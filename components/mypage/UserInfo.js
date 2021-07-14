@@ -1,36 +1,49 @@
 import React, {useState} from 'react'
 import Image from 'next/image'
-import styles from './UserInfo.module.css'
+import styles from '../../styles/UserInfo.module.css'
 import { SignOut } from '../../lib/signin'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar,faCookieBite } from "@fortawesome/free-solid-svg-icons";
+import { faStar,faCookieBite,faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function UserInfo(props) {
   const {user,userData} = props
 
   return (
-    <div className={styles.UserInfo_container}>
-      <Image
-        priority
-        src="/defaultprofile.png"
-        className={styles.borderCircle}
-        height={50}
-        width={50}
-        alt="profile image"
-        unoptimized={true}
-      />    
-      <p>{user && user.attributes.nickname}</p>
-      <button onClick={SignOut}>로그아웃</button>
+    <div className={styles.container}>
+      <div className={styles.profile}>
+        <Image
+          priority
+          src="/defaultprofile.png"
+          className={styles.borderCircle}
+          height={75}
+          width={75}
+          alt="profile image"
+          unoptimized={true}
+        />    
+        <div>
+          <h2 className={styles.nickname}>{user && user.attributes.nickname}</h2>
+          <button className={styles.change_nickname}>닉네임 변경</button>
+        </div>
+        
+        <button className={styles.signout} onClick={SignOut}>
+          <FontAwesomeIcon className={styles.signout_icon} icon={faSignOutAlt} ></FontAwesomeIcon>
+
+        </button>
+
+      </div>      
+
       <div className={styles.tickets_container}>
         <div className={styles.ticket_holder}>            
-          <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
-          <p>{userData && userData.ticket}</p>   
+          <FontAwesomeIcon className={styles.tickets} icon={faStar} ></FontAwesomeIcon>
+          {userData && userData.ticket}   
         </div>
         <div className={styles.ticket_holder}>
-          <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>  
-          <p>{userData && userData.freeTicket}</p>   
+          <FontAwesomeIcon className={styles.tickets} icon={faCookieBite} ></FontAwesomeIcon>  
+          {userData && userData.freeTicket}
         </div>
       </div>
+      <button className={styles.starcharge} onClick={()=>{}}>스타 충전</button>
+
     </div>
   );
 }

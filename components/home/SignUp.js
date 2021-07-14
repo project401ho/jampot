@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Link from "next/link"
 import { SignIn as SignInLib, SignUp as SignUpLib } from '../../lib/signin'
 import { createUser } from '../../lib/graphql'
-import styles from "./SignIn.module.scss";
+import styles from "../../styles/SignIn.module.scss";
 
 
 class SignUp extends Component {

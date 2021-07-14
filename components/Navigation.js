@@ -23,7 +23,7 @@ export default function Navigation(props) {
           e.preventDefault()
           expandMenu()
       }}>
-        <FontAwesomeIcon className="faIcons" icon={faBars}></FontAwesomeIcon>
+        <FontAwesomeIcon className={styles.menu} icon={faBars}></FontAwesomeIcon>
       </a>
     </div>
     {
@@ -35,11 +35,11 @@ export default function Navigation(props) {
           &&
           <>
           <div className={styles.Navigation_userdata}>            
-            <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
+            <FontAwesomeIcon className={styles.nav_tickets} icon={faStar} ></FontAwesomeIcon>
             <p className={styles.Navigation_userdata}>{userData && userData.ticket}</p>   
           </div>
           <div className={styles.Navigation_userdata}>
-            <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>  
+            <FontAwesomeIcon className={styles.nav_tickets} icon={faCookieBite} ></FontAwesomeIcon>  
             <p className={styles.Navigation_userdata}>{props.userData && userData.freeTicket}</p>   
           </div>
           </>

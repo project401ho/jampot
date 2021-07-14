@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import styles from "./ApplyPopUp.module.scss";
+import styles from "../../styles/ApplyPopUp.module.scss";
 
 export default function ApplyPopUp(props) {
   const {isOpen, close} = props;

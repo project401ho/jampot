@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import styles from "./MenuExpand.module.scss";
+import styles from "../../styles/MenuExpand.module.scss";
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faListUl,faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -33,9 +33,10 @@ export default function MenuExpand(props) {
         
             <div className={styles.content_item} onClick={()=>{
               setisListExapnd(!isListExapnd)
+              close()
             }}>
               <FontAwesomeIcon className={styles.faIcon} icon={faListUl} size="sm"></FontAwesomeIcon>
-              {isListExapnd ? "추천 보기 ": "전체 보기"}              
+              {isListExapnd ? "추천 보기 ": "리스트 보기"}              
             </div>
         
           {

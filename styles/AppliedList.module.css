@@ -1,0 +1,29 @@
+/* 
+  Signiture color : #3BD1B3
+  light tone: #c2f1e8
+  super light tone: #effffb
+  dark tone: #307e6e
+*/
+
+
+.container{
+  width: 100%;
+  padding: 0px 5%;
+  background-color: ##fff;
+
+}
+
+.item_container{
+  width: 100%;
+  background-color: #effffb;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  border: 1px dashed #c2f1e8;
+  margin: 15px 0px;
+  border-right: 7px solid #c2f1e8;
+  border-bottom: 7px solid #c2f1e8;
+  padding:10px
+}

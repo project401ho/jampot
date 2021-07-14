@@ -1,19 +1,20 @@
 import React, {useState, useEffect} from 'react'
 import Link from "next/link"
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Profile.module.css'
 import UserInfo from '../components/mypage/UserInfo'
 import AppliedList from '../components/mypage/AppliedList'
 import {Auth, DataStore, SortDirection} from "aws-amplify"
 import {Product as ProductDS, User as UserDS} from '../src/models'
+import { faUserAltSlash } from '@fortawesome/free-solid-svg-icons'
 
 export const siteTitle = "잼팟"
 
-export default function MyPage() {
+function MyPage() {
   const [user,setUser] = useState(null)
   const [userData,setUserData] = useState(null)
   const [appliedProductList,setappliedProductList] = useState([])
-
+  const [page, setpage] = useState(0)
   useEffect(() => {
     
     let test = "test"
@@ -23,7 +24,7 @@ export default function MyPage() {
     .then((e) => {        
       setUser(e)      
       fetchUserData(e.attributes.email)  
-      fetchappliedProductList(e.attributes.email)    
+      fetchappliedProductList(e.attributes.email,page)    
       test = e.attributes.email
     }) 
     .catch((error)=>{console.log(error);})
@@ -33,9 +34,11 @@ export default function MyPage() {
       setUserData(userData)      
     }
     
-    async function fetchappliedProductList(id) {
+    async function fetchappliedProductList(id,page) {
       let productlist = await DataStore.query(ProductDS, c=>c.applicants("contains",id), {
-        sort: item => item.createdAt(SortDirection.DESCENDING)
+        sort: item => item.createdAt(SortDirection.DESCENDING),
+        page: page,
+        limit: 4,  
       })      
       setappliedProductList(productlist)      
     }
@@ -43,7 +46,7 @@ export default function MyPage() {
 
     userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
     console.log("done set");
-    const appliedProductList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchappliedProductList(test))
+    const appliedProductList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchappliedProductList(test,page))
 
     return () => {
       userData_subscription.unsubscribe()
@@ -61,8 +64,8 @@ export default function MyPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>      
       <Link href="/">
-        <a>
-          <h1>Jampot logo</h1>
+        <a className={styles.logo}>
+          <h1 className={styles.logotxt}>jampot</h1>
         </a>
       </Link>
       <UserInfo 
@@ -72,7 +75,10 @@ export default function MyPage() {
       <AppliedList
         appliedProductList={appliedProductList}
         userData={userData}
+        page={page}
       />
     </div>
   );
 }
+
+export default MyPage

@@ -91,7 +91,7 @@ export default function Product(props) {
           } 
           setproductIdx(tempidx)
         }}>
-          <FontAwesomeIcon className="faIcons" icon={faChevronLeft} ></FontAwesomeIcon>
+          <FontAwesomeIcon className={styles.arrow} icon={faChevronLeft} ></FontAwesomeIcon>
         </a>
         <div className={styles.Product_image_container}>
           <div className={styles.Product_productdata_container}>
@@ -146,7 +146,7 @@ export default function Product(props) {
           }  
           setproductIdx(tempidx)
         }}>
-          <FontAwesomeIcon className="faIcons" icon={faChevronRight}></FontAwesomeIcon>
+          <FontAwesomeIcon className={styles.arrow} icon={faChevronRight}></FontAwesomeIcon>
         </a>
       </div>
       {
@@ -156,17 +156,17 @@ export default function Product(props) {
           {
           props.productList[productIdx].isFree
           ?
-            <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>
+            <FontAwesomeIcon className={styles.tickets} icon={faCookieBite} ></FontAwesomeIcon>
           :
-            <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
+            <FontAwesomeIcon className={styles.tickets} icon={faStar} ></FontAwesomeIcon>
           }
           응모하기
           {
           props.productList[productIdx].isFree
           ?
-            <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>
+            <FontAwesomeIcon className={styles.tickets} icon={faCookieBite} ></FontAwesomeIcon>
           :
-            <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
+            <FontAwesomeIcon className={styles.tickets} icon={faStar} ></FontAwesomeIcon>
           }
         </button>
         :

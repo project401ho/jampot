@@ -20,7 +20,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  color: #3BD1B3;
   margin-left: 15px;
   height: 100%;
   background-color: #effffb;
@@ -29,5 +28,7 @@
   margin:0px;
   margin-left: 10px;
   font-size: 1.75rem;
-  font-family: 'Bungee',  cursive;
+  font-family: 'Bungee';
+  color: #3BD1B3;
+
 }

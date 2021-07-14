@@ -15,6 +15,7 @@ function MyPage() {
   const [userData,setUserData] = useState(null)
   const [appliedProductList,setappliedProductList] = useState([])
   const [page, setpage] = useState(0)
+  
   useEffect(() => {
     
     let test = "test"
@@ -38,7 +39,7 @@ function MyPage() {
       let productlist = await DataStore.query(ProductDS, c=>c.applicants("contains",id), {
         sort: item => item.createdAt(SortDirection.DESCENDING),
         page: page,
-        limit: 4,  
+        limit: 20,  
       })      
       setappliedProductList(productlist)      
     }
@@ -59,12 +60,10 @@ function MyPage() {
     <div className={styles.container}>
       <Head>
         <title>{siteTitle}</title>
-        <meta name="description" content="online event apply website" />
-        <meta name="og:title" content={siteTitle} />
         <link rel="icon" href="/favicon.ico" />
       </Head>      
-      <Link href="/">
-        <a className={styles.logo}>
+      <Link className={styles.logo} href="/">
+        <a >
           <h1 className={styles.logotxt}>jampot</h1>
         </a>
       </Link>

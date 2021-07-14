@@ -1,0 +1,61 @@
+/* 
+  Signiture color : #3BD1B3
+  light tone: #c2f1e8
+  super light tone: #effffb
+  dark tone: #307e6e
+*/
+
+.background{  
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container{
+  width:90%;
+  height:70%;
+  border-radius: 5px;
+  background-color: #effffb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.title{
+  width:100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 10px;
+
+}
+.content{
+  width:100%;
+  text-align: center;
+  font-weight: bold;
+}
+.button {
+  width:80%;
+  height:8%;
+  margin-top: 10px;
+  border-radius: 5px;
+  border-left: 1px solid #3BD1B3;
+  border-top: 1px solid #3BD1B3;
+  border-right: 5px solid #3BD1B3;
+  border-bottom: 5px solid #3BD1B3;
+  background-color: #effffb;
+  font-size: 1.2rem;
+}
+.image{
+  width: 100%;
+  height: 60%;
+  position: relative;
+}
+.image_rgb{  
+  opacity:0.3;
+}

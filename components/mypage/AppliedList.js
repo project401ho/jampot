@@ -1,38 +1,37 @@
 import React, {useEffect, useState} from 'react'
-import Image from 'next/image'
-import { fetchProductImage} from "../../lib/graphql"
 import {DataStore, SortDirection} from "aws-amplify"
 import {Product as ProductDS, User as UserDS} from '../../src/models'
 import styles from "../../styles/AppliedList.module.css";
+import ResultPopUp from './ResultPopUp';
 
 export default function AppliedList(props) {
   const {appliedProductList, userData} = props
   const [urlList, seturlList] = useState([])
   const [appliedlist, setappliedlist] =useState([])
+  const [isResultPopUp, setisResultPopUp] = useState(false)
+  const [isWinner, setisWinner] =useState(false)
 
   async function checkWinner(e, winner, id){
     if(winner === userData.email){
       e.target.value = "🎉"
+      setisWinner(true)
     }
     else{
       e.target.value = "🦝"
+      setisWinner(false)
     }
     if(!userData.checkedAppliedList.some(e=>e === id)){
       await DataStore.save(UserDS.copyOf(userData, updated=>{
         updated.checkedAppliedList = [...userData.checkedAppliedList].concat(String(id))
       }))
     }        
-  }
-  function winnerPopUp(){
-
+    generateAppliedList()
   }
 
-  function racoonPopUp(){
-
-  }
   useEffect(()=>{
     setappliedlist(generateAppliedList())
   },[appliedProductList])
+
   function generateAppliedList(){
     let temp = appliedProductList.map((item,i)=>{
       let button = 
@@ -42,6 +41,7 @@ export default function AppliedList(props) {
         id = {item.id}
         onClick={(e)=>{
           checkWinner(e,e.target.name,e.target.id)
+          setisResultPopUp(true)
         }}
         value="🤞 🎁 🤞"
       />
@@ -56,7 +56,6 @@ export default function AppliedList(props) {
           value={_value}
         />
       }
-      console.log(item.applicants.length < item.max_applicants);
       if(item.applicants.length < item.max_applicants){
         button =
         <input 
@@ -64,7 +63,8 @@ export default function AppliedList(props) {
           name={item.winner} 
           id = {item.id}
           onClick={(e)=>{
-            checkWinner(e,e.target.name,e.target.id)
+            e.preventDefault()
+            applyProduct(item.id)
           }}
           value="추가 응모"
         />
@@ -79,9 +79,57 @@ export default function AppliedList(props) {
     return temp
   }
 
+  async function applyProduct(id){
+    let tempProduct = await DataStore.query(ProductDS, id)
+    if(tempProduct.isFree){
+      if(userData.freeTicket > 0){
+        await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
+          updated.applicants = [...tempProduct.applicants].concat(userData.id)
+          if(updated.applicants.length === updated.max_applicants){
+            updated.type = "close"
+          }
+        })).then(await DataStore.save(UserDS.copyOf(userData, updated=>{
+          updated.freeTicket -= 1
+          updated.appliedList = [...userData.appliedList].concat(id)
+        })))
+      }
+      else{
+        alert("not enough free ticket")
+        return      
+      }
+    }
+    else{
+      if(userData.ticket > 0){
+        await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
+          updated.applicants = [...tempProduct.applicants].concat(userData.id)
+          if(updated.applicants.length === updated.max_applicants){
+            updated.type = "close"              
+          }
+        })).then(await DataStore.save(UserDS.copyOf(userData, updated=>{
+          updated.ticket -= 1
+          updated.appliedList = [...userData.appliedList].concat(id)
+        })))
+      }
+      else{
+        alert("not enough ticket")
+        return        
+      }
+    }
+  }
+
   return (
     <div className={styles.container}>
       {appliedlist}
+      {
+        isResultPopUp
+        ?
+        <ResultPopUp
+          isWinner = {isWinner}
+          close = {()=>setisResultPopUp(false)}
+        />
+        :
+        null
+      }
     </div>
   );
 }

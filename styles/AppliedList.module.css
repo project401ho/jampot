@@ -9,7 +9,7 @@
 .container{
   width: 100%;
   padding: 0px 5%;
-  background-color: ##fff;
+  background-color: #fff;
 
 }
 
@@ -25,5 +25,5 @@
   margin: 15px 0px;
   border-right: 7px solid #c2f1e8;
   border-bottom: 7px solid #c2f1e8;
-  padding:10px
+  padding:10px;
 }

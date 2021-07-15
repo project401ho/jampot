@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import styles from '../../styles/Privacy.module.scss';
+import styles from '../styles/Privacy.module.scss';
 
 export default function ServicePolicy(props) {
   const [test,setTest] = useState("")

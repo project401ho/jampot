@@ -4,9 +4,11 @@ import styles from '../../styles/UserInfo.module.css'
 import { SignOut } from '../../lib/signin'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar,faCookieBite,faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import PayModule from '../PayModule';
 
 export default function UserInfo(props) {
   const {user,userData} = props
+  const [showShop, setshowShop] = useState(false)
 
   return (
     <div className={styles.container}>
@@ -42,12 +44,29 @@ export default function UserInfo(props) {
           {userData && userData.freeTicket}
         </div>
       </div>
+      
       <button className={styles.starcharge} onClick={()=>{
-        
+        setshowShop(!showShop)
       }}>
         스타 충전
       </button>
-
+      {
+        showShop &&
+        <div className={styles.shop}>
+          <PayModule
+            quantity={10}
+            bonus = {0}
+          />
+          <PayModule
+            quantity={30}
+            bonus = {3}
+          />
+          <PayModule
+            quantity={50}
+            bonus = {8}
+          />
+        </div>
+      }
     </div>
   );
 }

@@ -15,7 +15,7 @@ export default function Footer(props) {
         <Link href="/service_policy"><a>이용약관</a></Link>
       </div>
       <div className={styles.info}>
-        잼팟 | 프로젝트401호 | 사업자 정보 확인 | 사업자 번호 <br/>
+        잼팟 | 프로젝트401호 | 사업자 정보 확인 | 379-29-01231 <br/>
         주소: 서울 강남구 청담동 <br/>
         문의 주소: project401ho@gmail.com <br/>
         Copyright ⓒ 2021 Jampot <br/>

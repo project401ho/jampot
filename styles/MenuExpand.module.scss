@@ -4,7 +4,24 @@
   super light tone: #effffb
 */
 
-
+@media screen and (min-width: 680px) {
+  .MenuExpand_container {
+    margin: 0 auto;
+    width: 600px;   
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); ///배경에 픽스를 주고 투명도를 준다.
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+@media screen and (max-width: 680px) {
 .MenuExpand_container {
   position: fixed;
   top: 0;
@@ -18,7 +35,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-
+  }
+}
 
    .MenuExpandModal {
      width: 100%;
@@ -31,8 +49,9 @@
      flex-direction: column;
      align-items: center;
      justify-content: space-evenly;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      border-bottom-left-radius: 15px;
+      border: 1px solid #3BD1B3;
     
      .close {
        float: right;
@@ -112,4 +131,4 @@
      }
 
    }
- }
+ 

@@ -1,3 +1,12 @@
 .container{
-  
+  margin: 7px;
+  border-radius: 5px;
+  border-left: 1px solid #c2f1e8;
+  border-top: 1px solid #c2f1e8;
+  border-right: 1px solid #c2f1e8;
+  border-bottom: 5px solid #3BD1B3;
+  background-color: #effffb;
+  font-weight: bold;
+  color: #307e6e;
+  padding: 5px;
 }

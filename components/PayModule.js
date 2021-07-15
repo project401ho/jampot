@@ -1,32 +1,27 @@
 import styles from '../styles/BootPay.module.css'
 
-const BootPay = () => (
-  <div className={styles.container}>
-    <div className="box">
-      <button onClick={onClickRequest}>부트페이 결제호출</button>
-    </div>
-  </div>
+const PayModule = (props) => (
+
+  <button className={styles.container} onClick={onClickRequest}>{props.quantity+"개 충전"}<br/>{props.bonus > 0 && "+" + props.bonus + "개"}</button>
+
 );
 
 // componentdi
-
 function onClickRequest() {
   window.BootPay.request({
     price: '1000', //실제 결제되는 가격
     application_id: "60efc2d37b5ba4001d1de5cc",
-    name: '블링블링 마스카라', //결제창에서 보여질 이름
-    pg: 'kcp',
-    method: 'card', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
+    name: '스타 충전', //결제창에서 보여질 이름
+    pg: 'inicis',
+    // method: '', //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
     show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
     items: [
       {
-        item_name: '나는 아이템', //상품명
+        item_name: '스타', //상품명
         qty: 1, //수량
         unique: '123', //해당 상품을 구분짓는 primary key
         price: 1000, //상품 단가
-        cat1: 'TOP', // 대표 상품의 카테고리 상, 50글자 이내
-        cat2: '티셔츠', // 대표 상품의 카테고리 중, 50글자 이내
-        cat3: '라운드 티', // 대표상품의 카테고리 하, 50글자 이내
+        cat1: '유료 응모권', // 대표 상품의 카테고리 상, 50글자 이내
       }
     ],
     user_info: {
@@ -76,4 +71,4 @@ function onClickRequest() {
   });
 }
 
-export default BootPay;
+export default PayModule;

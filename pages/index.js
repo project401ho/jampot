@@ -9,7 +9,7 @@ import SignIn from '../components/home/Signin'
 import SignUp from '../components/home/SignUp'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
-import BootPay from '../components/BootPay'
+import PayModule from '../components/PayModule'
 
 import {Product as ProductDS, User as UserDS} from '../src/models'
 
@@ -125,6 +125,7 @@ function Home(props) {
         <meta name="description" content="online event apply website" />
         <meta name="og:title" content={siteTitle} />
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       
       <Navigation
@@ -194,7 +195,6 @@ function Home(props) {
         setUser={(_user)=>setUser(_user)} 
         close={()=>setIsSignUpModalOpen(false)}
       />
-      {/* <BootPay /> */}
 
     </div>
   )

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {DataStore, SortDirection} from "aws-amplify"
-import {Product as ProductDS, User as UserDS} from '../../src/models'
+import {Product as ProductDS, User as UserDS, Prize as PrizeDS} from '../../src/models'
 import styles from "../../styles/AppliedList.module.css";
 import ResultPopUp from './ResultPopUp';
 import ApplyPopUp from '../home/ApplyPopUp'
@@ -27,12 +27,20 @@ export default function AppliedList(props) {
 
   }
 
+  async function getPrizeCode(id){
+    let code =  await DataStore.query(PrizeDS,c=>c.prodcutID("eq",id))
+    console.log(code[0]);
+    console.log(code[0].code);
+    return code[0].code
+  }
+
   useEffect(()=>{
     setappliedlist(generateAppliedList())
   },[appliedProductList,userData])
 
   function generateAppliedList(){
     let temp = appliedProductList.map((item,i)=>{
+      let prizecode = ""
       let count = 
       <div className={styles.item_count_done}>
         {"마감"}
@@ -61,17 +69,17 @@ export default function AppliedList(props) {
           <div className={styles.item_won}>
             {"당첨"}
           </div>
+          getPrizeCode(item.id).then(e=>prizecode=e)
         }
         button =
         <input 
           className={styles.disabled}
-
           type="button" 
           name={item.winner} 
           id = {item.id}
-          value={_value}
-          
+          value={_value}          
         />
+        
       }
       if(item.applicants.length < item.max_applicants){
         count = 
@@ -94,9 +102,24 @@ export default function AppliedList(props) {
       return(
         <div className={styles.item_container} key={i}>
           <span>
-            {item.title}              
-            {/* {item.Prize} */}
+            {item.title}                   
           </span>
+          <div>
+            {
+              item.winner === userData.email && 
+              <input 
+                className={styles.prizecode_confirm}
+                type="button" 
+                name={item.winner} 
+                id = {item.id}
+                onClick={(e)=>{
+                  e.target.value=prizecode
+                  e.target.type="text"
+                }}
+                value="코드 확인"
+              />
+            }
+          </div>
           <span className={styles.item_info_container}>
             {count}            
             {button}

@@ -1,6 +1,70 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const syncPrizes = /* GraphQL */ `
+  query SyncPrizes(
+    $filter: ModelPrizeFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPrizes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        code
+        prodcutID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getPrize = /* GraphQL */ `
+  query GetPrize($id: ID!) {
+    getPrize(id: $id) {
+      id
+      code
+      prodcutID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPrizes = /* GraphQL */ `
+  query ListPrizes(
+    $filter: ModelPrizeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPrizes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        code
+        prodcutID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const syncProducts = /* GraphQL */ `
   query SyncProducts(
     $filter: ModelProductFilterInput

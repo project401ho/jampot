@@ -1,6 +1,57 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createPrize = /* GraphQL */ `
+  mutation CreatePrize(
+    $input: CreatePrizeInput!
+    $condition: ModelPrizeConditionInput
+  ) {
+    createPrize(input: $input, condition: $condition) {
+      id
+      code
+      prodcutID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePrize = /* GraphQL */ `
+  mutation UpdatePrize(
+    $input: UpdatePrizeInput!
+    $condition: ModelPrizeConditionInput
+  ) {
+    updatePrize(input: $input, condition: $condition) {
+      id
+      code
+      prodcutID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePrize = /* GraphQL */ `
+  mutation DeletePrize(
+    $input: DeletePrizeInput!
+    $condition: ModelPrizeConditionInput
+  ) {
+    deletePrize(input: $input, condition: $condition) {
+      id
+      code
+      prodcutID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createProduct = /* GraphQL */ `
   mutation CreateProduct(
     $input: CreateProductInput!

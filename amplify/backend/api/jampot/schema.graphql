@@ -1,6 +1,7 @@
 type Prize @model @auth(rules: [{allow: private, provider: iam}]) {
   id: ID!
-  prize_code: String
+  code: String
+  prodcutID: String
 }
 
 type Product @model @key(name: "productsByDate", fields: ["type", "createdAt"], queryField: "productsByDate") @auth(rules: [{allow: private, provider: iam}]) {
@@ -14,7 +15,6 @@ type Product @model @key(name: "productsByDate", fields: ["type", "createdAt"], 
   isFree: Boolean!
   type: String!
   winner: String
-  Prize: Prize @connection
 }
 
 type User @model @auth(rules: [{allow: private, provider: iam}]) {

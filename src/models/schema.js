@@ -10,8 +10,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "prize_code": {
-                    "name": "prize_code",
+                "code": {
+                    "name": "code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "prodcutID": {
+                    "name": "prodcutID",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -133,19 +140,6 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
-                },
-                "Prize": {
-                    "name": "Prize",
-                    "isArray": false,
-                    "type": {
-                        "model": "Prize"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "productPrizeId"
-                    }
                 },
                 "updatedAt": {
                     "name": "updatedAt",
@@ -293,5 +287,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4399cd66f18cca17212edcef827f5f25"
+    "version": "571263bbb50d242f16adcb0c1006f818"
 };

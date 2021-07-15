@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight,faChevronLeft,faStar,faCookieBite } from "@fortawesome/free-solid-svg-icons";
 import { fetchProductImage} from '../../lib/graphql'
 
-import {Product as ProductDS, User as UserDS} from '../../src/models'
+import {Product as ProductDS, User as UserDS, Prize as PrizeDS} from '../../src/models'
 import { DataStore } from "aws-amplify"
 import ApplyPopUp from './ApplyPopUp'
 
@@ -28,7 +28,7 @@ export default function Product(props) {
             if(updated.applicants.length === updated.max_applicants){
               updated.type = "close"
               updated.winner = updated.applicants[Math.floor(Math.random()*updated.max_applicants)]
-
+              
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.freeTicket -= 1

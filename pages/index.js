@@ -95,6 +95,7 @@ function Home(props) {
         page: page,
         limit: 4,        
       });
+      console.log(allProductList.length < 1);
       if(allProductList.length < 1){
         allProductList = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
           sort: item => item.createdAt(SortDirection.ASCENDING),
@@ -108,6 +109,7 @@ function Home(props) {
     const subscription = DataStore.observe(ProductDS).subscribe(() => {      
       fetchAllProductList(page)
     })
+    console.log("newpage",newpage);
     return [
       () => {
         subscription.unsubscribe()      

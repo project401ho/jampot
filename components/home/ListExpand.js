@@ -170,6 +170,7 @@ export default function ListExpand(props) {
         {page+1}
         <button className={styles.page_button} onClick={()=>{
           fetchAndSubscribeAllProductList(page+1).then((e)=>{
+            console.log(e);
             setpage(e[1])
           })
         }}>  

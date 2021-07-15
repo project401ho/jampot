@@ -92,7 +92,7 @@ function MyPage() {
         setpage={(newpage)=>setpage(newpage)}
         fetchappliedProductList={(email,page)=>fetchappliedProductList(email,page)}
       />
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

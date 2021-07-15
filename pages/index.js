@@ -169,7 +169,7 @@ function Home(props) {
         />
         </>
       }
-      <Footer/>
+      {/* <Footer/> */}
       {
         isMenuExpand === true
         ?

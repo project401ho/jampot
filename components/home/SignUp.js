@@ -51,7 +51,7 @@ class SignUp extends Component {
                       className={styles.loginPw}
                       type="text"
                       placeholder="이메일 인증번호"
-                      value=""
+                      value={this.state.email_confirm_code}                      
                       onChange={this.stateHandler}
                     />
                     <button className={styles.loginBtn} onClick={async ()=>

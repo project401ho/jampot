@@ -7,6 +7,7 @@ import AppliedList from '../components/mypage/AppliedList'
 import {Auth, DataStore, SortDirection} from "aws-amplify"
 import {Product as ProductDS, User as UserDS} from '../src/models'
 import { faUserAltSlash } from '@fortawesome/free-solid-svg-icons'
+import Footer from '../components/Footer'
 
 export const siteTitle = "잼팟"
 
@@ -91,6 +92,7 @@ function MyPage() {
         setpage={(newpage)=>setpage(newpage)}
         fetchappliedProductList={(email,page)=>fetchappliedProductList(email,page)}
       />
+      <Footer/>
     </div>
   );
 }

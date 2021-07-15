@@ -8,6 +8,7 @@ import ListExpand from '../components/home/ListExpand'
 import SignIn from '../components/home/Signin'
 import SignUp from '../components/home/SignUp'
 import Navigation from '../components/Navigation'
+import Footer from '../components/Footer'
 import BootPay from '../components/BootPay'
 
 import {Product as ProductDS, User as UserDS} from '../src/models'
@@ -166,7 +167,7 @@ function Home(props) {
         />
         </>
       }
-      
+      <Footer/>
       {
         isMenuExpand === true
         ?

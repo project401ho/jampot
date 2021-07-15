@@ -1,3 +1,10 @@
+/* 
+  Signiture color : #3BD1B3
+  light tone: #c2f1e8
+  super light tone: #effffb
+  dark tone: #307e6e
+*/
+
 .container {
   position: fixed;
   top: 0;
@@ -6,7 +13,8 @@
   left: 0;
   background: rgba(0, 0, 0, 0.6); 
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: flex-start;
 
   .item_container{
@@ -17,18 +25,63 @@
     box-sizing: border-box;
     margin: 50px auto;
     padding: 20px;
-    background: #fff; //로그인 배경이다   
+    background: #fff; 
+    display: flex;    
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .item_wrapper{
+    width:100%;
+    height:100%;
   }
   .title{
     font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 50px;
   }
-  .sendcode{
-
+  .sendcode_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0px;
+    width: 100%;
+    height: 15%;
+    border: 1px solid #3BD1B3;
+    border-radius: 5px;
   }
   .codeinput{
+    border: none;
+    width:100%;
+    height:100%;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+
+  }
+  .sendcode{
+    border: none;    
+    height:100%;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    color: #307e6e;
+    padding:6px;
 
   }
   .submit{
-    
+    width: 80%;
+    height: 10%;
+    margin: 20px 10%;
+    border-radius: 5px;        
+    border: 1px solid #3BD1B3;
+    font-weight: bold;
+    color: #307e6e;
+    padding: 5px;
+  } 
+  .close{
+    font-size: 25px;
+    margin-left: auto;
   }
 }

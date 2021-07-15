@@ -1,0 +1,30 @@
+/* 
+  Signiture color : #3BD1B3
+  light tone: #c2f1e8
+  super light tone: #effffb
+  dark tone: #307e6e
+*/
+
+.container{
+  border-top: 1px solid #c2f1e8;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: 0.5rem;
+  margin-top: 50px;
+  margin-left: 8%;
+}
+.logo{
+  font-family: Bungee;
+  font-size: large;
+  color: #3BD1B3;
+}
+.laws{
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.info{
+  margin-bottom:3px;
+}

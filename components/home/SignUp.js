@@ -51,6 +51,7 @@ class SignUp extends Component {
                       className={styles.loginPw}
                       type="text"
                       placeholder="이메일 인증번호"
+                      value=""
                       onChange={this.stateHandler}
                     />
                     <button className={styles.loginBtn} onClick={async ()=>
@@ -58,16 +59,7 @@ class SignUp extends Component {
                       if(this.state.password === this.state.password_confirm){
                         if(await ConfirmSignUpLib(this.state.email,this.state.email_confirm_code)){
                           let _user = await SignInLib(this.state.email,this.state.password)
-                          let temp = {
-                            id:this.state.email,
-                            email:this.state.email,
-                            nickname: this.state.nickname,
-                            ticket:0,
-                            freeTicket:0,
-                            appliedList:[],
-                            checkedAppliedList:[],
-                          }
-                          await createUser(temp)
+                          
                           this.props.setUser(_user)
                           close()
                           window.location.reload()
@@ -118,7 +110,17 @@ class SignUp extends Component {
                     <button className={styles.loginBtn} onClick={async ()=>
                     {                    
                       if(this.state.password === this.state.password_confirm){
-                        if(await SignUpLib(this.state.nickname,this.state.email,this.state.password)){                          
+                        if(await SignUpLib(this.state.nickname,this.state.email,this.state.password)){  
+                          let temp = {
+                            id:this.state.email,
+                            email:this.state.email,
+                            nickname: this.state.nickname,
+                            ticket:0,
+                            freeTicket:0,
+                            appliedList:[],
+                            checkedAppliedList:[],
+                          }
+                          await createUser(temp)                        
                           this.setState({isVerifying:true})
                         }
                       }

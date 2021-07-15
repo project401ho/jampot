@@ -21,8 +21,7 @@ export default function ListExpand(props) {
   const [page, setpage] =useState(0)
   useEffect(()=>{
     fetchAndSubscribeAllProductList(page)
-    // generateProductList()
-    
+   
   },[])
 
   async function applyProduct (tempProduct) {
@@ -161,24 +160,31 @@ export default function ListExpand(props) {
     <div className={styles.ListExpand_container}>
       {imageList}
       <div className={styles.ListExpand_ButtonContainer}>
-        <button onClick={()=>{
+        <button className={styles.page_button} onClick={()=>{
           if(page === 0) return
           fetchAndSubscribeAllProductList(page-1)          
           setpage(page-1)
         }}>  
-          <FontAwesomeIcon className="faIcons_tickets" icon={faChevronLeft} ></FontAwesomeIcon>
+          <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronLeft} ></FontAwesomeIcon>
         </button>
-        <button onClick={()=>{
+        {page+1}
+        <button className={styles.page_button} onClick={()=>{
           fetchAndSubscribeAllProductList(page+1).then((e)=>{
             setpage(e[1])
           })
         }}>  
-          <FontAwesomeIcon className="faIcons_tickets" icon={faChevronRight} ></FontAwesomeIcon>
+          <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronRight} ></FontAwesomeIcon>
         </button>
-        <ApplyPopUp
-          isOpen={isApplyPopUpOpen}
-          close={()=>setisApplyPopUpOpen(false)}
-        />
+        {
+          isApplyPopUpOpen 
+          ?
+          <ApplyPopUp
+            close={()=>setisApplyPopUpOpen(false)}
+          />
+          :
+          null
+        }
+        
       </div>
     </div>
   );

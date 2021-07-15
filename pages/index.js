@@ -8,6 +8,7 @@ import ListExpand from '../components/home/ListExpand'
 import SignIn from '../components/home/Signin'
 import SignUp from '../components/home/SignUp'
 import Navigation from '../components/Navigation'
+import BootPay from '../components/BootPay'
 import {Product as ProductDS, User as UserDS} from '../src/models'
 
 import { SignOut } from '../lib/signin'
@@ -92,7 +93,6 @@ function Home(props) {
         page: page,
         limit: 4,        
       });
-      console.log(allProductList);
       if(allProductList.length < 1){
         allProductList = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
           sort: item => item.createdAt(SortDirection.ASCENDING),
@@ -127,10 +127,14 @@ function Home(props) {
         expandMenu={()=>setisMenuExpand(true)}
         userData={userData}
       />
-      
+
+      {/* <button className={styles.signout} onClick={SignOut}/> */}
+
       {
         isListExapnd
         ?        
+        <>
+        <h2 className={styles.list_title}>👓</h2>
         <ListExpand
           user={user}  
           userData={userData} 
@@ -142,7 +146,10 @@ function Home(props) {
           fetchAndSubscribeAllProductList={(page)=>fetchAndSubscribeAllProductList(page)}     
 
         />
+        </>
         :
+        <>
+        <h2 className={styles.list_title}>🔥</h2>
         <Product 
           user={user}  
           userData={userData}
@@ -154,7 +161,7 @@ function Home(props) {
           productList = {productList}                     
             
         />
-        
+        </>
       }
       
       {
@@ -181,7 +188,8 @@ function Home(props) {
         setUser={(_user)=>setUser(_user)} 
         close={()=>setIsSignUpModalOpen(false)}
       />
-      
+      {/* <BootPay /> */}
+
     </div>
   )
 }

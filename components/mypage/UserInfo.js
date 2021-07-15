@@ -42,7 +42,11 @@ export default function UserInfo(props) {
           {userData && userData.freeTicket}
         </div>
       </div>
-      <button className={styles.starcharge} onClick={()=>{}}>스타 충전</button>
+      <button className={styles.starcharge} onClick={()=>{
+        
+      }}>
+        스타 충전
+      </button>
 
     </div>
   );

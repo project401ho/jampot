@@ -43,7 +43,7 @@ class SignUp extends Component {
                     name="nickname"
                     className={styles.loginPw}
                     type="text"
-                    placeholder="유저 닉네임  "
+                    placeholder="유저 닉네임 (변경가능)"
                     onChange={this.stateHandler}
                   />
                   <input
@@ -80,11 +80,13 @@ class SignUp extends Component {
                           ticket:0,
                           freeTicket:0,
                           appliedList:[],
+                          checkedAppliedList:[],
                         }
                         await createUser(temp)
                         this.props.setUser(_user)
                         close()
-                        
+                        window.location.reload()
+
                       }
                     }
                     else{

@@ -6,7 +6,7 @@
 */
 
 html {
-  background: #fff;
+  background: #effffb;
   color: #307e6e;
   top: 0;
   bottom: 0;
@@ -17,7 +17,7 @@ html {
 
 body {
   margin: 0;
-  background: #fff;
+  background: #effffb;
   width:100%;
   height:100%;
   padding: 0;
@@ -33,7 +33,7 @@ body {
     height:100%;
     margin: 0 auto;
     border: none;
-    background: #fff;
+    background: #effffb;
     padding:0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;

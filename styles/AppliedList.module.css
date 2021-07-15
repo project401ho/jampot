@@ -71,7 +71,7 @@
 }
 .button{
   border-radius: 3px;
-  width: 100px;
+  width: 80px;
   border-left: 1px solid #c2f1e8;
   border-top: 1px solid #c2f1e8;
   border-right: 1px solid #c2f1e8;
@@ -89,7 +89,7 @@
 }
 .disabled{
   border-radius: 3px;
-  width: 100px;
+  width: 60px;
   border: none;
   background-color: #effffb;
   padding:4px;
@@ -97,4 +97,49 @@
 .prizecode_confirm{
   width:100%;
   border: none;
+  padding: 5px;
+    border-left: 1px solid #c2f1e8;
+    border-top: 1px solid #c2f1e8;
+    border-right: 1px solid #c2f1e8;
+    border-bottom: 3px solid #c2f1e8;
+    color: #307e6e;
+    background-color: #fff;
+}
+.page_button {
+  margin: 15px 15px;
+  border-radius: 3px;
+  width: 60px;
+  height: 40px;
+  border-left: 1px solid #c2f1e8;
+  border-top: 1px solid #c2f1e8;
+  border-right: 5px solid #c2f1e8;
+  border-bottom: 5px solid #c2f1e8;
+  color: #307e6e;
+  background-color: #fff;
+}
+
+.page_button_icon {
+  font-size: 1.3rem;
+}
+
+.AppliedList_ButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.top_title{
+  font-size: 1.2rem;
+  margin: 0px;
+  padding: 10px 10px 0px 10px;
+  width: 100%;
+  text-align: center;
+}
+.title_container{
+
+}
+.item_title{
+  margin-bottom: 5px;
+  font-weight: bold;
 }

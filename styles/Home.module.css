@@ -13,6 +13,14 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
+.list_title{
+  padding: 5px;
+  margin: 0px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  background-color:#effffb;
+}
 .Navigation_container{
   width:100%;
   height:7%;
@@ -96,8 +104,8 @@
   height: 100%;
   background-color: #fff;
   border-radius: 15px;
-  border-left: 1px dashed #c2f1e8;
-  border-top: 1px dashed #c2f1e8;
+  border-left: 1px solid #c2f1e8;
+  border-top: 1px solid #c2f1e8;
   border-right: 7px solid #c2f1e8;
   border-bottom: 7px solid #c2f1e8;
   display: flex;
@@ -135,8 +143,8 @@
   border-radius: 15px;
   border: none;
   margin: 7% 0px;
-  border-left: 1px dashed #c2f1e8;
-  border-top: 1px dashed #c2f1e8;
+  border-left: 1px solid #c2f1e8;
+  border-top: 1px solid #c2f1e8;
   border-right: 7px solid #c2f1e8;
   border-bottom: 7px solid #c2f1e8;
   background-color: #fff;
@@ -158,7 +166,7 @@
 .ListExpand_container{
   width:100%;
   height: 100%;
-  background-color: #fff;
+  background-color: #effffb;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -166,16 +174,16 @@
 }
 .ListExpand_item_container {
   width: 95%;
-  background-color: #effffb;
+  background-color: #fff;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   border-radius: 12px;
-  border: 1px dashed #c2f1e8;
-  margin: 5px;
-  border-right: 7px solid #c2f1e8;
+  border: 1px solid #c2f1e8;
   border-bottom: 7px solid #c2f1e8;
+  margin: 5px;
+
   
 
 }
@@ -185,14 +193,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #effffb;
+  background-color: #fff;
   border-radius: 5px;
   padding: 5px;
   margin-left: 10px;
   margin-bottom: 10px;
 }
 .ListExpand_text_container {
-  width:100%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -217,8 +225,8 @@
 }
 .ListExpand_applycount{
   border-radius: 3px;
-  background-color: #c2f1e8;
-  width: 22%;
+  background-color: #effffb;
+  border: 1px solid #c2f1e8;
   height: 20px;
   text-align: center;
   color: #307e6e;
@@ -243,10 +251,10 @@
   border:none;
   border-left: 1px solid #c2f1e8;
   border-top: 1px solid #c2f1e8;
-  border-right: 5px solid #c2f1e8;
-  
+  border-right: 5px solid #c2f1e8;  
   border-bottom: 5px solid #c2f1e8;
-  background-color: #fff;
+
+  background-color: #effffb;
   color: #307e6e;
   display: flex;
   flex-direction: row;
@@ -279,4 +287,19 @@
 .nav_tickets{
   font-size: 1rem;
   margin-right: 7px;
+}
+.page_button{
+  margin: 15px 15px;
+  border-radius: 3px;
+  width:60px;
+  height:40px;
+  border-left: 1px solid #c2f1e8;
+  border-top: 1px solid #c2f1e8;
+  border-right: 5px solid #c2f1e8;
+  border-bottom: 5px solid #c2f1e8;
+  color: #307e6e;
+  background-color: #fff;
+}
+.page_button_icon{
+  font-size: 1.3rem;
 }

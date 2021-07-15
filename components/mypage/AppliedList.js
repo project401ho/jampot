@@ -4,9 +4,11 @@ import {Product as ProductDS, User as UserDS, Prize as PrizeDS} from '../../src/
 import styles from "../../styles/AppliedList.module.css";
 import ResultPopUp from './ResultPopUp';
 import ApplyPopUp from '../home/ApplyPopUp'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight,faChevronLeft,faStar,faCookieBite,faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function AppliedList(props) {
-  const {appliedProductList, userData} = props
+  const {appliedProductList, userData, page} = props
   const [appliedlist, setappliedlist] =useState([])
   const [isResultPopUp, setisResultPopUp] = useState(false)
   const [isWinner, setisWinner] = useState(false)
@@ -27,15 +29,18 @@ export default function AppliedList(props) {
 
   }
 
-  async function getPrizeCode(id){
-    let code =  await DataStore.query(PrizeDS,c=>c.prodcutID("eq",id))
-    console.log(code[0]);
-    console.log(code[0].code);
-    return code[0].code
+  async function getPrizeCode(item){
+    if(item.winner === userData.email){
+      let code =  await DataStore.query(PrizeDS,c=>c.prodcutID("eq",item.id))
+      return code[0].code 
+    }    
   }
 
   useEffect(()=>{
-    setappliedlist(generateAppliedList())
+    if(userData != null){
+      setappliedlist(generateAppliedList())
+    }
+    
   },[appliedProductList,userData])
 
   function generateAppliedList(){
@@ -69,7 +74,7 @@ export default function AppliedList(props) {
           <div className={styles.item_won}>
             {"당첨"}
           </div>
-          getPrizeCode(item.id).then(e=>prizecode=e)
+          getPrizeCode(item).then(e=>prizecode=e)
         }
         button =
         <input 
@@ -101,24 +106,26 @@ export default function AppliedList(props) {
       }
       return(
         <div className={styles.item_container} key={i}>
-          <span>
-            {item.title}                   
-          </span>
-          <div>
-            {
-              item.winner === userData.email && 
-              <input 
-                className={styles.prizecode_confirm}
-                type="button" 
-                name={item.winner} 
-                id = {item.id}
-                onClick={(e)=>{
-                  e.target.value=prizecode
-                  e.target.type="text"
-                }}
-                value="코드 확인"
-              />
-            }
+          <div className={styles.title_container}>
+            <div className={styles.item_title}>
+              {item.title}                   
+            </div>
+            <div>
+              {
+                item.winner === userData.email && 
+                <input 
+                  className={styles.prizecode_confirm}
+                  type="button" 
+                  name={item.winner} 
+                  id = {item.id}
+                  onClick={(e)=>{
+                    e.target.value=prizecode
+                    e.target.type="text"
+                  }}
+                  value="코드 확인"
+                />
+              }
+            </div>
           </div>
           <span className={styles.item_info_container}>
             {count}            
@@ -178,7 +185,31 @@ export default function AppliedList(props) {
 
   return (
     <div className={styles.container}>
+      {
+      appliedlist.length > 0
+      ?
+      <h2 className={styles.top_title}>응모 내역</h2>
+      :
+      <h2 className={styles.top_title}>응모 가즈아</h2>}
       {appliedlist}
+      <div className={styles.AppliedList_ButtonContainer}>
+        <button className={styles.page_button} onClick={()=>{
+          if(page === 0) return
+          props.fetchappliedProductList(userData.email,page-1)          
+          props.setpage(page-1)
+        }}>  
+          <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronLeft} ></FontAwesomeIcon>
+        </button>
+        {page+1}
+        <button className={styles.page_button} onClick={()=>{
+          props.fetchappliedProductList(userData.email,page+1).then((e)=>{
+            props.setpage(e)
+          })
+        }}>  
+          <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronRight} ></FontAwesomeIcon>
+        </button>
+        
+      </div>
       {
         isApplied
         ?

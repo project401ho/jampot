@@ -16,6 +16,25 @@ function MyPage() {
   const [appliedProductList,setappliedProductList] = useState([])
   const [page, setpage] = useState(0)
   
+  async function fetchappliedProductList(id,page) {
+    let newpage = page
+    let productlist = await DataStore.query(ProductDS, c=>c.applicants("contains",id), {
+      sort: item => item.createdAt(SortDirection.DESCENDING),
+      page: page,
+      limit: 4,  
+    })      
+    if(productlist.length < 1){
+      productlist = await DataStore.query(ProductDS, c=>c.applicants("contains",id), {
+        sort: item => item.createdAt(SortDirection.DESCENDING),
+        page: 0,
+        limit: 4,        
+      });
+      newpage = 0
+    }
+    setappliedProductList(productlist)      
+    return newpage
+  }
+
   useEffect(() => {
     
     let test = "test"
@@ -25,29 +44,22 @@ function MyPage() {
     .then((e) => {        
       setUser(e)      
       fetchUserData(e.attributes.email)  
+      console.log(e.attributes.email);
       fetchappliedProductList(e.attributes.email,page)    
       test = e.attributes.email
     }) 
     .catch((error)=>{console.log(error);})
    
     async function fetchUserData(id) {
-      console.log(id);
+
       const userData = await DataStore.query(UserDS,id)      
       setUserData(userData)      
     }
     
-    async function fetchappliedProductList(id,page) {
-      let productlist = await DataStore.query(ProductDS, c=>c.applicants("contains",id), {
-        sort: item => item.createdAt(SortDirection.DESCENDING),
-        page: page,
-        limit: 20,  
-      })      
-      setappliedProductList(productlist)      
-    }
+    
       
 
     userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
-    console.log("done set");
     const appliedProductList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchappliedProductList(test,page))
 
     return () => {
@@ -76,6 +88,8 @@ function MyPage() {
         appliedProductList={appliedProductList}
         userData={userData}
         page={page}
+        setpage={(newpage)=>setpage(newpage)}
+        fetchappliedProductList={(email,page)=>fetchappliedProductList(email,page)}
       />
     </div>
   );

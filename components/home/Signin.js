@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import Link from "next/link"
-import { SignIn as SignInLib} from '../../lib/signin'
+import {  SignIn as SignInLib} from '../../lib/signin'
 import styles from "../../styles/SignIn.module.scss";
-import { User as UserDS} from '../../src/models'
-import { DataStore } from "aws-amplify"
+import VerifyEmail from "./VerifyEmail";
 
 class SignIn extends Component {
   state = {
     email: "",
     password: "",
+    isOpenVerify: false,
   };
+
+
 
   stateHandler = (e) => {
     const { name, value } = e.target;
@@ -21,7 +23,9 @@ class SignIn extends Component {
     let clickInside = false
     return (
       <>
-        {isOpen ? (  
+        {
+        isOpen 
+        ?         
           <div className={styles.modal}  onClick={()=>{
               if(clickInside){
                 clickInside = false
@@ -52,36 +56,23 @@ class SignIn extends Component {
                     onChange={this.stateHandler}
                   />
                   <div className={styles.loginMid}>
-                    {/* <label className={styles.autoLogin} >
-                      {" "}
-                      <input type="checkbox" id="hint" onChange={this.rememberDeviceHandler}/> 로그인 유지하기
-                    </label> */}
                     <div className={styles.autoLogin}>아이디/비밀번호 찾기</div>
                   </div>
                   <button className={styles.loginBtn} onClick={async ()=>{
-                    let _user = await SignInLib(this.state.email,this.state.password)
-                    console.log(_user);
-                    if(_user !== null){
+                    let res = await SignInLib(this.state.email,this.state.password)
+                    console.log(res);
+                    if(res === "UserNotConfirmedException"){
+                      this.setState({isOpenVerify:true})
+                    }
+                    else if(res !== null){
                       window.location.reload()
                     }
-                    close()                    
+                                        
                     //link move
                   }}>
                     {" "}
                     로그인{" "}
                   </button>
-                  {/* <div className={styles.socialBox}>
-                    <div className={styles.kakao}>
-
-                      <div className={styles.kakaoText}>카카오 계정으로 신규가입</div>
-                    </div>
-                    <div className={styles.facebook}>
-
-                      <div className={styles.facebookText}>
-                        페이스북 계정으로 신규가입
-                      </div>
-                    </div>
-                  </div> */}
                   <div className={styles.loginEnd}>
                     <div className={styles.loginLine}>
                       {"회원이 아니신가요? "}
@@ -98,7 +89,17 @@ class SignIn extends Component {
               </div>
             </div>
           </div>
-        ) : null}
+        : 
+          null
+        }
+        {
+          this.state.isOpenVerify &&
+          <VerifyEmail
+            email={this.state.email}
+            password={this.state.password}
+            close={()=>this.setState({isOpenVerify:false})}
+          />
+        }
       </>
     );
   }

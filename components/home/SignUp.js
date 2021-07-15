@@ -59,7 +59,7 @@ class SignUp extends Component {
                       if(this.state.password === this.state.password_confirm){
                         if(await ConfirmSignUpLib(this.state.email,this.state.email_confirm_code)){
                           let _user = await SignInLib(this.state.email,this.state.password)
-                          
+  
                           this.props.setUser(_user)
                           close()
                           window.location.reload()
@@ -120,7 +120,7 @@ class SignUp extends Component {
                             appliedList:[],
                             checkedAppliedList:[],
                           }
-                          await createUser(temp)                        
+                          await createUser(temp)                                                
                           this.setState({isVerifying:true})
                         }
                       }

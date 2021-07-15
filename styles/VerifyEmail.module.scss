@@ -1,0 +1,34 @@
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6); 
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .item_container{
+    width: 90%;
+    height: 70%;
+    background-color: black;
+    position: relative;
+    box-sizing: border-box;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff; //로그인 배경이다   
+  }
+  .title{
+    font-weight: bold;
+  }
+  .sendcode{
+
+  }
+  .codeinput{
+
+  }
+  .submit{
+    
+  }
+}

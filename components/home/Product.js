@@ -27,10 +27,14 @@ export default function Product(props) {
             updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
             if(updated.applicants.length === updated.max_applicants){
               updated.type = "close"
+              updated.winner = updated.applicants[Math.floor(Math.random()*updated.max_applicants)]
+
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.freeTicket -= 1
-            updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+            if(!updated.appliedList.some((c)=>c===props.productList[productIdx].id)){
+              updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+            }            
           })))
         }
         else{
@@ -43,11 +47,15 @@ export default function Product(props) {
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
             updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
             if(updated.applicants.length === updated.max_applicants){
-              updated.type = "close"              
+              updated.type = "close"     
+              updated.winner = updated.applicants[Math.floor(Math.random()*updated.max_applicants)]
+
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.ticket -= 1
-            updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+            if(!updated.appliedList.some((c)=>c===props.productList[productIdx].id)){
+              updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+            }
           })))
         }
         else{
@@ -175,10 +183,16 @@ export default function Product(props) {
         </button>
 
       }
-      <ApplyPopUp
-        isOpen={isApplyPopUpOpen}
-        close={()=>setisApplyPopUpOpen(false)}
-      />
+      {
+        isApplyPopUpOpen
+        ?
+        <ApplyPopUp        
+          close={()=>setisApplyPopUpOpen(false)}
+        />
+        :
+        null  
+      }
+        
     </div>
   );
 }

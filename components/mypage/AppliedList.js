@@ -3,21 +3,20 @@ import {DataStore, SortDirection} from "aws-amplify"
 import {Product as ProductDS, User as UserDS} from '../../src/models'
 import styles from "../../styles/AppliedList.module.css";
 import ResultPopUp from './ResultPopUp';
+import ApplyPopUp from '../home/ApplyPopUp'
 
 export default function AppliedList(props) {
   const {appliedProductList, userData} = props
-  const [urlList, seturlList] = useState([])
   const [appliedlist, setappliedlist] =useState([])
   const [isResultPopUp, setisResultPopUp] = useState(false)
-  const [isWinner, setisWinner] =useState(false)
+  const [isWinner, setisWinner] = useState(false)
+  const [isApplied, setisApplied] = useState(false)
 
   async function checkWinner(e, winner, id){
     if(winner === userData.email){
-      e.target.value = "🎉"
       setisWinner(true)
     }
     else{
-      e.target.value = "🦝"
       setisWinner(false)
     }
     if(!userData.checkedAppliedList.some(e=>e === id)){
@@ -25,17 +24,22 @@ export default function AppliedList(props) {
         updated.checkedAppliedList = [...userData.checkedAppliedList].concat(String(id))
       }))
     }        
-    generateAppliedList()
+
   }
 
   useEffect(()=>{
     setappliedlist(generateAppliedList())
-  },[appliedProductList])
+  },[appliedProductList,userData])
 
   function generateAppliedList(){
     let temp = appliedProductList.map((item,i)=>{
+      let count = 
+      <div className={styles.item_count_done}>
+        {"마감"}
+      </div>
       let button = 
       <input 
+        className={styles.button}
         type="button" 
         name={item.winner} 
         id = {item.id}
@@ -47,18 +51,36 @@ export default function AppliedList(props) {
       />
       if(userData.checkedAppliedList.some(e=>e === item.id)){
         let _value = "🦝"
-        if(item.winner === userData.email) _value = "🎉"
+        count = 
+          <div className={styles.item_lost}>
+            {"미당첨"}
+          </div>
+        if(item.winner === userData.email) {
+          _value = "🎉"
+          count = 
+          <div className={styles.item_won}>
+            {"당첨"}
+          </div>
+        }
         button =
         <input 
+          className={styles.disabled}
+
           type="button" 
           name={item.winner} 
           id = {item.id}
           value={_value}
+          
         />
       }
       if(item.applicants.length < item.max_applicants){
+        count = 
+        <div className={styles.item_count}>
+          {item.applicants.length + " / " + item.max_applicants}
+        </div>
         button =
         <input 
+          className={styles.button}
           type="button" 
           name={item.winner} 
           id = {item.id}
@@ -71,8 +93,15 @@ export default function AppliedList(props) {
       }
       return(
         <div className={styles.item_container} key={i}>
-          {item.title}    
-          {button}
+          <span>
+            {item.title}              
+            {/* {item.Prize} */}
+          </span>
+          <span className={styles.item_info_container}>
+            {count}            
+            {button}
+          </span>
+          
         </div>
       )
     })
@@ -87,11 +116,14 @@ export default function AppliedList(props) {
           updated.applicants = [...tempProduct.applicants].concat(userData.id)
           if(updated.applicants.length === updated.max_applicants){
             updated.type = "close"
+            updated.winner = updated.applicants[Math.floor(Math.random()*updated.max_applicants)]
           }
         })).then(await DataStore.save(UserDS.copyOf(userData, updated=>{
           updated.freeTicket -= 1
-          updated.appliedList = [...userData.appliedList].concat(id)
-        })))
+          if(!updated.appliedList.some((c)=>c===id)){
+            updated.appliedList = [...userData.appliedList].concat(id)
+          }        
+        }))).then(setisApplied(true))
       }
       else{
         alert("not enough free ticket")
@@ -104,11 +136,15 @@ export default function AppliedList(props) {
           updated.applicants = [...tempProduct.applicants].concat(userData.id)
           if(updated.applicants.length === updated.max_applicants){
             updated.type = "close"              
+            updated.winner = updated.applicants[Math.floor(Math.random()*updated.max_applicants)]
+
           }
         })).then(await DataStore.save(UserDS.copyOf(userData, updated=>{
           updated.ticket -= 1
-          updated.appliedList = [...userData.appliedList].concat(id)
-        })))
+          if(!updated.appliedList.some((c)=>c===id)){
+            updated.appliedList = [...userData.appliedList].concat(id)
+          }
+        }))).then(setisApplied(true))
       }
       else{
         alert("not enough ticket")
@@ -120,6 +156,16 @@ export default function AppliedList(props) {
   return (
     <div className={styles.container}>
       {appliedlist}
+      {
+        isApplied
+        ?
+        <ApplyPopUp
+          isOpen={isApplied}
+          close={()=>setisApplied(false)}
+        />
+        :
+        null
+      }
       {
         isResultPopUp
         ?

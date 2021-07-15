@@ -1,5 +1,65 @@
 export const schema = {
     "models": {
+        "Prize": {
+            "name": "Prize",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "prize_code": {
+                    "name": "prize_code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Prizes",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "provider": "iam",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Product": {
             "name": "Product",
             "fields": {
@@ -73,6 +133,19 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
+                },
+                "Prize": {
+                    "name": "Prize",
+                    "isArray": false,
+                    "type": {
+                        "model": "Prize"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "productPrizeId"
+                    }
                 },
                 "updatedAt": {
                     "name": "updatedAt",
@@ -220,5 +293,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "6349112d655091dc38f420ff3b842804"
+    "version": "4399cd66f18cca17212edcef827f5f25"
 };

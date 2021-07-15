@@ -1,3 +1,13 @@
+  @media screen and (min-width: 680px) {
+    .ApplyPopUp_container {
+      width: 600px;
+      position: fixed;
+      height:100%;
+      margin: 0 auto;
+      padding:0;
+      background: rgba(0, 0, 0, 0.6); ///배경에 픽스를 주고 투명도를 준다.
+    }
+  }
  .ApplyPopUp_container {
    position: fixed;
    top: 0;
@@ -5,6 +15,8 @@
    bottom: 0;
    left: 0;
    background: rgba(0, 0, 0, 0.6); ///배경에 픽스를 주고 투명도를 준다.
+
+
 
    .ApplyPopUpModal {
      width: 90%;
@@ -16,6 +28,7 @@
      margin-top:150px;
      padding: 20px;
      background: #fff; //로그인 배경이다 
+
 
      .close {
        float: right;

@@ -31,6 +31,7 @@ function MyPage() {
     .catch((error)=>{console.log(error);})
    
     async function fetchUserData(id) {
+      console.log(id);
       const userData = await DataStore.query(UserDS,id)      
       setUserData(userData)      
     }

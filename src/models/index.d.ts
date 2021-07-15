@@ -4,6 +4,15 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+export declare class Prize {
+  readonly id: string;
+  readonly prize_code?: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Prize>);
+  static copyOf(source: Prize, mutator: (draft: MutableModel<Prize>) => MutableModel<Prize> | void): Prize;
+}
+
 export declare class Product {
   readonly id: string;
   readonly description?: string;
@@ -15,6 +24,7 @@ export declare class Product {
   readonly isFree: boolean;
   readonly type: string;
   readonly winner?: string;
+  readonly Prize?: Prize;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Product>);
   static copyOf(source: Product, mutator: (draft: MutableModel<Product>) => MutableModel<Product> | void): Product;

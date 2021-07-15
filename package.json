@@ -16,6 +16,9 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@fvilers/disable-react-devtools": "^1.2.1",
     "aws-amplify": "^4.1.2",
+    "coolsms-node-sdk": "^1.1.1",
+    "fs": "0.0.1-security",
+    "net": "^1.0.2",
     "next": "^11.0.1",
     "next-redux-wrapper": "^7.0.2",
     "react": "17.0.2",
@@ -23,7 +26,8 @@
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
     "sass": "^1.35.2",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "tls": "0.0.1"
   },
   "devDependencies": {
     "eslint": "7.30.0",

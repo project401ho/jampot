@@ -13,7 +13,8 @@ class MyDocument extends Document {
         <Head>
           <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet"/>
           <script async src="https://cdn.bootpay.co.kr/js/bootpay-3.3.1.min.js" type="application/javascript"></script>
-          
+          <script async src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 
         </Head>
         <body>

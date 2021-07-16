@@ -52,14 +52,13 @@ function MyPage() {
     .catch((error)=>{console.log(error);})
    
     async function fetchUserData(id) {
-
       const userData = await DataStore.query(UserDS,id)      
       setUserData(userData)      
     }
     
     
       
-
+    
     userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
     const appliedProductList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchappliedProductList(test,page))
 

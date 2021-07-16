@@ -1,5 +1,9 @@
 import React, {useState} from 'react'
 import styles from "../../styles/ApplyPopUp.module.scss";
+import {sendLink as KakaosendLink, sendCustomLink as KakaosendCustomLink} from "../../lib/kakaotalkshare"
+
+import {Product as ProductDS, User as UserDS, Prize as PrizeDS} from '../../src/models'
+import { DataStore } from "aws-amplify"
 
 export default function ApplyPopUp(props) {
   const {close} = props;
@@ -20,7 +24,20 @@ export default function ApplyPopUp(props) {
             &times;
           </span>
           <div className={styles.modalContents}>
-            <h1>응모 완료 ㅎㅎ</h1>
+            <h1>응모 완료 🤑</h1>
+            <p>친구들과 공유해주세요!<br/> 너굴맨이 좋아하는 쿠키를 받을 수 있어요!</p>
+            {
+              !props.isFree 
+              &&
+              <button 
+              className={styles.katalkShare}
+              onClick={async ()=>{
+                KakaosendCustomLink()
+                
+                close()
+              }
+              }>홍보하고 쿠키드쉴?</button>
+            }
             
 
             <button className={styles.ApplyPopUpBtn} onClick={()=>close()}>

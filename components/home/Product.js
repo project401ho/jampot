@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight,faChevronLeft,faStar,faCookieBite } from "@fortawesome/free-solid-svg-icons";
 import { fetchProductImage} from '../../lib/graphql'
 
-import {Product as ProductDS, User as UserDS, Prize as PrizeDS} from '../../src/models'
+import {Product as ProductDS, User as UserDS} from '../../src/models'
 import { DataStore } from "aws-amplify"
 import ApplyPopUp from './ApplyPopUp'
 
@@ -13,14 +13,14 @@ export default function Product(props) {
   const [productIdx, setproductIdx] = useState(0)  
   const [url, seturl] = useState(props.url)
   const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
+  const [isShareable, setisShareable] = useState(false)
 
-  const applyProduct = async ()=> {
+  async function applyProduct (id) {
     if(props.user === null) {
       props.isSignInModalOpen()
     }
-    else{
-      
-      let tempProduct = await DataStore.query(ProductDS,props.productList[productIdx].id)
+    else{      
+      let tempProduct = props.productList[productIdx]
       if(tempProduct.isFree){
         if(props.userData.freeTicket > 0){
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
@@ -32,8 +32,8 @@ export default function Product(props) {
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.freeTicket -= 1
-            if(!updated.appliedList.some((c)=>c===props.productList[productIdx].id)){
-              updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+            if(!updated.appliedList.some((c)=>c===tempProduct.id)){
+              updated.appliedList = [...props.userData.appliedList].concat(tempProduct.id)
             }            
           })))
         }
@@ -53,8 +53,8 @@ export default function Product(props) {
             }
           })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
             updated.ticket -= 1
-            if(!updated.appliedList.some((c)=>c===props.productList[productIdx].id)){
-              updated.appliedList = [...props.userData.appliedList].concat(props.productList[productIdx].id)
+            if(!updated.appliedList.some((c)=>c===tempProduct.id)){
+              updated.appliedList = [...props.userData.appliedList].concat(tempProduct.id)
             }
           })))
         }
@@ -65,6 +65,7 @@ export default function Product(props) {
         }
       }
       setisApplyPopUpOpen(true)
+      setisShareable(props.productList[productIdx].isFree)
       setproductIdx(0)
     }
   
@@ -160,7 +161,7 @@ export default function Product(props) {
       {
         props.productList[productIdx].applicants.length < props.productList[productIdx].max_applicants
         ?
-        <button className={styles.Product_apply_button} onClick={applyProduct} >
+        <button className={styles.Product_apply_button} onClick={()=>applyProduct(props.productList[productIdx].id)} >
           {
           props.productList[productIdx].isFree
           ?
@@ -179,7 +180,7 @@ export default function Product(props) {
         </button>
         :
         <button className={styles.Product_apply_button} disabled>
-          모집 완료
+          마감
         </button>
 
       }
@@ -188,6 +189,8 @@ export default function Product(props) {
         ?
         <ApplyPopUp        
           close={()=>setisApplyPopUpOpen(false)}
+          userData={props.userData}
+          isFree={isShareable}
         />
         :
         null  

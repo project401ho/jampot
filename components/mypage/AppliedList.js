@@ -10,8 +10,8 @@ import { faChevronRight,faChevronLeft,faStar,faCookieBite,faPlusCircle } from "@
 export default function AppliedList(props) {
   const {appliedProductList, userData, page} = props
   const [appliedlist, setappliedlist] =useState([])
-  const [isResultPopUp, setisResultPopUp] = useState(false)
-  const [isWinner, setisWinner] = useState(false)
+  const [isResultPopUp, setisResultPopUp] = useState(true)
+  const [isWinner, setisWinner] = useState(true)
   const [isApplied, setisApplied] = useState(false)
 
   async function checkWinner(e, winner, id){

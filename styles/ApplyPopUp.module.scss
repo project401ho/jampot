@@ -1,4 +1,12 @@
-  @media screen and (min-width: 680px) {
+ /* 
+  Signiture color : #3BD1B3
+  light tone: #c2f1e8
+  super light tone: #effffb
+  dark tone: #307e6e
+*/
+ 
+ 
+ @media screen and (min-width: 680px) {
     .ApplyPopUp_container {
       width: 600px;
       position: fixed;
@@ -10,6 +18,8 @@
   }
  .ApplyPopUp_container {
    position: fixed;
+  height:100%;
+
    top: 0;
    right: 0;
    bottom: 0;
@@ -46,7 +56,15 @@
        flex-direction: column;
 
       }
-
+      .katalkShare{
+        border-radius: 3px;
+        background-color: #effffb;
+        border-left: 1px solid #c2f1e8;
+        border-top: 1px solid #c2f1e8;
+        border-right: 1px solid #c2f1e8;
+        border-bottom: 5px solid #c2f1e8;
+        
+      }
        .ApplyPopUpBtn {
          height: 40px;
          font-size: 14px;

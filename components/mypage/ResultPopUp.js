@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import styles from "../../styles/ResultPopUp.module.css";
 import Image from 'next/image'
+import {sendLink as KakaosendLink, sendCustomLink as KakaosendCustomLink} from "../../lib/kakaotalkshare"
 
 export default function ResultPopUp(props) {
   const [popup,setpopup] = useState(null)
@@ -12,8 +13,8 @@ export default function ResultPopUp(props) {
 
   if(popup === null) {
     if(props.isWinner){
-      title = "당첨🎉"
-      content = "추카포카해"
+      title = "🎉축하합니다!🎉"
+      content = "🎉🎉추카포카해🎉🎉"
       buttonValue = "코드 받기!"
       imageURL = "/dangchumtrans.png"
       setpopup ( 
@@ -39,7 +40,11 @@ export default function ResultPopUp(props) {
             type="button" 
             className={styles.button} 
             value={"자랑하고 쿠키받기"}
-            onClick={()=>props.close()}
+            onClick={()=>{
+              KakaosendCustomLink()
+              
+              props.close()
+            }}
 
           />        
           <input 

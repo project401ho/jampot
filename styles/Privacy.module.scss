@@ -1,3 +1,29 @@
 .container{
-  
+  padding:20px
+}
+.Navigation_container {
+  width: 100%;
+  height: 7%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #effffb;
+}
+
+.Navigation_logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #3BD1B3;
+  margin-left: 15px;
+  height: 100%;
+}
+
+.Navigation_logotxt {
+  margin: 0px;
+  margin-left: 10px;
+  font-size: 1.75rem;
+  font-family: 'Bungee', cursive;
 }

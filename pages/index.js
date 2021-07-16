@@ -20,7 +20,7 @@ export const siteTitle = "잼팟"
 
 
 export async function getServerSideProps() {
- 
+  
   let productlist = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
     sort: item => item.createdAt(SortDirection.ASCENDING)
   })
@@ -50,9 +50,10 @@ function Home(props) {
 
 
   useEffect(() => {
-    
+    if (window.Kakao.Auth == null) {
+      window.Kakao.init("dd00de50a65b383ef223f46012f8d438");
+    }
     let test = "test"
-    let userData_subscription = null
 
     Auth.currentAuthenticatedUser()
     .then((e) => {        
@@ -64,21 +65,20 @@ function Home(props) {
    
     async function fetchUserData(id) {
       const userData = await DataStore.query(UserDS,id)      
+      console.log(userData);
       setUserData(userData)      
     }
-    
-    async function fetchProductList_2() {
-      let productlist = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
+    fetchProductList_2("check")
+    async function fetchProductList_2(check) {
+      const productlist = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
         sort: item => item.createdAt(SortDirection.ASCENDING)
       })      
+      console.log(check);
       setproductList(productlist)      
-    }
-
-    userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
-    const productList_subscription = DataStore.observe(ProductDS).subscribe(() => {      
-      fetchProductList_2()
-    })
-
+    }    
+    
+    const userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
+    const productList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchProductList_2("check"))
     return () => {
       userData_subscription.unsubscribe()
       productList_subscription.unsubscribe()
@@ -95,7 +95,6 @@ function Home(props) {
         page: page,
         limit: 4,        
       });
-      console.log(allProductList.length < 1);
       if(allProductList.length < 1){
         allProductList = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
           sort: item => item.createdAt(SortDirection.ASCENDING),

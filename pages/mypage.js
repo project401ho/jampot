@@ -37,7 +37,9 @@ function MyPage() {
   }
 
   useEffect(() => {
-    
+    if (window.Kakao.Auth == null) {
+      window.Kakao.init("dd00de50a65b383ef223f46012f8d438");
+    }
     let test = "test"
     let userData_subscription = null
 

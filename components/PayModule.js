@@ -2,7 +2,11 @@ import styles from '../styles/BootPay.module.css'
 
 const PayModule = (props) => (
 
-  <button className={styles.container} onClick={onClickRequest}>{props.quantity+"개 충전"}<br/>{props.bonus > 0 && "+" + props.bonus + "개"}</button>
+  <button className={styles.container} onClick={()=>{
+    alert("준비중입니다.")
+    return
+    // onClickRequest
+  }}>{props.quantity+"개 충전"}<br/>{props.bonus > 0 && "+" + props.bonus + "개"}</button>
 
 );
 

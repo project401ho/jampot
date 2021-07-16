@@ -10,17 +10,20 @@ import { DataStore } from "aws-amplify"
 import ApplyPopUp from './ApplyPopUp'
 
 export default function Product(props) {
+
   const [productIdx, setproductIdx] = useState(0)  
   const [url, seturl] = useState(props.url)
   const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
   const [isShareable, setisShareable] = useState(false)
 
-  async function applyProduct (id) {
+  async function applyProduct (e,id) {
+    console.log(e);
+    e.target.disabled=true
     if(props.user === null) {
       props.isSignInModalOpen()
     }
     else{      
-      let tempProduct = props.productList[productIdx]
+      let tempProduct = await DataStore.query(ProductDS,id)
       if(tempProduct.isFree){
         if(props.userData.freeTicket > 0){
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
@@ -39,6 +42,8 @@ export default function Product(props) {
         }
         else{
           alert("not enough free ticket")
+          setTimeout(()=>e.target.disabled=false,1000)
+          
           return
         }
       }
@@ -60,21 +65,22 @@ export default function Product(props) {
         }
         else{
           alert("not enough ticket")
-
+          setTimeout(()=>e.target.disabled=false,1000)
+          
           return
         }
       }
       setisApplyPopUpOpen(true)
       setisShareable(props.productList[productIdx].isFree)
       setproductIdx(0)
+      setTimeout(()=>e.target.disabled=false,1000)
+      
     }
   
   }
   
   return (
-    <div className={styles.Product_container}>      
-      
-      
+    <div className={styles.Product_container}>    
       <div className={styles.Product_content_container}>
         <a onClick={async (e)=>{
           e.preventDefault()
@@ -161,7 +167,7 @@ export default function Product(props) {
       {
         props.productList[productIdx].applicants.length < props.productList[productIdx].max_applicants
         ?
-        <button className={styles.Product_apply_button} onClick={()=>applyProduct(props.productList[productIdx].id)} >
+        <button className={styles.Product_apply_button} onClick={(e)=>applyProduct(e,props.productList[productIdx].id)} >
           {
           props.productList[productIdx].isFree
           ?

@@ -9,24 +9,18 @@ import { DataStore,Storage } from "aws-amplify"
 import ApplyPopUp from './ApplyPopUp'
 
 export default function ListExpand(props) {
-  const {
-    fetchAndSubscribeAllProductList,
-    allProductList,
-    urlList,
-    seturlList,
-  } = props
 
   const [imageList,setimageList] = useState([])
   const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
-  const [page, setpage] =useState(0)
-  const [isFree, setisFree] =useState(true)
+  const [page, setpage] = useState(0)
+  const [isFree, setisFree] = useState(true)
+
   useEffect(()=>{
-    fetchAndSubscribeAllProductList(page)
-   
+    props.fetchAndSubscribeAllProductList(page)
+    console.log("effect");   
   },[])
 
-  async function applyProduct (id) {
-      
+  async function applyProduct (id) {      
     if(props.user === null) {
       props.isSignInModalOpen()
     }
@@ -81,21 +75,21 @@ export default function ListExpand(props) {
   }
 
   async function generateProductList(){
-    let templist = allProductList.concat()
+    let templist = [...props.allProductList]
     let tempimageList = []
 
     if(!templist.length > 0) return
     for(let i = 0; i < templist.length; i++){
-      let urlListIdx = urlList.findIndex((item)=>item.filename === templist[i].image)
+      let urlListIdx = props.urlList.findIndex((item)=>item.filename === templist[i].image)
       if(urlListIdx >= 0){
-        tempimageList[i] = urlList[urlListIdx].url
+        tempimageList[i] = props.urlList[urlListIdx].url
       }
       else{
         let tempurl = await Storage.get(templist[i].image)
         let temp = {url:tempurl,filename:templist[i].image}
-        let tempurllist = [...urlList].concat(temp)
+        let tempurllist = [...props.urlList].concat(temp)
         tempimageList[i] = tempurl
-        seturlList(tempurllist)
+        props.setUrlList(tempurllist)
       }  
     }
     tempimageList = tempimageList.map((item, i)=>{
@@ -111,14 +105,14 @@ export default function ListExpand(props) {
           <div key={i} className={styles.ListExpand_content_container}>
             <div className={styles.ListExpand_text_container}>
               <h3 className={styles.ListExpand_title}>
-                {allProductList[i].title}
+                {props.allProductList[i].title}
               </h3>
               {
-                allProductList[i].applicants.length >= Math.floor(allProductList[i].max_applicants*0.7)
+                props.allProductList[i].applicants.length >= Math.floor(props.allProductList[i].max_applicants*0.7)
                 ?
                 <>
                 {
-                    allProductList[i].applicants.length < allProductList[i].max_applicants
+                    props.allProductList[i].applicants.length < props.allProductList[i].max_applicants
                   ?
                     <div className={styles.ListExpand_urgent}>마감 임박!</div>
                   :
@@ -127,20 +121,20 @@ export default function ListExpand(props) {
                 </>
                 
                 :
-                <div className={styles.ListExpand_applycount}>{ "( " + allProductList[i].applicants.length +" / "+ allProductList[i].max_applicants + " )" }</div>
+                <div className={styles.ListExpand_applycount}>{ "( " + props.allProductList[i].applicants.length +" / "+ props.allProductList[i].max_applicants + " )" }</div>
                 
               }
               
             </div>
             {
-              allProductList[i].applicants.length < allProductList[i].max_applicants
+              props.allProductList[i].applicants.length < props.allProductList[i].max_applicants
               ?
               <button className={styles.ListExpand_apply} onClick={()=>{
-                applyProduct(allProductList[i].id)
-                setisFree(allProductList[i].isFree)
+                applyProduct(props.allProductList[i].id)
+                setisFree(props.allProductList[i].isFree)
                 }} >
                 {
-                allProductList[i].isFree
+                props.allProductList[i].isFree
                 ?
                   <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>
                 :
@@ -148,7 +142,7 @@ export default function ListExpand(props) {
                 }
                 응모하기
                 {
-                allProductList[i].isFree
+                props.allProductList[i].isFree
                 ?
                   <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>
                 :
@@ -166,7 +160,7 @@ export default function ListExpand(props) {
     })
     setimageList(tempimageList)
   }
-  useMemo(()=> generateProductList(),[allProductList])
+  useMemo(()=> generateProductList(),[props.allProductList])
 
   return (
     <div className={styles.ListExpand_container}>
@@ -174,15 +168,14 @@ export default function ListExpand(props) {
       <div className={styles.ListExpand_ButtonContainer}>
         <button className={styles.page_button} onClick={()=>{
           if(page === 0) return
-          fetchAndSubscribeAllProductList(page-1)          
+          props.fetchAndSubscribeAllProductList(page-1)          
           setpage(page-1)
         }}>  
           <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronLeft} ></FontAwesomeIcon>
         </button>
         {page+1}
         <button className={styles.page_button} onClick={()=>{
-          fetchAndSubscribeAllProductList(page+1).then((e)=>{
-            console.log(e);
+          props.fetchAndSubscribeAllProductList(page+1).then((e)=>{
             setpage(e[1])
           })
         }}>  

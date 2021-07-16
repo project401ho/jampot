@@ -65,7 +65,6 @@ function MyPage() {
     return () => {
       userData_subscription.unsubscribe()
       appliedProductList_subscription.unsubscribe()
-
     }
   },[]) 
 

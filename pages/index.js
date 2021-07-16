@@ -88,7 +88,7 @@ function Home(props) {
   
   async function fetchAndSubscribeAllProductList(page){
     let newpage = page
-    await fetchAllProductList(page)
+    fetchAllProductList(page)
     async function fetchAllProductList(page){
       let allProductList = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
         sort: item => item.createdAt(SortDirection.ASCENDING),
@@ -161,7 +161,7 @@ function Home(props) {
           userData={userData}
           urlList = {urlList}          
           isSignInModalOpen={()=>setIsSignInModalOpen(true)}
-          seturlList={(list)=>seturlList(list)}
+          setUrlList={(list)=>seturlList(list)}
 
           url={_url} 
           productList = {productList}                     

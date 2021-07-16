@@ -13,6 +13,7 @@ export default function AppliedList(props) {
   const [isResultPopUp, setisResultPopUp] = useState(false)
   const [isWinner, setisWinner] = useState(false)
   const [isApplied, setisApplied] = useState(false)
+  const [isSharable, setIsSharable] = useState(false)
 
   async function checkWinner(e, winner, id){
     if(winner === userData.email){
@@ -100,6 +101,7 @@ export default function AppliedList(props) {
           onClick={(e)=>{
             e.preventDefault()
             applyProduct(item.id)
+            setIsSharable(item.isFree)
           }}
           value="추가 응모"
         />
@@ -112,7 +114,7 @@ export default function AppliedList(props) {
             </div>
             <div>
               {
-                item.winner === userData.email && 
+                (item.winner === userData.email && userData.checkedAppliedList.some((c)=> c===item.id)) &&
                 <input 
                   className={styles.prizecode_confirm}
                   type="button" 
@@ -216,6 +218,7 @@ export default function AppliedList(props) {
         <ApplyPopUp
           isOpen={isApplied}
           close={()=>setisApplied(false)}
+          isFree = {isSharable}
         />
         :
         null

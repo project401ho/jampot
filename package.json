@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-amplify/datastore":"^3.2.1",
     "@aws-amplify/cli": "^5.1.0",
-    "@aws-amplify/datastore": "^3.2.1",
     "@aws-amplify/ui-react": "^1.2.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",

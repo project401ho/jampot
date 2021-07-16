@@ -68,6 +68,7 @@ function MyPage() {
       userData_subscription.unsubscribe()
       appliedProductList_subscription.unsubscribe()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]) 
 
   return (

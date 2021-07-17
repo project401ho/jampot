@@ -18,29 +18,28 @@ function MyPage() {
   const [page, setpage] = useState(0)
   
   async function fetchappliedProductList(id,page) {
-    let newpage = page
     let productlist = await DataStore.query(ProductDS, c=>c.applicants("contains",id), {
       sort: item => item.createdAt(SortDirection.DESCENDING),
       page: page,
       limit: 4,  
     })      
     if(productlist.length < 1){
+      page = 0;
       productlist = await DataStore.query(ProductDS, c=>c.applicants("contains",id), {
         sort: item => item.createdAt(SortDirection.DESCENDING),
         page: 0,
         limit: 4,        
       });
-      newpage = 0
     }
     setappliedProductList(productlist)      
-    return newpage
+    setpage(page)
   }
 
   useEffect(() => {
     if (window.Kakao.Auth == null) {
       window.Kakao.init("dd00de50a65b383ef223f46012f8d438");
     }
-    let test = "test"
+    let email = "email"
     let userData_subscription = null
 
     Auth.currentAuthenticatedUser()
@@ -49,7 +48,7 @@ function MyPage() {
       fetchUserData(e.attributes.email)  
       console.log(e.attributes.email);
       fetchappliedProductList(e.attributes.email,page)    
-      test = e.attributes.email
+      email = e.attributes.email
     }) 
     .catch((error)=>{console.log(error);})
    
@@ -58,11 +57,8 @@ function MyPage() {
       setUserData(userData)      
     }
     
-    
-      
-    
-    userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
-    const appliedProductList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchappliedProductList(test,page))
+    userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(email))
+    const appliedProductList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchappliedProductList(email,page))
 
     return () => {
       userData_subscription.unsubscribe()
@@ -92,7 +88,6 @@ function MyPage() {
         appliedProductList={appliedProductList}
         userData={userData}
         page={page}
-        setpage={(newpage)=>setpage(newpage)}
         fetchappliedProductList={(email,page)=>fetchappliedProductList(email,page)}
       />
       <Footer/>

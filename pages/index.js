@@ -44,9 +44,10 @@ function Home(props) {
   const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
   const [isMenuExpand,setisMenuExpand] = useState(false)
-  const [isListExapnd,setisListExapnd] = useState(false)
+  const [isListExapnd,setisListExapnd] = useState(true)
   const [urlList, seturlList] = useState([{url:props._url,filename:props.productlist[0].image}])
   const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
+  const [page, setpage] = useState(0)
 
   const _url = props._url 
 
@@ -66,7 +67,6 @@ function Home(props) {
         // Example conflict handler
         const modelConstructor = data.modelConstructor;
 
-        console.log("TEST", data);
         if(modelConstructor === ProductDS){
           let localModel = data.localModel
           let product = await DataStore.query(ProductDS, localModel.id)
@@ -131,34 +131,33 @@ function Home(props) {
   },[])
   
   async function fetchAndSubscribeAllProductList(page){
-    let newpage = page
     fetchAllProductList(page)
     async function fetchAllProductList(page){
       let allProductList = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
         sort: item => item.createdAt(SortDirection.ASCENDING),
         page: page,
         limit: 4,        
-      });
-      if(allProductList.length < 1){
+      })
+      if(allProductList.length < 1 ){
+        page = 0;
         allProductList = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
           sort: item => item.createdAt(SortDirection.ASCENDING),
           page: 0,
           limit: 4,        
         });
-        newpage = 0
+        
       }
       setallproductList(allProductList)      
+      setpage(page);
     }
+
     const subscription = DataStore.observe(ProductDS).subscribe(() => {      
       fetchAllProductList(page)
     })
-    console.log("newpage",newpage);
-    return [
-      () => {
-        subscription.unsubscribe()      
-      },
-      newpage
-    ]
+    
+    return () => {
+      subscription.unsubscribe()      
+    }
   }
 
   return (
@@ -191,7 +190,9 @@ function Home(props) {
           urlList={urlList}
           isSignInModalOpen={()=>setIsSignInModalOpen(true)}
           seturlList={(list)=>seturlList(list)}
-
+          isApplyPopUpOpen={isApplyPopUpOpen}
+          setisApplyPopUpOpen={(bool)=>setisApplyPopUpOpen(bool)}
+          page = {page}
           allProductList={allProductList}
           fetchAndSubscribeAllProductList={(page)=>fetchAndSubscribeAllProductList(page)}     
 

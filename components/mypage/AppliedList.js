@@ -200,15 +200,12 @@ export default function AppliedList(props) {
         <button className={styles.page_button} onClick={()=>{
           if(page === 0) return
           props.fetchappliedProductList(userData.email,page-1)          
-          props.setpage(page-1)
         }}>  
           <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronLeft} ></FontAwesomeIcon>
         </button>
         {page+1}
         <button className={styles.page_button} onClick={()=>{
-          props.fetchappliedProductList(userData.email,page+1).then((e)=>{
-            props.setpage(e)
-          })
+          props.fetchappliedProductList(userData.email,page+1)
         }}>  
           <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronRight} ></FontAwesomeIcon>
         </button>

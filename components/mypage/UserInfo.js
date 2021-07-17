@@ -51,7 +51,7 @@ export default function UserInfo(props) {
         setshowShop(!showShop)
         
       }}>
-        스타 충전
+        {"⭐ 스타 충전 ⭐"}
       </button>
       {
         showShop &&

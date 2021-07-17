@@ -114,3 +114,21 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+
+/* hover zone */
+.signout:hover{
+  background-color: #3BD1B3;
+  color: #fff;
+}
+.signout:active {
+  background-color: #3BD1B3;
+  color: #fff;
+}
+.change_nickname:hover{
+  background-color: #3BD1B3;
+  color: #fff;
+}
+.change_nickname:active {
+  background-color: #3BD1B3;
+  color: #fff;
+}

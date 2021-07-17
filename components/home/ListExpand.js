@@ -11,11 +11,10 @@ import ApplyPopUp from './ApplyPopUp'
 export default function ListExpand(props) {
 
   const [imageList,setimageList] = useState([])
-  const [page, setpage] = useState(0)
   const [isFree, setisFree] = useState(true)
 
   useEffect(()=>{
-    props.fetchAndSubscribeAllProductList(page)
+    props.fetchAndSubscribeAllProductList(props.page)
     console.log("effect");   
   },[])
 
@@ -162,17 +161,14 @@ export default function ListExpand(props) {
       {imageList}
       <div className={styles.ListExpand_ButtonContainer}>
         <button className={styles.page_button} onClick={()=>{
-          if(page === 0) return
-          props.fetchAndSubscribeAllProductList(page-1)          
-          setpage(page-1)
+          if(props.page === 0) return
+          props.fetchAndSubscribeAllProductList(props.page-1)          
         }}>  
           <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronLeft} ></FontAwesomeIcon>
         </button>
-        {page+1}
+        {props.page+1}
         <button className={styles.page_button} onClick={()=>{
-          props.fetchAndSubscribeAllProductList(page+1).then((e)=>{
-            setpage(e[1])
-          })
+          props.fetchAndSubscribeAllProductList(props.page+1)
         }}>  
           <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronRight} ></FontAwesomeIcon>
         </button>

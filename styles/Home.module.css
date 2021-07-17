@@ -45,6 +45,14 @@
   font-size: 1.75rem;
   font-family: 'Bungee', cursive;
 }
+
+.Navigation_logotxt:hover {
+  color: #307e6e;
+}
+
+.Navigation_logotxt:active {
+  color: #307e6e;
+}
 .Navigation_menu{
   margin-right: 10px;
   height: 100%;
@@ -153,14 +161,41 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
+}
+.Product_apply_button:hover {
+  background-color: #3BD1B3;
+  color: #fff;
+}
+
+.Product_apply_button:active {
+  background-color: #3BD1B3;
+  color: #fff;
+}
+.Product_Arrow_container{
+  padding: 15px;
+  height:50%;
+  color: #3BD1B3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.Product_Arrow_container:hover {
+  color: #307e6e;
+}
+
+.Product_Arrow_container:active {
+  color: #307e6e;
 }
 .arrow{
   font-size: 2rem;
 }
+
 .tickets{
   margin: 0px 10px;
   font-size: 1rem;
-  color: #307e6e;
+  font-weight: bold;
 }
 
 .ListExpand_container{
@@ -241,14 +276,18 @@
 }
 .ListExpand_apply:hover{
   background-color: #3BD1B3;
+  color: #fff;
 }
 .ListExpand_apply:active {
   background-color: #3BD1B3;
+  color: #fff;
 }
 .ListExpand_apply{
   width: 90%;
   height:100%;
   padding: 10px 0px; 
+  font-weight: bold;
+
   border-radius: 5px;
   border:none;
   border-left: 1px solid #c2f1e8;
@@ -281,9 +320,19 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  color: #3BD1B3;
+
 }
 .menu{
   font-size: 1.7rem;
+  color: #3BD1B3;
+}
+.menu:hover {
+  color: #307e6e;
+}
+
+.menu:active {
   color: #307e6e;
 }
 .nav_tickets{
@@ -299,9 +348,19 @@
   border-top: 1px solid #c2f1e8;
   border-right: 1px solid #c2f1e8;
   border-bottom: 5px solid #c2f1e8;
-  color: #307e6e;
+  color: #3BD1B3;
   background-color: #fff;
 }
+.page_button:hover {
+  background-color: #3BD1B3;
+  color: #fff;
+}
+
+.page_button:active {
+  background-color: #3BD1B3;
+  color: #fff;
+}
+
 .page_button_icon{
   font-size: 1.3rem;
 }

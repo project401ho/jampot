@@ -80,7 +80,8 @@ export default function Product(props) {
   return (
     <div className={styles.Product_container}>    
       <div className={styles.Product_content_container}>
-        <a onClick={async (e)=>{
+        <div className={styles.Product_Arrow_container}
+        onClick={async (e)=>{
           e.preventDefault()
           let tempidx = productIdx
           if(productIdx > 0){
@@ -105,7 +106,7 @@ export default function Product(props) {
           setproductIdx(tempidx)
         }}>
           <FontAwesomeIcon className={styles.arrow} icon={faChevronLeft} ></FontAwesomeIcon>
-        </a>
+        </div>
         <div className={styles.Product_image_container}>
           <div className={styles.Product_productdata_container}>
             {
@@ -135,7 +136,8 @@ export default function Product(props) {
             unoptimized={true}
           />
         </div>
-        <a onClick={async (e)=>{
+        <div className={styles.Product_Arrow_container}
+        onClick={async (e)=>{
           e.preventDefault()
           let tempidx = productIdx
           if(productIdx < props.productList.length-1){
@@ -160,7 +162,7 @@ export default function Product(props) {
           setproductIdx(tempidx)
         }}>
           <FontAwesomeIcon className={styles.arrow} icon={faChevronRight}></FontAwesomeIcon>
-        </a>
+        </div>
       </div>
       {
         props.productList[productIdx].applicants.length < props.productList[productIdx].max_applicants

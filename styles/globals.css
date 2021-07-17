@@ -71,6 +71,14 @@ a {
   color: #307e6e;
   margin-bottom: 0px;
 }
+.starchargetrue:hover {
+  background-color: #3BD1B3;
+  color: white;
+}
+.starchargetrue:active {
+  background-color: #3BD1B3;
+  color: white;
+}
 
 .starchargefalse {
   width: 90%;
@@ -85,5 +93,14 @@ a {
   font-weight: bold;
   color: #307e6e;
   margin-bottom: 0px;
+}
+.starchargefalse:hover {
+  background-color: #3BD1B3;
+  color: white;
+}
+
+.starchargefalse:active {
+  background-color: #3BD1B3;
+  color: white;
 }
 

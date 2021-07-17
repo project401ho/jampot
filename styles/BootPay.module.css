@@ -1,3 +1,11 @@
+/* 
+  Signiture color : #3BD1B3
+  light tone: #c2f1e8
+  super light tone: #effffb
+  dark tone: #307e6e
+*/
+
+
 .container{
   margin: 10px;
   border-radius: 5px;
@@ -9,4 +17,15 @@
   font-weight: bold;
   color: #307e6e;
   padding: 5px;
+}
+
+.container:hover {
+  background-color: #3BD1B3;
+  color: #fff;
+
+}
+
+.container:active {
+  background-color: #3BD1B3;
+  color: #fff;
 }

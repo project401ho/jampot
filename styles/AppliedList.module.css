@@ -78,15 +78,10 @@
   border-bottom: 5px solid #c2f1e8;
   background-color: #fff;
   padding:4px;
+  font-weight: bold;
+  color:#307e6e;
 }
-.button:active{
-  border-left: 1px solid #c2f1e8;
-  border-top: 5px solid #c2f1e8;
-  border-right: 1px solid #c2f1e8;
-  border-bottom: 1px solid #c2f1e8;
-  background-color: #3BD1B3;
-  color: #307e6e;
-}
+
 .disabled{
   border-radius: 3px;
   width: 60px;
@@ -114,7 +109,7 @@
   border-top: 1px solid #c2f1e8;
   border-right: 1px solid #c2f1e8;
   border-bottom: 5px solid #c2f1e8;
-  color: #307e6e;
+  color: #3BD1B3;
   background-color: #fff;
 }
 
@@ -127,7 +122,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  color: #3BD1B3;
 }
+
+
 
 .top_title{
   font-size: 1.2rem;
@@ -135,9 +134,26 @@
   padding: 10px 10px 0px 10px;
   width: 100%;
   text-align: center;
+  color: #3BD1B3;
+
 }
 
 .item_title{
   margin-bottom: 5px;
   font-weight: bold;
+}
+
+/* hover zone */
+.page_button:hover{
+  background-color: #3BD1B3;
+  color: #fff;
+}
+.button:hover {
+  background-color: #3BD1B3;
+  color: #fff;
+}
+
+.button:active {
+  background-color: #3BD1B3;
+  color: #fff;
 }

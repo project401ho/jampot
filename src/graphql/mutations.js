@@ -68,10 +68,10 @@ export const createProduct = /* GraphQL */ `
       isFree
       type
       winner
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      updatedAt
     }
   }
 `;
@@ -91,10 +91,10 @@ export const updateProduct = /* GraphQL */ `
       isFree
       type
       winner
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      updatedAt
     }
   }
 `;
@@ -114,10 +114,10 @@ export const deleteProduct = /* GraphQL */ `
       isFree
       type
       winner
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      updatedAt
     }
   }
 `;

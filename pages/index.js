@@ -14,6 +14,7 @@ import PayModule from '../components/PayModule'
 import {Product as ProductDS, User as UserDS} from '../src/models'
 
 import { SignOut } from '../lib/signin'
+import { DISCARD } from "@aws-amplify/datastore";
 
 
 export const siteTitle = "잼팟"
@@ -55,6 +56,29 @@ function Home(props) {
     }
     let test = "test"
 
+
+    DataStore.configure({
+      errorHandler: (error) => {
+        console.warn("Unrecoverable error", { error });
+      },
+      conflictHandler: async (data) => {
+        // Example conflict handler
+        const modelConstructor = data.modelConstructor;
+
+        console.log("TEST", data);
+        if(modelConstructor === ProductDS){
+          let remoteModel = data.remoteModel
+          let localModel = data.localModel
+          let newModel = modelConstructor.copyOf(remoteModel,(d)=>{
+            d.applicants = [...d.applicants].concat(localModel.applicants[localModel.applicants.length-1])
+          })
+          console.log(newModel);
+          return newModel
+        }
+        return DISCARD;
+      },
+    });
+
     Auth.currentAuthenticatedUser()
     .then((e) => {        
       setUser(e)      
@@ -65,20 +89,20 @@ function Home(props) {
    
     async function fetchUserData(id) {
       const userData = await DataStore.query(UserDS,id)      
-      console.log(userData);
       setUserData(userData)      
     }
-    fetchProductList_2("check")
-    async function fetchProductList_2(check) {
+    fetchProductList_2()
+    async function fetchProductList_2() {
       const productlist = await DataStore.query(ProductDS, c=>c.type("eq","open"), {
         sort: item => item.createdAt(SortDirection.ASCENDING)
       })      
-      console.log(check);
       setproductList(productlist)      
     }    
     
     const userData_subscription = DataStore.observe(UserDS).subscribe(() => fetchUserData(test))
-    const productList_subscription = DataStore.observe(ProductDS).subscribe(() => fetchProductList_2("check"))
+    const productList_subscription = DataStore.observe(ProductDS).subscribe((msg) =>{
+      fetchProductList_2()
+    })
     return () => {
       userData_subscription.unsubscribe()
       productList_subscription.unsubscribe()

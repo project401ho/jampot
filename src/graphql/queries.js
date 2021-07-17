@@ -89,10 +89,10 @@ export const syncProducts = /* GraphQL */ `
         isFree
         type
         winner
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -112,10 +112,10 @@ export const getProduct = /* GraphQL */ `
       isFree
       type
       winner
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      updatedAt
     }
   }
 `;
@@ -137,10 +137,10 @@ export const listProducts = /* GraphQL */ `
         isFree
         type
         winner
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -251,10 +251,10 @@ export const productsByDate = /* GraphQL */ `
         isFree
         type
         winner
+        updatedAt
         _version
         _deleted
         _lastChangedAt
-        updatedAt
       }
       nextToken
       startedAt

@@ -56,10 +56,10 @@ export const onCreateProduct = /* GraphQL */ `
       isFree
       type
       winner
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      updatedAt
     }
   }
 `;
@@ -76,10 +76,10 @@ export const onUpdateProduct = /* GraphQL */ `
       isFree
       type
       winner
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      updatedAt
     }
   }
 `;
@@ -96,10 +96,10 @@ export const onDeleteProduct = /* GraphQL */ `
       isFree
       type
       winner
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      updatedAt
     }
   }
 `;

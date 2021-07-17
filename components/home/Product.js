@@ -17,7 +17,6 @@ export default function Product(props) {
   const [isShareable, setisShareable] = useState(false)
 
   async function applyProduct (e,id) {
-    console.log(e);
     e.target.disabled=true
     if(props.user === null) {
       props.isSignInModalOpen()

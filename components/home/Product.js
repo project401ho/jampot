@@ -169,18 +169,11 @@ export default function Product(props) {
           {
           props.productList[productIdx].isFree
           ?
-            <FontAwesomeIcon className={styles.tickets} icon={faCookieBite} ></FontAwesomeIcon>
+            <span className={styles.tickets} >🍪 응모하기 🍪</span>
           :
-            <FontAwesomeIcon className={styles.tickets} icon={faStar} ></FontAwesomeIcon>
-          }
-          응모하기
-          {
-          props.productList[productIdx].isFree
-          ?
-            <FontAwesomeIcon className={styles.tickets} icon={faCookieBite} ></FontAwesomeIcon>
-          :
-            <FontAwesomeIcon className={styles.tickets} icon={faStar} ></FontAwesomeIcon>
-          }
+            <span className={styles.tickets} >⭐ 응모하기 ⭐</span>
+          }          
+          
         </button>
         :
         <button className={styles.Product_apply_button} disabled>

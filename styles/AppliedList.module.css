@@ -71,7 +71,7 @@
 }
 .button{
   border-radius: 3px;
-  width: 80px;
+  /* width: 80px; */
   border-left: 1px solid #c2f1e8;
   border-top: 1px solid #c2f1e8;
   border-right: 1px solid #c2f1e8;

@@ -35,11 +35,15 @@ export default function Navigation(props) {
           &&
           <>
           <div className={styles.Navigation_userdata}>            
-            <FontAwesomeIcon className={styles.nav_tickets} icon={faStar} ></FontAwesomeIcon>
+            
+            <span className={styles.nav_tickets} >⭐</span>
+
             <p className={styles.Navigation_userdata}>{userData && userData.ticket}</p>   
           </div>
           <div className={styles.Navigation_userdata}>
-            <FontAwesomeIcon className={styles.nav_tickets} icon={faCookieBite} ></FontAwesomeIcon>  
+
+            <span className={styles.nav_tickets} >🍪</span>
+
             <p className={styles.Navigation_userdata}>{props.userData && userData.freeTicket}</p>   
           </div>
           </>

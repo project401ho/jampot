@@ -13,40 +13,43 @@ export default function UserInfo(props) {
   return (
     <div className={styles.container}>
       <div className={styles.profile}>
-        <Image
-          priority
-          src="/defaultprofile.png"
-          className={styles.borderCircle}
-          height={75}
-          width={75}
-          alt="profile image"
-          unoptimized={true}
-        />    
-        <div>
+        <div className={styles.profile_item_container}>
+          <Image
+            priority
+            src="/defaultprofile.png"
+            className={styles.borderCircle}
+            height={75}
+            width={75}
+            alt="profile image"
+            unoptimized={true}
+          />              
+          <button className={styles.signout} onClick={SignOut}>          
+            로그아웃
+          </button>
+        </div>
+        
+        <div className={styles.nickname_container}>
           <h2 className={styles.nickname}>{user && user.attributes.nickname}</h2>
           <button className={styles.change_nickname}>닉네임 변경</button>
         </div>
-        
-        <button className={styles.signout} onClick={SignOut}>
-          <FontAwesomeIcon className={styles.signout_icon} icon={faSignOutAlt} ></FontAwesomeIcon>
-
-        </button>
 
       </div>      
 
       <div className={styles.tickets_container}>
         <div className={styles.ticket_holder}>            
-          <FontAwesomeIcon className={styles.tickets} icon={faStar} ></FontAwesomeIcon>
+          <span className={styles.tickets} >⭐</span>
           {userData && userData.ticket}   
         </div>
         <div className={styles.ticket_holder}>
-          <FontAwesomeIcon className={styles.tickets} icon={faCookieBite} ></FontAwesomeIcon>  
+          <span className={styles.tickets} >🍪</span>  
           {userData && userData.freeTicket}
         </div>
       </div>
       
-      <button className={styles.starcharge} onClick={()=>{
+      <button className={"starcharge"+showShop.toString()} onClick={(e)=>{
+        console.log(e.target.className);
         setshowShop(!showShop)
+        
       }}>
         스타 충전
       </button>

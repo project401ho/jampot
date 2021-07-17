@@ -6,7 +6,7 @@ const PayModule = (props) => (
     alert("준비중입니다.")
     return
     // onClickRequest
-  }}>{props.quantity+"개 충전"}<br/>{props.bonus > 0 && "+" + props.bonus + "개"}</button>
+  }}>{props.quantity+"개 충전"}<br/>{props.bonus > 0 && "보너스 " + props.bonus + "개"}</button>
 
 );
 

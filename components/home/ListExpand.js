@@ -138,18 +138,11 @@ export default function ListExpand(props) {
                 {
                 props.allProductList[i].isFree
                 ?
-                  <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>
+                  "🍪 응모하기 🍪"
                 :
-                  <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
+                  "⭐ 응모하기 ⭐"
                 }
-                응모하기
-                {
-                props.allProductList[i].isFree
-                ?
-                  <FontAwesomeIcon className="faIcons_tickets" icon={faCookieBite} ></FontAwesomeIcon>
-                :
-                  <FontAwesomeIcon className="faIcons_tickets" icon={faStar} ></FontAwesomeIcon>
-                }
+                
               </button>
               :
               <button className={styles.ListExpand_apply, styles.ListExpand_apply_done  } disabled>

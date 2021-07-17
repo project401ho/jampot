@@ -88,6 +88,8 @@ export default function AppliedList(props) {
         
       }
       if(item.applicants.length < item.max_applicants){
+        let type = "⭐"
+        if(item.isFree) type = "🍪"
         count = 
         <div className={styles.item_count}>
           {item.applicants.length + " / " + item.max_applicants}
@@ -103,7 +105,7 @@ export default function AppliedList(props) {
             applyProduct(item.id)
             setIsSharable(item.isFree)
           }}
-          value="추가 응모"
+          value={type + " 추가 응모"}
         />
       }
       return(

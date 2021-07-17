@@ -93,12 +93,12 @@
   width:100%;
   border: none;
   padding: 5px;
-    border-left: 1px solid #c2f1e8;
-    border-top: 1px solid #c2f1e8;
-    border-right: 1px solid #c2f1e8;
-    border-bottom: 3px solid #c2f1e8;
-    color: #307e6e;
-    background-color: #fff;
+  border-left: 1px solid #c2f1e8;
+  border-top: 1px solid #c2f1e8;
+  border-right: 1px solid #c2f1e8;
+  border-bottom: 3px solid #c2f1e8;
+  color: #307e6e;
+  background-color: #fff;
 }
 .page_button {
   margin: 15px 15px;
@@ -154,6 +154,15 @@
 }
 
 .button:active {
+  background-color: #3BD1B3;
+  color: #fff;
+}
+.prizecode_confirm:hover {
+  background-color: #3BD1B3;
+  color: #fff;
+}
+
+.prizecode_confirm:active {
   background-color: #3BD1B3;
   color: #fff;
 }

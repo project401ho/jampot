@@ -44,7 +44,7 @@ function Home(props) {
   const [isSignInModalOpen,setIsSignInModalOpen] = useState(false)
   const [isSignUpModalOpen,setIsSignUpModalOpen] = useState(false)
   const [isMenuExpand,setisMenuExpand] = useState(false)
-  const [isListExapnd,setisListExapnd] = useState(true)
+  const [isListExapnd,setisListExapnd] = useState(false)
   const [urlList, seturlList] = useState([{url:props._url,filename:props.productlist[0].image}])
   const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
   const [page, setpage] = useState(0)

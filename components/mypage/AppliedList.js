@@ -125,6 +125,7 @@ export default function AppliedList(props) {
                   onClick={(e)=>{
                     e.target.value=prizecode
                     e.target.type="text"
+                    e.target.className=""
                   }}
                   value="코드 확인"
                 />

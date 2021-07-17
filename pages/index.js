@@ -206,7 +206,7 @@ function Home(props) {
           userData={userData}
           urlList = {urlList}          
           isSignInModalOpen={()=>setIsSignInModalOpen(true)}
-          setUrlList={(list)=>seturlList(list)}
+          seturlList={(list)=>seturlList(list)}
           isApplyPopUpOpen={isApplyPopUpOpen}
           setisApplyPopUpOpen={(bool)=>setisApplyPopUpOpen(bool)}
           url={_url} 

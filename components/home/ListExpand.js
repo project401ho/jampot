@@ -11,7 +11,6 @@ import ApplyPopUp from './ApplyPopUp'
 export default function ListExpand(props) {
 
   const [imageList,setimageList] = useState([])
-  const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
   const [page, setpage] = useState(0)
   const [isFree, setisFree] = useState(true)
 
@@ -26,20 +25,22 @@ export default function ListExpand(props) {
     }
     else{      
       let tempProduct = await DataStore.query(ProductDS,id)
+      let tempUser = await DataStore.query(UserDS,props.userData.id)
       if(tempProduct.isFree){
-        if(props.userData.freeTicket > 0){
+        if(tempUser.freeTicket > 0){
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
-            updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
+            updated.applicants = [...tempProduct.applicants].concat(tempUser.id)
             if(updated.applicants.length === updated.max_applicants){
               updated.type = "close"
               updated.winner = updated.applicants[Math.floor(Math.random()*updated.max_applicants)]
               
             }
-          })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
-            updated.freeTicket -= 1
-            if(!updated.appliedList.some((c)=>c===tempProduct.id)){
-              updated.appliedList = [...props.userData.appliedList].concat(tempProduct.id)
-            }            
+          })).then(
+            await DataStore.save(UserDS.copyOf(tempUser, updated=>{
+              updated.freeTicket -= 1
+              if(!updated.appliedList.some((c)=>c===tempProduct.id)){
+                updated.appliedList = [...tempUser.appliedList].concat(tempProduct.id)
+              }            
           })))
         }
         else{
@@ -48,19 +49,20 @@ export default function ListExpand(props) {
         }
       }
       else{
-        if(props.userData.ticket > 0){
+        if(tempUser.ticket > 0){
           await DataStore.save(ProductDS.copyOf(tempProduct,updated=>{
-            updated.applicants = [...tempProduct.applicants].concat(props.userData.id)
+            updated.applicants = [...tempProduct.applicants].concat(tempUser.id)
             if(updated.applicants.length === updated.max_applicants){
               updated.type = "close"     
               updated.winner = updated.applicants[Math.floor(Math.random()*updated.max_applicants)]
 
             }
-          })).then(await DataStore.save(UserDS.copyOf(props.userData, updated=>{
-            updated.ticket -= 1
-            if(!updated.appliedList.some((c)=>c===tempProduct.id)){
-              updated.appliedList = [...props.userData.appliedList].concat(tempProduct.id)
-            }
+          })).then(
+            await DataStore.save(UserDS.copyOf(tempUser, updated=>{
+              updated.ticket -= 1
+              if(!updated.appliedList.some((c)=>c===tempProduct.id)){
+                updated.appliedList = [...tempUser.appliedList].concat(tempProduct.id)
+              }
           })))
         }
         else{
@@ -69,7 +71,7 @@ export default function ListExpand(props) {
           return
         }
       }
-      setisApplyPopUpOpen(true)
+      props.setisApplyPopUpOpen(true)
     }
   
   }
@@ -182,10 +184,10 @@ export default function ListExpand(props) {
           <FontAwesomeIcon className={styles.page_button_icon} icon={faChevronRight} ></FontAwesomeIcon>
         </button>
         {
-          isApplyPopUpOpen 
+          props.isApplyPopUpOpen 
           ?
           <ApplyPopUp
-            close={()=>setisApplyPopUpOpen(false)}
+            close={()=>props.setisApplyPopUpOpen(false)}
             userData={props.userData}
             isFree={isFree}
           />

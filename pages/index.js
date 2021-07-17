@@ -46,6 +46,7 @@ function Home(props) {
   const [isMenuExpand,setisMenuExpand] = useState(false)
   const [isListExapnd,setisListExapnd] = useState(false)
   const [urlList, seturlList] = useState([{url:props._url,filename:props.productlist[0].image}])
+  const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
 
   const _url = props._url 
 
@@ -66,16 +67,16 @@ function Home(props) {
         const modelConstructor = data.modelConstructor;
 
         console.log("TEST", data);
-        
         if(modelConstructor === ProductDS){
           let localModel = data.localModel
+          let product = await DataStore.query(ProductDS, localModel.id)
           let email = null
           const newModel = modelConstructor.copyOf(localModel, (d) => {
             email = d.applicants.pop()
           });         
           let localUserData = await DataStore.query(UserDS,email)
           await DataStore.save(UserDS.copyOf(localUserData,updated => {
-            if(newModel.isFree){
+            if(product.isFree){
               updated.freeTicket += 1
             }
             else{
@@ -85,8 +86,15 @@ function Home(props) {
               updated.appliedList.pop()
             }
           }))
+          setisApplyPopUpOpen(false)
+          if(product.isFree){
+            alert("동시요청으로 인해 환불처리 되었습니다. 😅 \n환불내역: 🍪쿠키 + 1개")
+          }
+          else{
+            alert("동시요청으로 인해 환불처리 되었습니다. 😅 \n환불내역: ⭐스타 + 1개")
+          }
         } 
-
+        
         return DISCARD;
       },
     });
@@ -198,7 +206,8 @@ function Home(props) {
           urlList = {urlList}          
           isSignInModalOpen={()=>setIsSignInModalOpen(true)}
           setUrlList={(list)=>seturlList(list)}
-
+          isApplyPopUpOpen={isApplyPopUpOpen}
+          setisApplyPopUpOpen={(bool)=>setisApplyPopUpOpen(bool)}
           url={_url} 
           productList = {productList}                     
             

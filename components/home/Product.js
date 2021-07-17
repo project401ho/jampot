@@ -13,7 +13,6 @@ export default function Product(props) {
 
   const [productIdx, setproductIdx] = useState(0)  
   const [url, seturl] = useState(props.url)
-  const [isApplyPopUpOpen, setisApplyPopUpOpen] = useState(false)
   const [isShareable, setisShareable] = useState(false)
 
   async function applyProduct (e,id) {
@@ -69,7 +68,7 @@ export default function Product(props) {
           return
         }
       }
-      setisApplyPopUpOpen(true)
+      props.setisApplyPopUpOpen(true)
       setisShareable(props.productList[productIdx].isFree)
       setproductIdx(0)
       setTimeout(()=>e.target.disabled=false,1000)
@@ -190,10 +189,10 @@ export default function Product(props) {
 
       }
       {
-        isApplyPopUpOpen
+        props.isApplyPopUpOpen
         ?
         <ApplyPopUp        
-          close={()=>setisApplyPopUpOpen(false)}
+          close={()=>props.setisApplyPopUpOpen(false)}
           userData={props.userData}
           isFree={isShareable}
         />

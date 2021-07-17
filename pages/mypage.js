@@ -77,11 +77,13 @@ function MyPage() {
         <title>{siteTitle}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>      
-      <Link className={styles.logo} href="/">
+      <div  className={styles.logo} >      
+      <Link href="/">
         <a >
           <h1 className={styles.logotxt}>jampot</h1>
         </a>
       </Link>
+      </div>
       <UserInfo 
         user = {user}
         userData={userData}

@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 5px;
-  border: 1px dashed #c2f1e8;
+  border: 1px solid #c2f1e8;
   margin: 15px 0px;
   border-bottom: 7px solid #c2f1e8;
   padding:10px;
@@ -112,7 +112,7 @@
   height: 40px;
   border-left: 1px solid #c2f1e8;
   border-top: 1px solid #c2f1e8;
-  border-right: 5px solid #c2f1e8;
+  border-right: 1px solid #c2f1e8;
   border-bottom: 5px solid #c2f1e8;
   color: #307e6e;
   background-color: #fff;

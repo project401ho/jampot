@@ -66,15 +66,27 @@ function Home(props) {
         const modelConstructor = data.modelConstructor;
 
         console.log("TEST", data);
+        
         if(modelConstructor === ProductDS){
-          let remoteModel = data.remoteModel
           let localModel = data.localModel
-          let newModel = modelConstructor.copyOf(remoteModel,(d)=>{
-            d.applicants = [...d.applicants].concat(localModel.applicants[localModel.applicants.length-1])
-          })
-          console.log(newModel);
-          return newModel
-        }
+          let email = null
+          const newModel = modelConstructor.copyOf(localModel, (d) => {
+            email = d.applicants.pop()
+          });         
+          let localUserData = await DataStore.query(UserDS,email)
+          await DataStore.save(UserDS.copyOf(localUserData,updated => {
+            if(newModel.isFree){
+              updated.freeTicket += 1
+            }
+            else{
+              updated.ticket += 1
+            }
+            if(!newModel.applicants.some(e=>updated.email === e)){
+              updated.appliedList.pop()
+            }
+          }))
+        } 
+
         return DISCARD;
       },
     });

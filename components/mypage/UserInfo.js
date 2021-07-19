@@ -59,14 +59,19 @@ export default function UserInfo(props) {
           <PayModule
             quantity={10}
             bonus = {0}
+            userData={props.userData}
           />
           <PayModule
             quantity={30}
             bonus = {3}
+            userData={props.userData}
+
           />
           <PayModule
             quantity={50}
             bonus = {8}
+            userData={props.userData}
+
           />
         </div>
       }

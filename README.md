@@ -7,6 +7,14 @@
 6. 하단 배너광고?
 
 # 개발 기록
+## 7.19
+결제 검증 문제:
+1. CROS issue가 있음
+2. amplify function 이랑 API Gateway로 해결하려함
+3. Access-control-allow-origin 설정해도 이슈가 있음
+4. 프록시를 쓰면 403 포비든이 나옴
+5. 근본적 해결책 강구중
+
 ## 7.18
 스프린트 하느라고 기록 못남김 토요일에 MVP만듬 <br>
 

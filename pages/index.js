@@ -28,6 +28,8 @@ export async function getServerSideProps() {
   productlist = JSON.parse(JSON.stringify(productlist))
   const _url = await Storage.get(productlist[0].image)
 
+  console.log(productlist);
+
   return {
     props: {
       productlist,

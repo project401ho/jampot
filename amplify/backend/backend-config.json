@@ -48,15 +48,10 @@
     }
   },
   "function": {
-    "syncConflictHandler23bdcf39": {
-      "service": "Lambda",
+    "BootPayVerification": {
+      "build": true,
       "providerPlugin": "awscloudformation",
-      "build": true
-    },
-    "syncConflictHandlerae8f2a50": {
-      "service": "Lambda",
-      "providerPlugin": "awscloudformation",
-      "build": true
+      "service": "Lambda"
     }
   }
 }

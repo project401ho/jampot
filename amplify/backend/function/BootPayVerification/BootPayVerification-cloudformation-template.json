@@ -1,11 +1,16 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda resource stack creation using Amplify CLI",
+  "Description": "Lambda Function resource stack creation using Amplify CLI",
   "Parameters": {
-    "env": {
-      "Type": "String"
+    "CloudWatchRule": {
+      "Type": "String",
+      "Default": "NONE",
+      "Description": " Schedule Expression"
     },
     "deploymentBucketName": {
+      "Type": "String"
+    },
+    "env": {
       "Type": "String"
     },
     "s3Key": {
@@ -30,16 +35,24 @@
         "aws:asset:property": "Code"
       },
       "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        },
         "Handler": "index.handler",
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "syncConflictHandler23bdcf39",
+            "BootPayVerification",
             {
               "Fn::Join": [
                 "",
                 [
-                  "syncConflictHandler23bdcf39",
+                  "BootPayVerification",
                   "-",
                   {
                     "Ref": "env"
@@ -66,15 +79,8 @@
           ]
         },
         "Runtime": "nodejs14.x",
-        "Timeout": "25",
-        "Code": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
-        }
+        "Layers": [],
+        "Timeout": "25"
       }
     },
     "LambdaExecutionRole": {
@@ -83,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "syncConflictHandler23bdcf39LambdaRole",
+            "jampotLambdaRole8b29ce22",
             {
               "Fn::Join": [
                 "",
                 [
-                  "syncConflictHandler23bdcf39LambdaRole",
+                  "jampotLambdaRole8b29ce22",
                   "-",
                   {
                     "Ref": "env"

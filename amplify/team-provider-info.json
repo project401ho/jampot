@@ -23,13 +23,9 @@
         "jampot7747e642": {}
       },
       "function": {
-        "syncConflictHandlerae8f2a50": {
+        "BootPayVerification": {
           "deploymentBucketName": "amplify-jampot-dev-150020-deployment",
-          "s3Key": "amplify-builds/syncConflictHandlerae8f2a50-6b4934386d4c4d393453-build.zip"
-        },
-        "syncConflictHandler23bdcf39": {
-          "deploymentBucketName": "amplify-jampot-dev-150020-deployment",
-          "s3Key": "amplify-builds/syncConflictHandler23bdcf39-46446750673352306f59-build.zip"
+          "s3Key": "amplify-builds/BootPayVerification-62437359547664757262-build.zip"
         }
       }
     }

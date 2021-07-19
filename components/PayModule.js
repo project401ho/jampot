@@ -90,8 +90,8 @@ export default function PayModule (props) {
       className={styles.container} 
       onClick={()=>{    
         // onClickRequest(props)
-        axios.get("https://nu1s818no2.execute-api.ap-northeast-2.amazonaws.com/dev")
-        .then(e=>console.log(e))
+        // axios.get("https://nu1s818no2.execute-api.ap-northeast-2.amazonaws.com/dev")
+        // .then(e=>console.log(e))
       }}
     >
       {props.quantity+"개 충전"}<br/>{props.bonus > 0 && "보너스 " + props.bonus + "개"}

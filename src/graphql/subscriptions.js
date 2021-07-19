@@ -7,9 +7,6 @@ export const onCreatePrize = /* GraphQL */ `
       id
       code
       prodcutID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -21,9 +18,6 @@ export const onUpdatePrize = /* GraphQL */ `
       id
       code
       prodcutID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -35,9 +29,6 @@ export const onDeletePrize = /* GraphQL */ `
       id
       code
       prodcutID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -57,9 +48,6 @@ export const onCreateProduct = /* GraphQL */ `
       type
       winner
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -77,9 +65,6 @@ export const onUpdateProduct = /* GraphQL */ `
       type
       winner
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -97,9 +82,6 @@ export const onDeleteProduct = /* GraphQL */ `
       type
       winner
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -113,9 +95,6 @@ export const onCreateUser = /* GraphQL */ `
       freeTicket
       appliedList
       checkedAppliedList
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -131,9 +110,6 @@ export const onUpdateUser = /* GraphQL */ `
       freeTicket
       appliedList
       checkedAppliedList
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -149,9 +125,6 @@ export const onDeleteUser = /* GraphQL */ `
       freeTicket
       appliedList
       checkedAppliedList
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }

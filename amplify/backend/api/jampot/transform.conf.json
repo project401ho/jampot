@@ -1,24 +1,4 @@
 {
     "Version": 5,
-    "ElasticsearchWarning": true,
-    "ResolverConfig": {
-        "project": {
-            "ConflictHandler": "OPTIMISTIC_CONCURRENCY",
-            "ConflictDetection": "VERSION"
-        },
-        "models": {
-            "Prize": {
-                "ConflictHandler": "OPTIMISTIC_CONCURRENCY",
-                "ConflictDetection": "VERSION"
-            },
-            "Product": {
-                "ConflictHandler": "OPTIMISTIC_CONCURRENCY",
-                "ConflictDetection": "VERSION"
-            },
-            "User": {
-                "ConflictHandler": "OPTIMISTIC_CONCURRENCY",
-                "ConflictDetection": "VERSION"
-            }
-        }
-    }
+    "ElasticsearchWarning": true
 }

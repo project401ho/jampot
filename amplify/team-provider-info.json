@@ -21,12 +21,6 @@
       "auth": {
         "jampot9fcc665f9fcc665f": {},
         "jampot7747e642": {}
-      },
-      "function": {
-        "BootPayVerification": {
-          "deploymentBucketName": "amplify-jampot-dev-150020-deployment",
-          "s3Key": "amplify-builds/BootPayVerification-62437359547664757262-build.zip"
-        }
       }
     }
   }

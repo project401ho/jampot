@@ -47,11 +47,5 @@
       "providerPlugin": "awscloudformation"
     }
   },
-  "function": {
-    "BootPayVerification": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  }
+  "function": {}
 }

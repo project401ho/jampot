@@ -1,43 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const syncPrizes = /* GraphQL */ `
-  query SyncPrizes(
-    $filter: ModelPrizeFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPrizes(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        code
-        prodcutID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getPrize = /* GraphQL */ `
   query GetPrize($id: ID!) {
     getPrize(id: $id) {
       id
       code
       prodcutID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -54,48 +23,10 @@ export const listPrizes = /* GraphQL */ `
         id
         code
         prodcutID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncProducts = /* GraphQL */ `
-  query SyncProducts(
-    $filter: ModelProductFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncProducts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        description
-        applicants
-        title
-        createdAt
-        max_applicants
-        image
-        isFree
-        type
-        winner
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -113,9 +44,6 @@ export const getProduct = /* GraphQL */ `
       type
       winner
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -138,44 +66,8 @@ export const listProducts = /* GraphQL */ `
         type
         winner
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUsers = /* GraphQL */ `
-  query SyncUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUsers(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        email
-        nickname
-        ticket
-        freeTicket
-        appliedList
-        checkedAppliedList
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -189,9 +81,6 @@ export const getUser = /* GraphQL */ `
       freeTicket
       appliedList
       checkedAppliedList
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -212,14 +101,10 @@ export const listUsers = /* GraphQL */ `
         freeTicket
         appliedList
         checkedAppliedList
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -252,12 +137,8 @@ export const productsByDate = /* GraphQL */ `
         type
         winner
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
   }
 `;

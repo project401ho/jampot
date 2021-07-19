@@ -10,9 +10,6 @@ export const createPrize = /* GraphQL */ `
       id
       code
       prodcutID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -27,9 +24,6 @@ export const updatePrize = /* GraphQL */ `
       id
       code
       prodcutID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -44,9 +38,6 @@ export const deletePrize = /* GraphQL */ `
       id
       code
       prodcutID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -69,9 +60,6 @@ export const createProduct = /* GraphQL */ `
       type
       winner
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -92,9 +80,6 @@ export const updateProduct = /* GraphQL */ `
       type
       winner
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -115,9 +100,6 @@ export const deleteProduct = /* GraphQL */ `
       type
       winner
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -134,9 +116,6 @@ export const createUser = /* GraphQL */ `
       freeTicket
       appliedList
       checkedAppliedList
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -155,9 +134,6 @@ export const updateUser = /* GraphQL */ `
       freeTicket
       appliedList
       checkedAppliedList
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -176,9 +152,6 @@ export const deleteUser = /* GraphQL */ `
       freeTicket
       appliedList
       checkedAppliedList
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }

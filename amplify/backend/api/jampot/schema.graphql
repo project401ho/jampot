@@ -15,7 +15,7 @@ type Product @model @key(name: "productsByDate", fields: ["type", "createdAt"], 
   isFree: Boolean!
   type: String!
   winner: String
-  updatedAt:AWSDateTime
+  updatedAt: AWSDateTime
 }
 
 type User @model @auth(rules: [{allow: private, provider: iam}]) {

@@ -90,7 +90,7 @@ export default function ListExpand(props) {
         let temp = {url:tempurl,filename:templist[i].image}
         let tempurllist = [...props.urlList].concat(temp)
         tempimageList[i] = tempurl
-        props.setUrlList(tempurllist)
+        props.seturlList(tempurllist)
       }  
     }
     tempimageList = tempimageList.map((item, i)=>{

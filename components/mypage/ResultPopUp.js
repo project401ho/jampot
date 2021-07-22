@@ -15,7 +15,7 @@ export default function ResultPopUp(props) {
     if(props.isWinner){
       title = "🎉축하합니다!🎉"
       content = "🎉🎉추카포카해🎉🎉"
-      buttonValue = "코드 받기!"
+      buttonValue = "닫기"
       imageURL = "/dangchumtrans.png"
       setpopup ( 
       <div className={styles.background}>
@@ -25,11 +25,13 @@ export default function ResultPopUp(props) {
           </div>
           <div className={styles.image}>            
             <Image
+              priority
               src={imageURL}            
               layout='fill'
               objectFit='fill'
               alt={"image"}
               className={styles.image_rgb}
+              unoptimized={true}
             />
           </div>
           <div className={styles.content}>
@@ -59,9 +61,9 @@ export default function ResultPopUp(props) {
       )
     }
     else{
-      title = "아쉽지만.."
-      content = "위로 선물은 너굴맨이 준비했으니 안심하라구!"
-      buttonValue = "고마웡"
+      title = "ㅎㅎ"
+      content = "경품은 너굴맨이 처리했으니 안심하라구!"
+      buttonValue = "닫기"
       imageURL = "/neogulman.webp"
       setpopup(
       <div className={styles.background}>
@@ -71,10 +73,12 @@ export default function ResultPopUp(props) {
           </div>
           <div className={styles.image}>            
             <Image
+              priority
               src={imageURL}            
-              layout='fill'
-              objectFit='fill'
-              alt={"image"}            
+              height={200}
+              width={200}
+              alt={"product image"}            
+              unoptimized={true}
             />
           </div>
           <div className={styles.content}>
@@ -84,8 +88,10 @@ export default function ResultPopUp(props) {
           <input 
             type="button" 
             className={styles.button} 
-            value={"눈물젖은 쿠키받기"}
-            onClick={()=>props.close()}
+            value={buttonValue}
+            onClick={()=>{
+              props.close()
+            }}
           />              
           
         </div>

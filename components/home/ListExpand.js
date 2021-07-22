@@ -122,7 +122,8 @@ export default function ListExpand(props) {
                 </>
                 
                 :
-                <div className={styles.ListExpand_applycount}>{ "( " + props.allProductList[i].applicants.length +" / "+ props.allProductList[i].max_applicants + " )" }</div>
+                <div className={styles.ListExpand_open}>모집 중</div>
+                // <div className={styles.ListExpand_applycount}>{ "( " + props.allProductList[i].applicants.length +" / "+ props.allProductList[i].max_applicants + " )" }</div>
                 
               }
               
@@ -130,10 +131,14 @@ export default function ListExpand(props) {
             {
               props.allProductList[i].applicants.length < props.allProductList[i].max_applicants
               ?
-              <button className={styles.ListExpand_apply} onClick={()=>{
+              <button className={styles.ListExpand_apply} onClick={(e)=>{
+                e.target.disabled = true
                 applyProduct(props.allProductList[i].id)
                 setisFree(props.allProductList[i].isFree)
-                }} >
+                setTimeout(()=>e.target.disabled=false,1000)
+                }} 
+                
+              >
                 {
                 props.allProductList[i].isFree
                 ?

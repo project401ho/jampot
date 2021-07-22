@@ -49,12 +49,19 @@
        margin: 0 auto;
        width: 100%;
        position: relative;
-       padding: 0 20px 32px;
+       padding: 0 20px;
        box-sizing: border-box;
        display: flex;
        justify-content: center;
        flex-direction: column;
 
+      }
+      .buttoncontainer{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
       .katalkShare{
         border-radius: 3px;
@@ -63,20 +70,25 @@
         border-top: 1px solid #c2f1e8;
         border-right: 1px solid #c2f1e8;
         border-bottom: 5px solid #c2f1e8;
-        
+        color: #307e6e;
+        font-weight: bold;
+        width:70%;
+        padding:5px;
       }
-       .ApplyPopUpBtn {
+       .ApplyPopUpBtn {         
          height: 40px;
          font-size: 14px;
          padding: 13px 30px;
          cursor: pointer;
-         background-color: black;
-         color: white;
+         background-color: #effffb;
+         color: #307e6e;
+         font-weight: bold;
          line-height: 1px;
          margin-top: 20px;
          margin-bottom: 12px;
          border-radius: 3px;
          border-style: none;
+         border: 1px solid #c2f1e8;
        }
 
    }

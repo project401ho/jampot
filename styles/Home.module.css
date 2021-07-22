@@ -260,6 +260,19 @@
   align-items: center;
   justify-content: center;
 }
+.ListExpand_open {
+  border-radius: 3px;
+  background-color: #c2f1e8;
+  width: 22%;
+  height: 20px;
+  text-align: center;
+  color: #307e6e;
+  font-weight: bold;
+  font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .ListExpand_applycount{
   border-radius: 3px;
   background-color: #effffb;

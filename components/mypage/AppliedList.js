@@ -10,7 +10,7 @@ import { faChevronRight,faChevronLeft,faStar,faCookieBite,faPlusCircle } from "@
 export default function AppliedList(props) {
   const {appliedProductList, userData, page} = props
   const [appliedlist, setappliedlist] = useState([])
-  const [isResultPopUp, setisResultPopUp] = useState(false)
+  const [isResultPopUp, setisResultPopUp] = useState(true)
   const [isWinner, setisWinner] = useState(false)
   const [isApplied, setisApplied] = useState(false)
   const [isSharable, setIsSharable] = useState(false)
@@ -92,7 +92,8 @@ export default function AppliedList(props) {
         if(item.isFree) type = "🍪"
         count = 
         <div className={styles.item_count}>
-          {item.applicants.length + " / " + item.max_applicants}
+          모집 중
+          {/* {item.applicants.length + " / " + item.max_applicants} */}
         </div>
         button =
         <input 
@@ -102,8 +103,10 @@ export default function AppliedList(props) {
           id = {item.id}
           onClick={(e)=>{
             e.preventDefault()
+            e.target.disabled=true
             applyProduct(item.id)
             setIsSharable(item.isFree)
+            setTimeout(()=>e.target.disabled = false,1000)
           }}
           value={type + " 추가 응모"}
         />

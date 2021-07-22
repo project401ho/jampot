@@ -92,6 +92,7 @@ export default function PayModule (props) {
         // onClickRequest(props)
         // axios.get("https://nu1s818no2.execute-api.ap-northeast-2.amazonaws.com/dev")
         // .then(e=>console.log(e))
+        alert("준비 중 입니다")
       }}
     >
       {props.quantity+"개 충전"}<br/>{props.bonus > 0 && "보너스 " + props.bonus + "개"}

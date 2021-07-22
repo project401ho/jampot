@@ -124,7 +124,7 @@ export default function Product(props) {
             <h2 className = {styles.Product_title}>
               {props.productList[productIdx].title}
               <br/>
-              {"( " + props.productList[productIdx].applicants.length+" / "+props.productList[productIdx].max_applicants + " )"}
+              {/* {"( " + props.productList[productIdx].applicants.length+" / "+props.productList[productIdx].max_applicants + " )"} */}
             </h2>
           </div>
           

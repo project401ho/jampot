@@ -26,24 +26,25 @@ export default function ApplyPopUp(props) {
           <div className={styles.modalContents}>
             <h1>응모 완료 🤑</h1>
             <p>친구들과 공유해주세요!<br/> 너굴맨이 좋아하는 쿠키를 받을 수 있어요!</p>
-            {
-              !props.isFree 
-              &&
-              <button 
+          </div>
+          <div className={styles.buttoncontainer}>
+            <button 
               className={styles.katalkShare}
               onClick={async ()=>{
-                KakaosendCustomLink()
-                
+                let chance = 10
+                if(props.isFree){
+                  chance = Math.floor(Math.random()*10)
+                }
+                console.log(chance);
+                KakaosendCustomLink(chance)                
                 close()
               }
-              }>홍보하고 쿠키드쉴?</button>
-            }
-            
-
+              }>
+                홍보하고 쿠키드쉴?
+            </button>
             <button className={styles.ApplyPopUpBtn} onClick={()=>close()}>
               확인
             </button>
-            
           </div>
         </div>
       </div>

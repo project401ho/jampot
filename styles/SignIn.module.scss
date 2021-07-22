@@ -1,10 +1,24 @@
- .modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.6); ///배경에 픽스를 주고 투명도를 준다.
+@media screen and (min-width: 680px) {
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 600px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.6); ///배경에 픽스를 주고 투명도를 준다.
+  }
+}
+
+  .modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6); ///배경에 픽스를 주고 투명도를 준다.
+  }
 
   .loginModal {
     width: 90%;
@@ -165,4 +179,3 @@
       }
     }
   }
-}
